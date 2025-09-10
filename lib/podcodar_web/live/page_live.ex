@@ -8,8 +8,8 @@ defmodule PodcodarWeb.PageLive do
     <Layouts.app flash={@flash} current_scope={@current_scope}>
       <section class="text-center min-h-svh flex flex-col justify-center items-center gap-12 mt-[-6rem] bg-pattern p-6">
         <div class="gap-4">
-          <h1 class="text-5xl font-bold">Free technology education for everyone</h1>
-          <h2 class="text-2xl">Go from zero to your first job without any financial loss</h2>
+          <h1 class="text-5xl font-bold">Educação em tecnologia acessível para todos!</h1>
+          <h2 class="text-2xl">Do zero ao seu primeiro emprego sem pagar nada</h2>
         </div>
 
         <div class="min-w-full md:min-w-3xl">
@@ -17,27 +17,27 @@ defmodule PodcodarWeb.PageLive do
             <.input
               field={@form[:query]}
               type="search"
-              placeholder="Search courses, topics..."
+              placeholder="Pesquise cursos, tópicos..."
               autocomplete="off"
               autofocus
             />
 
-            <.link navigation={~p"/#"} class="btn btn-ghost">I'm Feeling Lucky </.link>
-            <.button type="submit">Search</.button>
+            <.link navigate={~p"/#"} class="btn btn-ghost">Estou com sorte</.link>
+            <.button type="submit">Pesquisar</.button>
           </.form>
         </div>
 
         <div class="flex flex-wrap justify-center gap-4 max-w-full md:max-w-2xl">
-          <a href="/en/courses?language=golang" class="btn btn-sm btn-dash btn-accent">Go</a>
-          <a href="/en/courses?language=elixir" class="btn btn-sm btn-dash btn-accent">Elixir</a>
-          <a href="/en/courses?language=python" class="btn btn-sm btn-dash btn-accent">Python</a>
-          <a href="/en/courses?language=ruby" class="btn btn-sm btn-dash btn-accent">Ruby</a>
-          <a href="/en/courses?framework=react.js" class="btn btn-sm btn-dash btn-accent">React</a>
-          <a href="/en/courses?framework=node.js" class="btn btn-sm btn-dash btn-accent">Node</a>
-          <a href="/en/courses?framework=laravel" class="btn btn-sm btn-dash btn-accent">Laravel</a>
-          <a href="/en/courses?tool=sql" class="btn btn-sm btn-dash btn-accent">Postgres</a>
-          <a href="/en/courses?framework=phoenix" class="btn btn-sm btn-dash btn-accent">Phoenix</a>
-          <a href="/en/courses" class="btn btn-sm btn-dash btn-accent">Much more</a>
+          <a href="/cursos?language=golang" class="btn btn-sm btn-dash btn-accent">Go</a>
+          <a href="/cursos?language=elixir" class="btn btn-sm btn-dash btn-accent">Elixir</a>
+          <a href="/cursos?language=python" class="btn btn-sm btn-dash btn-accent">Python</a>
+          <a href="/cursos?language=ruby" class="btn btn-sm btn-dash btn-accent">Ruby</a>
+          <a href="/cursos?framework=react.js" class="btn btn-sm btn-dash btn-accent">React</a>
+          <a href="/cursos?framework=node.js" class="btn btn-sm btn-dash btn-accent">Node</a>
+          <a href="/cursos?framework=laravel" class="btn btn-sm btn-dash btn-accent">Laravel</a>
+          <a href="/cursos?tool=sql" class="btn btn-sm btn-dash btn-accent">Postgres</a>
+          <a href="/cursos?framework=phoenix" class="btn btn-sm btn-dash btn-accent">Phoenix</a>
+          <a href="/cursos" class="btn btn-sm btn-dash btn-accent">Muito mais</a>
         </div>
       </section>
 
@@ -55,7 +55,7 @@ defmodule PodcodarWeb.PageLive do
           </a>
           <a href="https://github.com/sponsors/podcodar" target="_blank" class="btn btn-outline">
             <.icon name="hero-currency-dollar" class="w-5 h-5" />
-            <span class="ml-2">Sponsor</span>
+            <span class="ml-2">Patrocinar</span>
           </a>
           <a
             href="https://github.com/podcodar/.github/blob/main/TRANSPARENCY.md"
@@ -63,55 +63,60 @@ defmodule PodcodarWeb.PageLive do
             class="btn btn-outline"
           >
             <.icon name="hero-document-text" class="w-5 h-5" />
-            <span class="ml-2">Transparency</span>
+            <span class="ml-2">Transparência</span>
           </a>
         </div>
       </section>
 
       <section class="my-20 px-6 py-12 max-w-full md:max-w-4xl mx-auto flex flex-col gap-10">
         <div>
-          <h2 class="text-center text-3xl font-bold">Our mission</h2>
+          <h2 class="text-center text-3xl font-bold">Nossa missão</h2>
           <p class="mt-4">
-            TechSchool is all about making tech education accessible to everyone for free. There are tons of awesome courses online, but we don't have big bucks for marketing. So, newbies often run into the expensive courses first, making it seem like you have to shell out a ton of money.
+            Acreditamos que a educação em tecnologia deve ser acessível a todos. Por isso, criamos a PodCodar para impulsionar sua jornada profissional nas áreas de tecnologia!
           </p>
           <p class="mt-4">
-            That's where TechSchool steps in. We're here to shine a light on those awesome free courses that might be flying under the radar. Our website has a bunch of courses covering different areas. The goal? Help anyone go from zero to landing their first job without breaking the bank. We want to tackle the expensive course culture and make tech education fair and equal for everyone.
+            Como fazemos isso? Pesquisamos, avaliamos e organizamos conteúdos de alta qualidade, garantindo que você tenha acesso às melhores oportunidades de aprendizado. Além disso, oferecemos um espaço seguro para troca de ideias, além de mentorias personalizadas, entrevistas simuladas, e muito mais!
+          </p>
+          <p class="mt-4">
+            Junte-se a nós para transformar a educação em tecnologia no Brasil, tornando-a mais inclusiva e acessível! Comece hoje mesmo a se qualificar gratuitamente e alavanque sua carreira nas áreas de TI!
           </p>
         </div>
       </section>
 
       <section class="my-20 px-6 py-12 max-w-full md:max-w-4xl mx-auto flex flex-col gap-10">
         <div>
-          <h2 class="text-center text-3xl font-bold">Platform Statistics</h2>
+          <h2 class="text-center text-3xl font-bold">Estatísticas da plataforma</h2>
           <div class="stats stats-horizontal shadow mt-4 w-full">
             <div class="stat">
-              <div class="stat-title">Courses</div>
-              <div class="stat-value">189</div>
+              <div class="stat-title">💬 Membros</div>
+              <div class="stat-value">253</div>
             </div>
             <div class="stat">
-              <div class="stat-title">Bootcamps</div>
-              <div class="stat-value">10</div>
+              <div class="stat-title">👩🏾‍💻 Empregos Conquistados</div>
+              <div class="stat-value">29</div>
             </div>
             <div class="stat">
-              <div class="stat-title">Total Views</div>
-              <div class="stat-value">1584</div>
+              <div class="stat-title">🌐 Visualizações Totais</div>
+              <div class="stat-value">1421</div>
             </div>
           </div>
-          <p class="text-sm mt-2">Last updated: 3 months ago</p>
+          <p class="text-sm mt-2">Última atualização: há 3 horas</p>
           <div class="mt-4 flex justify-center">
             <a
               href="https://github.com/danielbergholz/techschool.dev/blob/main/docs/contributing-guide.md"
               class="btn btn-accent"
               target="_blank"
             >
-              Add course to PodCodar
+              Adicionar curso ao PodCodar
             </a>
           </div>
         </div>
       </section>
 
       <section class="my-20 px-3 max-w-full md:max-w-4xl mx-auto flex flex-col gap-10">
-        <h2 class="text-center text-2xl font-semibold">Huge thanks to our contributors 🚀</h2>
+        <h2 class="text-center text-2xl font-semibold">
+          Agradecimentos especiais aos nossos contribuidores 🚀
+        </h2>
 
         <div class="flex flex-wrap justify-center gap-4 mt-6">
           <div :for={contrib <- @contributors} class="avatar">

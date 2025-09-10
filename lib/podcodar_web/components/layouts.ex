@@ -31,7 +31,7 @@ defmodule PodcodarWeb.Layouts do
         <ul class="menu p-4 w-80 min-h-full bg-base-200">
           <li><a href="https://discord.gg/C4abRX5skH" target="_blank">Discord</a></li>
           <li><a href="https://github.com/podcodar/" target="_blank">GitHub</a></li>
-          <li><a href="https://github.com/sponsors/danielbergholz" target="_blank">Sponsor</a></li>
+          <li><a href="https://github.com/sponsors/podcodar" target="_blank">Patrocinar</a></li>
         </ul>
       </div>
     </div>
@@ -72,7 +72,9 @@ defmodule PodcodarWeb.Layouts do
           <ul class="menu menu-horizontal">
             <li><a href="https://discord.gg/C4abRX5skH" target="_blank">Discord</a></li>
             <li><a href="https://github.com/podcodar/" target="_blank">GitHub</a></li>
-            <li><a href="https://github.com/sponsors/danielbergholz" target="_blank">Sponsor</a></li>
+            <li>
+              <a href="https://github.com/sponsors/podcodar" target="_blank">Patrocinar</a>
+            </li>
           </ul>
         </div>
       </div>
@@ -84,7 +86,7 @@ defmodule PodcodarWeb.Layouts do
     ~H"""
     <footer class="footer footer-center p-6 bg-base-200 text-base-content">
       <div>
-        <p>Copyright © #{Date.utc_today().year} - All right reserved by PodCodar</p>
+        <p>Copyright © {Date.utc_today().year} - Todos os direitos reservados a PodCodar</p>
       </div>
     </footer>
     """

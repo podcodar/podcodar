@@ -6,11 +6,10 @@ defmodule PodcodarWeb.PageLiveTest do
 
   test "home page shows main content", %{conn: conn} do
     {:ok, _view, html} = live(conn, "/")
-    html = if is_binary(html), do: html, else: IO.iodata_to_binary(html)
 
-    assert html =~ "Free technology education for everyone"
-    assert html =~ "Our mission"
-    assert html =~ "Platform Statistics"
+    assert html =~ "Educação em tecnologia acessível para todos"
+    assert html =~ "Nossa missão"
+    assert html =~ "Estatísticas da plataforma"
   end
 
   test "search form validates and shows errors", %{conn: conn} do
