@@ -5,82 +5,93 @@ defmodule PodcodarWeb.Layouts do
   """
   use PodcodarWeb, :html
 
-  # Embed all files in layouts/* within this module.
-  # The default root.html.heex file contains the HTML
-  # skeleton of your application, namely HTML headers
-  # and other static content.
+  # Embed templates in layouts/*
   embed_templates "layouts/*"
 
-  @doc """
-  Renders your app layout.
-
-  This function is typically invoked from every template,
-  and it often contains your application menu, sidebar,
-  or similar.
-
-  ## Examples
-
-      <Layouts.app flash={@flash}>
-        <h1>Content</h1>
-      </Layouts.app>
-
-  """
   attr :flash, :map, required: true, doc: "the map of flash messages"
-
-  attr :current_scope, :map,
-    default: nil,
-    doc: "the current [scope](https://hexdocs.pm/phoenix/scopes.html)"
-
+  attr :current_scope, :map, default: nil, doc: "the current scope"
   slot :inner_block, required: true
 
   def app(assigns) do
     ~H"""
-    <header class="navbar px-4 sm:px-6 lg:px-8">
-      <div class="flex-1">
-        <a href="/" class="flex-1 flex w-fit items-center gap-2">
-          <img src={~p"/images/logo.svg"} width="36" />
-          <span class="text-sm font-semibold">v{Application.spec(:phoenix, :vsn)}</span>
-        </a>
+    <div class="bg-base-100 drawer">
+      <input id="my-drawer-3" type="checkbox" class="drawer-toggle" />
+      <div class="drawer-content flex flex-col min-h-screen">
+        <.navbar current_scope={@current_scope} />
+
+        <main class="flex-grow">
+          {render_slot(@inner_block)}
+        </main>
+
+        <.footer />
       </div>
-      <div class="flex-none">
-        <ul class="flex flex-column px-1 space-x-4 items-center">
-          <li>
-            <a href="https://phoenixframework.org/" class="btn btn-ghost">Website</a>
-          </li>
-          <li>
-            <a href="https://github.com/phoenixframework/phoenix" class="btn btn-ghost">GitHub</a>
-          </li>
-          <li>
-            <.theme_toggle />
-          </li>
-          <li>
-            <a href="https://hexdocs.pm/phoenix/overview.html" class="btn btn-primary">
-              Get Started <span aria-hidden="true">&rarr;</span>
-            </a>
-          </li>
+
+      <div class="drawer-side">
+        <label for="my-drawer-3" class="drawer-overlay"></label>
+        <ul class="menu p-4 w-80 min-h-full bg-base-200">
+          <li><a href="https://discord.gg/C4abRX5skH" target="_blank">Discord</a></li>
+          <li><a href="https://github.com/podcodar/" target="_blank">GitHub</a></li>
+          <li><a href="https://github.com/sponsors/danielbergholz" target="_blank">Sponsor</a></li>
         </ul>
       </div>
-    </header>
-
-    <main class="px-4 py-20 sm:px-6 lg:px-8">
-      <div class="mx-auto max-w-2xl space-y-4">
-        {render_slot(@inner_block)}
-      </div>
-    </main>
-
-    <.flash_group flash={@flash} />
+    </div>
     """
   end
 
-  @doc """
-  Shows the flash group with standard titles and content.
+  def navbar(assigns) do
+    ~H"""
+    <div class="navbar none sticky top-0 p-4">
+      <div class="flex bg-opacity-80 backdrop-blur-sm shadow-md rounded-lg w-full py-2 px-4 z-50">
+        <div class="flex-none lg:hidden">
+          <label for="my-drawer-3" class="btn btn-square btn-ghost">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              class="inline-block w-6 h-6 stroke-current"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M4 6h16M4 12h16M4 18h16"
+              >
+              </path>
+            </svg>
+          </label>
+        </div>
 
-  ## Examples
+        <div class="flex flex-1">
+          <a href="/" class="flex items-center gap-2">
+            <img src={~p"/images/logo.svg"} width="36" alt="PodCodar logo" />
+            <span class="text-lg font-bold">PodCodar</span>
+          </a>
+        </div>
 
-      <.flash_group flash={@flash} />
-  """
-  attr :flash, :map, required: true, doc: "the map of flash messages"
-  attr :id, :string, default: "flash-group", doc: "the optional id of flash container"
+        <div class="flex-none hidden lg:block">
+          <ul class="menu menu-horizontal">
+            <li><a href="https://discord.gg/C4abRX5skH" target="_blank">Discord</a></li>
+            <li><a href="https://github.com/podcodar/" target="_blank">GitHub</a></li>
+            <li><a href="https://github.com/sponsors/danielbergholz" target="_blank">Sponsor</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    """
+  end
+
+  def footer(assigns) do
+    ~H"""
+    <footer class="footer footer-center p-6 bg-base-200 text-base-content">
+      <div>
+        <p>Copyright © #{Date.utc_today().year} - All right reserved by PodCodar</p>
+      </div>
+    </footer>
+    """
+  end
+
+  attr :flash, :map, required: true
+  attr :id, :string, default: "flash-group"
 
   def flash_group(assigns) do
     ~H"""
@@ -115,15 +126,10 @@ defmodule PodcodarWeb.Layouts do
     """
   end
 
-  @doc """
-  Provides dark vs light theme toggle based on themes defined in app.css.
-
-  See <head> in root.html.heex which applies the theme before page load.
-  """
   def theme_toggle(assigns) do
     ~H"""
     <div class="card relative flex flex-row items-center border-2 border-base-300 bg-base-300 rounded-full">
-      <div class="absolute w-1/3 h-full rounded-full border-1 border-base-200 bg-base-100 brightness-200 left-0 [[data-theme=light]_&]:left-1/3 [[data-theme=dark]_&]:left-2/3 transition-[left]" />
+      <div class="absolute w-1/3 h-full rounded-full border-1 border-base-200 bg-base-100 left-0 transition-[left]" />
 
       <button
         class="flex p-2 cursor-pointer w-1/3"
