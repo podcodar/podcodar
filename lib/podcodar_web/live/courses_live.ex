@@ -13,6 +13,7 @@ defmodule PodcodarWeb.CoursesLive do
     {:ok,
      socket
      |> assign(
+       page_title: "Cursos",
        courses: courses,
        search_form:
          to_form(%{
@@ -73,7 +74,12 @@ defmodule PodcodarWeb.CoursesLive do
                 </p>
 
                 <div class="card-actions justify-end">
-                  <a href={course.link} class="btn btn-primary btn-outline" target="_blank" rel="noopener noreferrer" >
+                  <a
+                    href={course.link}
+                    class="btn btn-primary btn-outline"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
                     Acessar Curso
                   </a>
                 </div>
