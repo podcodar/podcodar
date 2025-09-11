@@ -106,7 +106,7 @@ defmodule PodcodarWeb.PageLive do
 
         <div class="mt-4 flex justify-center">
           <a
-            href="https://github.com/danielbergholz/techschool.dev/blob/main/docs/contributing-guide.md"
+            href="https://github.com/podcodar/podcodar/blob/main/docs/contributing-guidelines.md"
             class="btn btn-accent"
             target="_blank"
           >
@@ -117,7 +117,7 @@ defmodule PodcodarWeb.PageLive do
 
       <section class="my-20 px-3 max-w-full md:max-w-4xl mx-auto flex flex-col gap-12">
         <h2 class="text-center text-2xl font-semibold">
-          Agradecimentos especiais aos nossos contribuidores 🚀
+          Agradecimentos especiais aos nossos colaboradores 🚀
         </h2>
 
         <div class="flex flex-wrap justify-center gap-4 mt-6">
