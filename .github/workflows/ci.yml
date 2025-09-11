@@ -116,7 +116,7 @@ jobs:
 
   quality-gateway:
     name: Quality Gateway
-    needs: [elixir, deno, assets]
+    needs: [elixir, scripts, assets]
     runs-on: ubuntu-latest
     steps:
       - name: All checks passed
