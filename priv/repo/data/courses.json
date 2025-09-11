@@ -1,8 +1,8 @@
 [
   {
-    "title": "Aprenda Go 🇧🇷",
+    "title": "Aprenda Go",
     "link": "https://www.youtube.com/embed/videoseries?si=KOngD_UrBUnYWWo0&amp;list=PLCKpcjBB_VlBsxJ9IseNxFllf-UFEXOdg",
-    "description": "Curso completo em português da linguagem Go, de zero a ninja! 🇧🇷",
+    "description": "Curso completo em português da linguagem Go, de zero a ninja!",
     "locale": "br",
     "technologies": ["golang", "backend", "programming", "system", "network"]
   },
@@ -10,15 +10,15 @@
   {
     "title": "Descomplicando o Docker",
     "link": "https://www.youtube.com/embed/videoseries?si=iDa8v8mkA_SudE2R&amp;list=PLf-O3X2-mxDn1VpyU2q3fuI6YYeIWp5rR",
-    "description": "Workshop completo sobre Docker, do básico ao avançado, em português! 🇧🇷",
+    "description": "Workshop completo sobre Docker, do básico ao avançado, em português!",
     "locale": "br",
     "technologies": ["golang", "backend", "docker", "vm", "deploy"]
   },
 
   {
     "title": "Linux Week",
-    "link": "https://www.youtube.com/embed/videoseries?si=iDa8v8mkA_SudE2R&amp;list=PLf-O3X2-mxDn1VpyU2q3fuI6YYeIWp5rR",
-    "description": "Uma semana de conteúdo gratuito em português sobre Linux da LinuxTips! 🇧🇷",
+    "link": "https://www.youtube.com/embed/videoseries?si=p-zx4zDSxBFNJrBe&amp;list=PLf-O3X2-mxDnl7LhhjhEgbo2etWKkJ0GV",
+    "description": "Uma semana de conteúdo gratuito em português sobre Linux da LinuxTips! ",
     "locale": "br",
     "technologies": ["linux", "system", "network", "cli", "shell"]
   },
@@ -26,23 +26,15 @@
   {
     "title": "Curso de Terminal Linux",
     "link": "https://www.youtube.com/embed/videoseries?si=blPRtAbASw16BauQ&amp;list=PLbV6TI03ZWYXXwbP2TNTbviUaFh6YqqVt",
-    "description": "Curso completo e gratuito de Terminal Linux em português! 🇧🇷",
+    "description": "Curso completo e gratuito de Terminal Linux em português!",
     "locale": "br",
     "technologies": ["linux", "shell", "cli", "terminal"]
   },
 
   {
-    "title": "Descomplicando o Docker",
-    "link": "https://www.youtube.com/embed/videoseries?si=iDa8v8mkA_SudE2R&amp;list=PLf-O3X2-mxDn1VpyU2q3fuI6YYeIWp5rR",
-    "description": "Uma semana de conteúdo gratuito em português sobre Linux da LinuxTips! 🇧🇷",
-    "locale": "br",
-    "technologies": ["linux", "system", "network", "cli", "shell"]
-  },
-
-  {
     "title": "Python Week",
-    "link": "https://www.youtube.com/embed/videoseries?si=hTMMxFxPhd6qWGMC&amp;list=PLndfcZyvAqbofQl2kLLdeWWjCcPlOPnrW",
-    "description": "Uma semana de conteúdo gratuito em português sobre Python pela LinuxTips! 🇧🇷",
+    "link": "https://www.youtube.com/embed/videoseries?si=QAdDLGzw3eRWhCSf&amp;list=PLf-O3X2-mxDlfAv8IOfic1sHArdwrrkgh",
+    "description": "Uma semana de conteúdo gratuito em português sobre Python pela LinuxTips!",
     "locale": "br",
     "technologies": ["python", "programming", "backend", "data-science", "system"]
   },
@@ -50,7 +42,7 @@
   {
     "title": "Curso de JavaScript",
     "link": "https://www.youtube.com/embed/videoseries?si=BMuxF5QsV-ZXQHR_&amp;list=PLbV6TI03ZWYVP6EByYoUxZJeZaqitHi9r",
-    "description": "Curso introdutório e gratuito de JavaScript em português! 🇧🇷",
+    "description": "Curso introdutório e gratuito de JavaScript em português!",
     "locale": "br",
     "technologies": ["javascript", "frontend", "web", "programming"]
   },
@@ -58,7 +50,7 @@
   {
     "title": "Estruturas de dados",
     "link": "https://www.youtube.com/embed/videoseries?si=hTMMxFxPhd6qWGMC&amp;list=PLndfcZyvAqbofQl2kLLdeWWjCcPlOPnrW",
-    "description": "Estude as principais estruturas de dados utilizadas na programação! 🇧🇷",
+    "description": "Estude as principais estruturas de dados utilizadas na programação!",
     "locale": "br",
     "technologies": ["data-structures", "programming", "algorithms", "fundamentals"]
   },
@@ -66,7 +58,7 @@
   {
     "title": "Alquimia Stone - Formação Gratuita em Elixir",
     "link": "https://www.youtube.com/embed/videoseries?si=JJVeHhpXstElNL9P&amp;list=PLv3nyCBtlWP8I9rknIrfcJWrO05yEzknD",
-    "description": "A Stone oferece um curso completo e gratuito de Elixir em português! 🇧🇷",
+    "description": "A Stone oferece um curso completo e gratuito de Elixir em português!",
     "locale": "br",
     "technologies": ["elixir", "backend", "programming", "functional"]
   },
@@ -82,7 +74,7 @@
   {
     "title": "Curso de TypeScript",
     "link": "https://www.youtube.com/embed/videoseries?si=jxcsUhojcQ2CmnTs&amp;list=PLbV6TI03ZWYWwU5p9ZBH8oJTCjgneX53u",
-    "description": "Curso introdutório e gratuito de TypeScript em português! 🇧🇷",
+    "description": "Curso introdutório e gratuito de TypeScript em português!",
     "locale": "br",
     "technologies": ["typescript", "javascript", "fullstack", "web", "programming"]
   },
@@ -97,9 +89,9 @@
   {
     "title": "O essential do Spring",
     "link": "https://www.youtube.com/embed/videoseries?si=cTNetTtAaOlnVUoY&amp;list=PL62G310vn6nF3gssjqfCKLpTK2sZJ_a_1",
-    "description": "Curso introdutório e gratuito de Spring Framework em português! 🇧🇷",
+    "description": "Curso introdutório e gratuito de Spring Framework em português!",
     "locale": "br",
-    "technologies": ["java", "spring", "backend", "web", "programming"]
+    "technologies": ["java", "spring", "backend", "api"]
   }
 ]
 

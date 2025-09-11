@@ -2,14 +2,34 @@ import { z } from "zod";
 
 const locale = ["en", "es", "fr", "de"];
 const technologies = [
-  "phoenix",
-  "liveview",
-  "ecto",
-  "channels",
-  "deployment",
-  "api",
   "testing",
   "fullstack",
+  "golang",
+  "backend",
+  "programming",
+  "system",
+  "network",
+  "docker",
+  "vm",
+  "linux",
+  "cli",
+  "shell",
+  "python",
+  "data-science",
+  "javascript",
+  "frontend",
+  "web",
+  "data-structures",
+  "algorithms",
+  "fundamentals",
+  "elixir",
+  "functional",
+  "java",
+  "oop",
+  "typescript",
+  "spring",
+  "terminal",
+  "deploy",
 ];
 
 const CourseSchema = z.object({
@@ -22,7 +42,8 @@ const CourseSchema = z.object({
   locale: z.enum(locale),
   technologies: z
     .array(z.enum(technologies))
-    .min(1, "At least one technology must be specified"),
+    .min(1, "At least one technology must be specified")
+    .max(5, "No more than five technologies can be specified"),
 });
 
 const CourseListSchema = z

@@ -47,7 +47,7 @@ defmodule PodcodarWeb.CoursesLive do
 
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           <div :for={course <- @courses} class="card">
-            <div class="card bg-base-100 w-full shadow-sm">
+            <div class="card bg-base-100 w-full h-full shadow-sm">
               <figure>
                 <iframe
                   width="100%"
@@ -61,14 +61,24 @@ defmodule PodcodarWeb.CoursesLive do
                 </iframe>
               </figure>
 
-              <div class="card-body">
+              <div class="card-body gap-4">
                 <h2 class="card-title">{course.title}</h2>
 
-                <p>{course.description}</p>
-                <p class="badge badge-acent absolute top-2 right-2">{course.locale}</p>
+                <p class="badge badge-outline bg-current absolute top-2 right-2 overflow-auto">
+                  {if course.locale == "br" do
+                    "🇧🇷"
+                  else
+                    "🇺🇸"
+                  end}
+                </p>
 
-                <p class="gap-2 flex">
-                  <span :for={tech <- course.technologies} class="badge badge-dash badge-secondary">
+                <p>{course.description}</p>
+
+                <p class="gap-2 flex flex-wrap">
+                  <span
+                    :for={tech <- course.technologies}
+                    class="badge badge-dash badge-secondary flex-grow"
+                  >
                     {tech}
                   </span>
                 </p>
