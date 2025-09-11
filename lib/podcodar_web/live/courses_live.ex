@@ -25,7 +25,7 @@ defmodule PodcodarWeb.CoursesLive do
   def render(assigns) do
     ~H"""
     <Layouts.app flash={@flash}>
-      <div class="container mx-auto py-8">
+      <div class="container mx-auto py-8 px-4">
         <h1 class="text-2xl font-bold mb-4">Cursos Disponíveis</h1>
 
         <div class="mb-4">
@@ -35,7 +35,7 @@ defmodule PodcodarWeb.CoursesLive do
               type="search"
               placeholder="Pesquise cursos..."
               phx-debounce="420"
-              autofocus
+              phx-hook="FocusAndCursorToEnd"
             />
           </.form>
         </div>
