@@ -2,8 +2,10 @@ import { z } from "zod";
 
 const locale = ["en", "br"];
 const technologies = [
+  "phoenix",
   "testing",
   "fullstack",
+  "go",
   "golang",
   "backend",
   "programming",
@@ -12,6 +14,7 @@ const technologies = [
   "docker",
   "vm",
   "linux",
+  "api",
   "cli",
   "shell",
   "python",
@@ -40,15 +43,10 @@ const CourseSchema = z.object({
     .min(20, "Description must be at least 20 characters long"),
   // locale with options
   locale: z.enum(locale),
-  technologies: z
-    .array(z.enum(technologies))
-    .min(1, "At least one technology must be specified")
-    .max(5, "No more than five technologies can be specified"),
+  technologies: z.array(
+    z.enum(technologies),
+  ),
 });
-
-const CourseListSchema = z
-  .array(CourseSchema)
-  .min(1, "Course list cannot be empty");
 
 if (Deno.args.length !== 1) {
   console.error(
@@ -60,9 +58,9 @@ if (Deno.args.length !== 1) {
 const filePath = Deno.args[0];
 const data = await Deno.readTextFile(filePath);
 
-const courses = CourseListSchema.safeParse(JSON.parse(data));
+const courses = z.array(CourseSchema).safeParse(JSON.parse(data));
 if (!courses.success) {
-  console.error("Validation errors:", courses.error);
+  console.error(courses.error!.issues);
   Deno.exit(1);
 }
 
