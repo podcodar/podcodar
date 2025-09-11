@@ -1,0 +1,73 @@
+[
+  {
+    "title": "Mastering LiveView",
+    "link": "https://www.youtube.com/embed/liveviewcourse",
+    "description": "A comprehensive guide to building interactive web applications with Phoenix LiveView.",
+    "locale": "en",
+    "technologies": ["phoenix", "liveview"]
+  },
+  {
+    "title": "Ecto for Beginners",
+    "link": "https://www.youtube.com/embed/ecto101",
+    "description": "Learn the basics of Ecto, Phoenix's database library, including queries and changesets.",
+    "locale": "en",
+    "technologies": ["phoenix", "ecto"]
+  },
+  {
+    "title": "Phoenix Channels Deep Dive",
+    "link": "https://www.youtube.com/embed/channelsdeepdive",
+    "description": "Understand how to implement real-time features using Phoenix Channels.",
+    "locale": "en",
+    "technologies": ["phoenix", "channels"]
+  },
+  {
+    "title": "Deploying Phoenix Apps",
+    "link": "https://www.youtube.com/embed/phoenixdeployments",
+    "description": "Learn the best practices for deploying Phoenix applications to production.",
+    "locale": "en",
+    "technologies": ["phoenix", "deployment"]
+  },
+  {
+    "title": "Building REST APIs with Phoenix",
+    "link": "https://www.youtube.com/embed/restwithphoenix",
+    "description": "Step-by-step guide on building RESTful APIs using the Phoenix web framework.",
+    "locale": "en",
+    "technologies": ["phoenix", "api"]
+  },
+  {
+    "title": "Testing Phoenix Applications",
+    "link": "https://www.youtube.com/embed/phoenixtesting",
+    "description": "A guide to testing Phoenix applications using ExUnit and other tools.",
+    "locale": "en",
+    "technologies": ["phoenix", "testing"]
+  },
+  {
+    "title": "Advanced Phoenix Framework Patterns",
+    "link": "https://www.youtube.com/embed/advancedphoenix",
+    "description": "Take your Phoenix skills to the next level with advanced design patterns and techniques.",
+    "locale": "en",
+    "technologies": ["phoenix"]
+  },
+  {
+    "title": "Phoenix Framework for Beginners",
+    "link": "https://www.youtube.com/embed/phoenixforbeginners",
+    "description": "A beginner-friendly course to get started with Phoenix, covering the basics of web development.",
+    "locale": "en",
+    "technologies": ["phoenix"]
+  },
+  {
+    "title": "Real-time Web Apps with Phoenix",
+    "link": "https://www.youtube.com/embed/realtimephoenix",
+    "description": "Learn how to create real-time web applications with Phoenix and LiveView.",
+    "locale": "en",
+    "technologies": ["phoenix", "liveview"]
+  },
+  {
+    "title": "Full-stack Development with Phoenix",
+    "link": "https://www.youtube.com/embed/fullstackphoenix",
+    "description": "An all-in-one guide to developing full-stack applications using Phoenix and Elixir.",
+    "locale": "en",
+    "technologies": ["phoenix", "fullstack"]
+  }
+]
+

@@ -40,7 +40,7 @@ defmodule PodcodarWeb.Layouts do
 
   def navbar(assigns) do
     ~H"""
-    <div class="navbar none sticky top-0 p-4">
+    <div class="navbar none sticky top-0 p-4 z-50">
       <div class="flex bg-opacity-80 backdrop-blur-sm shadow-md rounded-lg w-full py-2 px-4 z-50">
         <div class="flex-none lg:hidden">
           <label for="my-drawer-3" class="btn btn-square btn-ghost">

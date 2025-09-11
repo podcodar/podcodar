@@ -22,7 +22,7 @@ defmodule PodcodarWeb.PageLive do
               autofocus
             />
 
-            <.link navigate={~p"/#"} class="btn btn-ghost">Estou com sorte</.link>
+            <.link navigate={~p"/courses"} class="btn btn-ghost">Estou com sorte</.link>
             <.button type="submit">Pesquisar</.button>
           </.form>
         </div>
@@ -157,7 +157,13 @@ defmodule PodcodarWeb.PageLive do
     changeset = SearchQuery.changeset(%SearchQuery{}, params)
 
     if changeset.valid? do
-      {:noreply, assign(socket, :form, to_form(changeset))}
+      query = Ecto.Changeset.get_field(changeset, :query)
+      params = %{"query" => query}
+
+      {:noreply,
+       socket
+       |> assign(:form, to_form(changeset))
+       |> push_navigate(to: ~p"/courses?#{params}")}
     else
       {:noreply, assign(socket, :form, to_form(Map.put(changeset, :action, :insert)))}
     end

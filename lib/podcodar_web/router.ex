@@ -18,6 +18,7 @@ defmodule PodcodarWeb.Router do
     pipe_through :browser
 
     live "/", PageLive, :home
+    live "/courses", CoursesLive, :home
   end
 
   # Other scopes may use custom stacks.
