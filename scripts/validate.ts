@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-const locale = ["en", "es", "fr", "de"];
+const locale = ["en", "br"];
 const technologies = [
   "testing",
   "fullstack",
