@@ -3,6 +3,8 @@ defmodule Podcodar.Courses do
 
   # define a course structure
   defmodule Course do
+
+    @derive Jason.Encoder
     defstruct [:title, :description, :link, :locale, :technologies]
 
     @type t :: %__MODULE__{
@@ -14,7 +16,11 @@ defmodule Podcodar.Courses do
           }
   end
 
-  @courses_file_path "priv/repo/data/courses.json"
+  @courses_file_path Application.compile_env(
+                       :podcodar,
+                       :courses_file_path,
+                       "priv/repo/data/courses.json"
+                     )
 
   def list_courses do
     {:ok, content} = File.read(@courses_file_path)
