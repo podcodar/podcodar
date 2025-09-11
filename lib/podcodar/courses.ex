@@ -3,7 +3,6 @@ defmodule Podcodar.Courses do
 
   # define a course structure
   defmodule Course do
-
     @derive Jason.Encoder
     defstruct [:title, :description, :link, :locale, :technologies]
 

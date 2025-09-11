@@ -109,7 +109,7 @@ defmodule PodcodarWeb.PageLive do
             href="https://github.com/danielbergholz/techschool.dev/blob/main/docs/contributing-guide.md"
             class="btn btn-accent"
             target="_blank"
-            >
+          >
             Adicionar um curso
           </a>
         </div>
