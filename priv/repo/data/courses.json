@@ -1,73 +1,105 @@
 [
   {
-    "title": "Mastering LiveView",
-    "link": "https://www.youtube.com/embed/liveviewcourse",
-    "description": "A comprehensive guide to building interactive web applications with Phoenix LiveView.",
+    "title": "Aprenda Go 🇧🇷",
+    "link": "https://www.youtube.com/embed/videoseries?si=KOngD_UrBUnYWWo0&amp;list=PLCKpcjBB_VlBsxJ9IseNxFllf-UFEXOdg",
+    "description": "Curso completo em português da linguagem Go, de zero a ninja! 🇧🇷",
+    "locale": "br",
+    "technologies": ["golang", "backend", "programming", "system", "network"]
+  },
+
+  {
+    "title": "Descomplicando o Docker",
+    "link": "https://www.youtube.com/embed/videoseries?si=iDa8v8mkA_SudE2R&amp;list=PLf-O3X2-mxDn1VpyU2q3fuI6YYeIWp5rR",
+    "description": "Workshop completo sobre Docker, do básico ao avançado, em português! 🇧🇷",
+    "locale": "br",
+    "technologies": ["golang", "backend", "docker", "vm", "deploy"]
+  },
+
+  {
+    "title": "Linux Week",
+    "link": "https://www.youtube.com/embed/videoseries?si=iDa8v8mkA_SudE2R&amp;list=PLf-O3X2-mxDn1VpyU2q3fuI6YYeIWp5rR",
+    "description": "Uma semana de conteúdo gratuito em português sobre Linux da LinuxTips! 🇧🇷",
+    "locale": "br",
+    "technologies": ["linux", "system", "network", "cli", "shell"]
+  },
+
+  {
+    "title": "Curso de Terminal Linux",
+    "link": "https://www.youtube.com/embed/videoseries?si=blPRtAbASw16BauQ&amp;list=PLbV6TI03ZWYXXwbP2TNTbviUaFh6YqqVt",
+    "description": "Curso completo e gratuito de Terminal Linux em português! 🇧🇷",
+    "locale": "br",
+    "technologies": ["linux", "shell", "cli", "terminal"]
+  },
+
+  {
+    "title": "Descomplicando o Docker",
+    "link": "https://www.youtube.com/embed/videoseries?si=iDa8v8mkA_SudE2R&amp;list=PLf-O3X2-mxDn1VpyU2q3fuI6YYeIWp5rR",
+    "description": "Uma semana de conteúdo gratuito em português sobre Linux da LinuxTips! 🇧🇷",
+    "locale": "br",
+    "technologies": ["linux", "system", "network", "cli", "shell"]
+  },
+
+  {
+    "title": "Python Week",
+    "link": "https://www.youtube.com/embed/videoseries?si=hTMMxFxPhd6qWGMC&amp;list=PLndfcZyvAqbofQl2kLLdeWWjCcPlOPnrW",
+    "description": "Uma semana de conteúdo gratuito em português sobre Python pela LinuxTips! 🇧🇷",
+    "locale": "br",
+    "technologies": ["python", "programming", "backend", "data-science", "system"]
+  },
+
+  {
+    "title": "Curso de JavaScript",
+    "link": "https://www.youtube.com/embed/videoseries?si=BMuxF5QsV-ZXQHR_&amp;list=PLbV6TI03ZWYVP6EByYoUxZJeZaqitHi9r",
+    "description": "Curso introdutório e gratuito de JavaScript em português! 🇧🇷",
+    "locale": "br",
+    "technologies": ["javascript", "frontend", "web", "programming"]
+  },
+
+  {
+    "title": "Estruturas de dados",
+    "link": "https://www.youtube.com/embed/videoseries?si=hTMMxFxPhd6qWGMC&amp;list=PLndfcZyvAqbofQl2kLLdeWWjCcPlOPnrW",
+    "description": "Estude as principais estruturas de dados utilizadas na programação! 🇧🇷",
+    "locale": "br",
+    "technologies": ["data-structures", "programming", "algorithms", "fundamentals"]
+  },
+
+  {
+    "title": "Alquimia Stone - Formação Gratuita em Elixir",
+    "link": "https://www.youtube.com/embed/videoseries?si=JJVeHhpXstElNL9P&amp;list=PLv3nyCBtlWP8I9rknIrfcJWrO05yEzknD",
+    "description": "A Stone oferece um curso completo e gratuito de Elixir em português! 🇧🇷",
+    "locale": "br",
+    "technologies": ["elixir", "backend", "programming", "functional"]
+  },
+
+  {
+    "title": "Maratona Java Virado no Jiraya",
+    "link": "https://www.youtube.com/embed/videoseries?si=X7MZyBYVp3XUSeIL&amp;list=PL62G310vn6nFIsOCC0H-C2infYgwm8SWW",
+    "description": "Melhor, maior, e o mais completo curso de Java em português grátis de toda Internet está de volta.",
+    "locale": "br",
+    "technologies": ["java", "backend", "programming", "oop", "system"]
+  },
+
+  {
+    "title": "Curso de TypeScript",
+    "link": "https://www.youtube.com/embed/videoseries?si=jxcsUhojcQ2CmnTs&amp;list=PLbV6TI03ZWYWwU5p9ZBH8oJTCjgneX53u",
+    "description": "Curso introdutório e gratuito de TypeScript em português! 🇧🇷",
+    "locale": "br",
+    "technologies": ["typescript", "javascript", "fullstack", "web", "programming"]
+  },
+
+  {
+    "title": "Phoenix Crash Course",
+    "link": "https://www.youtube.com/embed/videoseries?si=aEtdEZ8ZhIxgrNmM&amp;list=PLbV6TI03ZWYXKCJePfD8G34hyWdW_WLFk",
+    "description": "Learn the basics of Phoenix framework with this comprehensive crash course.",
     "locale": "en",
-    "technologies": ["phoenix", "liveview"]
+    "technologies": ["phoenix", "elixir", "web", "backend"]
   },
   {
-    "title": "Ecto for Beginners",
-    "link": "https://www.youtube.com/embed/ecto101",
-    "description": "Learn the basics of Ecto, Phoenix's database library, including queries and changesets.",
-    "locale": "en",
-    "technologies": ["phoenix", "ecto"]
-  },
-  {
-    "title": "Phoenix Channels Deep Dive",
-    "link": "https://www.youtube.com/embed/channelsdeepdive",
-    "description": "Understand how to implement real-time features using Phoenix Channels.",
-    "locale": "en",
-    "technologies": ["phoenix", "channels"]
-  },
-  {
-    "title": "Deploying Phoenix Apps",
-    "link": "https://www.youtube.com/embed/phoenixdeployments",
-    "description": "Learn the best practices for deploying Phoenix applications to production.",
-    "locale": "en",
-    "technologies": ["phoenix", "deployment"]
-  },
-  {
-    "title": "Building REST APIs with Phoenix",
-    "link": "https://www.youtube.com/embed/restwithphoenix",
-    "description": "Step-by-step guide on building RESTful APIs using the Phoenix web framework.",
-    "locale": "en",
-    "technologies": ["phoenix", "api"]
-  },
-  {
-    "title": "Testing Phoenix Applications",
-    "link": "https://www.youtube.com/embed/phoenixtesting",
-    "description": "A guide to testing Phoenix applications using ExUnit and other tools.",
-    "locale": "en",
-    "technologies": ["phoenix", "testing"]
-  },
-  {
-    "title": "Advanced Phoenix Framework Patterns",
-    "link": "https://www.youtube.com/embed/advancedphoenix",
-    "description": "Take your Phoenix skills to the next level with advanced design patterns and techniques.",
-    "locale": "en",
-    "technologies": ["phoenix"]
-  },
-  {
-    "title": "Phoenix Framework for Beginners",
-    "link": "https://www.youtube.com/embed/phoenixforbeginners",
-    "description": "A beginner-friendly course to get started with Phoenix, covering the basics of web development.",
-    "locale": "en",
-    "technologies": ["phoenix"]
-  },
-  {
-    "title": "Real-time Web Apps with Phoenix",
-    "link": "https://www.youtube.com/embed/realtimephoenix",
-    "description": "Learn how to create real-time web applications with Phoenix and LiveView.",
-    "locale": "en",
-    "technologies": ["phoenix", "liveview"]
-  },
-  {
-    "title": "Full-stack Development with Phoenix",
-    "link": "https://www.youtube.com/embed/fullstackphoenix",
-    "description": "An all-in-one guide to developing full-stack applications using Phoenix and Elixir.",
-    "locale": "en",
-    "technologies": ["phoenix", "fullstack"]
+    "title": "O essential do Spring",
+    "link": "https://www.youtube.com/embed/videoseries?si=cTNetTtAaOlnVUoY&amp;list=PL62G310vn6nF3gssjqfCKLpTK2sZJ_a_1",
+    "description": "Curso introdutório e gratuito de Spring Framework em português! 🇧🇷",
+    "locale": "br",
+    "technologies": ["java", "spring", "backend", "web", "programming"]
   }
 ]
 
