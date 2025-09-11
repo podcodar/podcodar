@@ -41,7 +41,7 @@ defmodule PodcodarWeb.PageLive do
         </div>
       </section>
 
-      <section class="my-20 px-6 py-12 max-w-full md:max-w-4xl mx-auto gap-10 flex flex-col">
+      <section class="my-20 px-6 py-12 max-w-full md:max-w-4xl mx-auto gap-12 flex flex-col ">
         <h2 class="text-center text-2xl font-semibold mb-6">Links</h2>
 
         <div class="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-full sm:max-w-xl md:max-w-2xl mx-auto">
@@ -68,9 +68,10 @@ defmodule PodcodarWeb.PageLive do
         </div>
       </section>
 
-      <section class="my-20 px-6 py-12 max-w-full md:max-w-4xl mx-auto flex flex-col gap-10">
+      <section class="my-20 px-6 py-12 max-w-full md:max-w-4xl mx-auto flex flex-col gap-12">
+        <h2 class="text-center text-3xl font-bold">Nossa missão</h2>
+
         <div>
-          <h2 class="text-center text-3xl font-bold">Nossa missão</h2>
           <p class="mt-4">
             Acreditamos que a educação em tecnologia deve ser acessível a todos. Por isso, criamos a PodCodar para impulsionar sua jornada profissional nas áreas de tecnologia!
           </p>
@@ -83,9 +84,9 @@ defmodule PodcodarWeb.PageLive do
         </div>
       </section>
 
-      <section class="my-20 px-6 py-12 max-w-full md:max-w-4xl mx-auto flex flex-col gap-10">
+      <section class="my-20 px-6 py-12 max-w-full md:max-w-4xl mx-auto flex flex-col gap-12">
+        <h2 class="text-center text-3xl font-bold">Estatísticas da plataforma</h2>
         <div>
-          <h2 class="text-center text-3xl font-bold">Estatísticas da plataforma</h2>
           <div class="stats stats-horizontal shadow mt-4 w-full">
             <div class="stat">
               <div class="stat-title">💬 Membros</div>
@@ -96,24 +97,25 @@ defmodule PodcodarWeb.PageLive do
               <div class="stat-value">29</div>
             </div>
             <div class="stat">
-              <div class="stat-title">🌐 Visualizações Totais</div>
+              <div class="stat-title">🌐 Horas de cursos</div>
               <div class="stat-value">1421</div>
             </div>
           </div>
-          <p class="text-sm mt-2">Última atualização: há 3 horas</p>
-          <div class="mt-4 flex justify-center">
-            <a
-              href="https://github.com/danielbergholz/techschool.dev/blob/main/docs/contributing-guide.md"
-              class="btn btn-accent"
-              target="_blank"
+          <p class="text-sm text-secondary text-center mt-2">Última atualização: há 7 horas</p>
+        </div>
+
+        <div class="mt-4 flex justify-center">
+          <a
+            href="https://github.com/danielbergholz/techschool.dev/blob/main/docs/contributing-guide.md"
+            class="btn btn-accent"
+            target="_blank"
             >
-              Adicionar curso ao PodCodar
-            </a>
-          </div>
+            Adicionar um curso
+          </a>
         </div>
       </section>
 
-      <section class="my-20 px-3 max-w-full md:max-w-4xl mx-auto flex flex-col gap-10">
+      <section class="my-20 px-3 max-w-full md:max-w-4xl mx-auto flex flex-col gap-12">
         <h2 class="text-center text-2xl font-semibold">
           Agradecimentos especiais aos nossos contribuidores 🚀
         </h2>

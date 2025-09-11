@@ -18,7 +18,7 @@ Key considerations:
 - UI: DaisyUI and TailwindCSS
 - Database: Ecto with SQLite3
 - Deno for `scripts` (latest version is 2.5.0)
-- More info at [AGENTS.md][../AGENTS.md]
+- More info at [AGENTS.md](../AGENTS.md)
 
 ## Definition of Work
 
