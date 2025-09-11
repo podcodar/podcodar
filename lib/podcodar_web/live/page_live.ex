@@ -28,16 +28,16 @@ defmodule PodcodarWeb.PageLive do
         </div>
 
         <div class="flex flex-wrap justify-center gap-4 max-w-full md:max-w-2xl">
-          <a href="/cursos?language=golang" class="btn btn-sm btn-dash btn-accent">Go</a>
-          <a href="/cursos?language=elixir" class="btn btn-sm btn-dash btn-accent">Elixir</a>
-          <a href="/cursos?language=python" class="btn btn-sm btn-dash btn-accent">Python</a>
-          <a href="/cursos?language=ruby" class="btn btn-sm btn-dash btn-accent">Ruby</a>
-          <a href="/cursos?framework=react.js" class="btn btn-sm btn-dash btn-accent">React</a>
-          <a href="/cursos?framework=node.js" class="btn btn-sm btn-dash btn-accent">Node</a>
-          <a href="/cursos?framework=laravel" class="btn btn-sm btn-dash btn-accent">Laravel</a>
-          <a href="/cursos?tool=sql" class="btn btn-sm btn-dash btn-accent">Postgres</a>
-          <a href="/cursos?framework=phoenix" class="btn btn-sm btn-dash btn-accent">Phoenix</a>
-          <a href="/cursos" class="btn btn-sm btn-dash btn-accent">Muito mais</a>
+          <a href="/courses?query=golang" class="btn btn-sm btn-dash btn-secondary">Go</a>
+          <a href="/courses?query=elixir" class="btn btn-sm btn-dash btn-secondary">Elixir</a>
+          <a href="/courses?query=python" class="btn btn-sm btn-dash btn-secondary">Python</a>
+          <a href="/courses?query=ruby" class="btn btn-sm btn-dash btn-secondary">Ruby</a>
+          <a href="/courses?query=react.js" class="btn btn-sm btn-dash btn-secondary">React</a>
+          <a href="/courses?query=node.js" class="btn btn-sm btn-dash btn-secondary">Node</a>
+          <a href="/courses?query=laravel" class="btn btn-sm btn-dash btn-secondary">Laravel</a>
+          <a href="/courses?tool=sql" class="btn btn-sm btn-dash btn-secondary">Postgres</a>
+          <a href="/courses?query=phoenix" class="btn btn-sm btn-dash btn-secondary">Phoenix</a>
+          <a href="/courses" class="btn btn-sm btn-dash btn-accent">Muito mais</a>
         </div>
       </section>
 
