@@ -73,7 +73,7 @@ defmodule PodcodarWeb.CoursesLive do
                 </p>
 
                 <div class="card-actions justify-end">
-                  <a href={course.link} class="btn btn-primary btn-outline" _target="blank">
+                  <a href={course.link} class="btn btn-primary btn-outline" target="_blank" rel="noopener noreferrer" >
                     Acessar Curso
                   </a>
                 </div>
