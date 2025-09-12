@@ -36,7 +36,7 @@
     "link": "https://www.youtube.com/embed/videoseries?si=QAdDLGzw3eRWhCSf&amp;list=PLf-O3X2-mxDlfAv8IOfic1sHArdwrrkgh",
     "description": "Uma semana de conteúdo gratuito em português sobre Python pela LinuxTips!",
     "locale": "br",
-    "technologies": ["python", "programming", "backend", "data-science", "system"]
+    "technologies": ["python", "programming", "backend", "system"]
   },
 
   {

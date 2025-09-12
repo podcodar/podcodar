@@ -3,16 +3,16 @@
 Adoramos nossos colaboradores! Aqui está como você pode contribuir:
 
 - [Abra uma issue](https://github.com/podcodar/podcodar/issues) se você acredita ter encontrado um bug.
-- Faça um [pull request](https://github.com/podcodar/podcodar/pull) para adicionar novas funcionalidades/melhorar a qualidade de vida/corrigir bugs.
+- Faça um [pull request](https://github.com/podcodar/podcodar/pull) para adicionar novas funcionalidades, melhorar a Experiência de Desenvolvimento ou corrigir bugs.
 
 ## Adicionando um novo curso
 
-- Adicione uma nova entrada no arquivo JSON `priv/repo/data/courses.json`. O arquivo deve ter a seguinte estrutura atualizada:
+- Adicione uma nova entrada no arquivo JSON `priv/repo/data/courses.json`. O arquivo deve ter a seguinte estrutura:
 
 ```jsonc
 {
   "title": "Gnome do Curso",
-  "link": "Embedable URL do curso no YouTube",
+  "link": "URL embedável do curso no YouTube",
   "description": "Breve descrição do curso (mínimo de 20 characters)",
   "locale": "br",
   "technologies": ["tecnologia 1", "tecnologia 2"]
@@ -23,8 +23,8 @@ Adoramos nossos colaboradores! Aqui está como você pode contribuir:
 
 ### Notas importantes
 
-- Certifique-se de que as tecnologias listadas em `technologies` estejam incluídas no arquivo de validação `scripts/validate.ts`. Consulte as tecnologias suportadas no memento:
-- Cursos devem focar em tópicos específicos. Se o curso aborda apenas um framework, liste apenas esse framework em `technologies`. Se o curso aborda múltiplos assuntos, liste todos else de forma abrangente.
+- Certifique-se de que as tecnologias listadas em `technologies` estejam incluídas no arquivo de validação `scripts/validate.ts`. Consulte as tecnologias suportadas no memento.
+- Cursos devem focar em tópicos específicos. Se o curso aborda apenas um framework, liste apenas esse framework em `technologies`. Se o curso aborda múltiplos assuntos, liste todos de forma abrangente.
 
 Exemplo:
 
@@ -34,8 +34,8 @@ Curso "Desenvolvimento Web Completo":
 {
   "title": "Desenvolvimento Web Completo",
   "link": "https://www.youtube.com/embed/videoseries?list=PL1234567890",
-  "description": "Curso que ensina HTML, CSS, JavaScript, e mais!",
-  "locale": "pt",
+  "description": "Curso que ensina HTML, CSS, JavaScript e mais!",
+  "locale": "br",
   "technologies": ["HTML", "CSS", "JavaScript", "React", "Node.js"]
 }
 ```
@@ -44,7 +44,7 @@ Curso "Desenvolvimento Web Completo":
 
 ### Isso dá muito trabalho, eu só quero adicionar um curso!
 
-Eu sei. Estou trabalhando para tornar todo esse processo mais fácil. Enquanto isso, se você quiser adicionar um curso, basta abrir uma issue com os detalhes do curso e eu adicionarei para você.
+Entendemos. Estamos trabalhando para tornar todo esse processo mais fácil. Enquanto isso, se você quiser adicionar um curso, basta abrir uma issue com os detalhes do curso e nós o adicionaremos para você.
 
 ### Que tipo de conteúdo posso adicionar?
 
@@ -53,7 +53,7 @@ O foco principal desta plataforma são cursos de desenvolvimento web. Mas sinta-
 ### Que tipo de conteúdo não posso adicionar?
 
 - Conteúdo que não seja relacionado à programação. Isso inclui: música, filmes, programas de TV, etc.
-- Conteúdo de criadores com qualquer tipo de comportamento inadequado, como: racismo, sexismo, homofobia, etc. Isso é completamente inaceitável e não será tolerado nesta comunidade!
+- Conteúdo de criadores com qualquer tipo de comportamento inadequado, como: racismo, sexismo, homofobia, etc. Isso é completamente inaceitável e não será tolerado nesta comunidade.
 
 ## Voltar
 
