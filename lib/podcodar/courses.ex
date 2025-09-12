@@ -5,28 +5,15 @@ defmodule Podcodar.Courses do
   defmodule Course do
     @derive Jason.Encoder
     defstruct [:title, :description, :link, :locale, :technologies]
-
-    @type t :: %__MODULE__{
-            title: String.t(),
-            description: String.t(),
-            link: String.t(),
-            locale: String.t(),
-            technologies: [String.t()]
-          }
   end
 
-  @courses_file_path Application.compile_env(
-                       :podcodar,
-                       :courses_file_path,
-                       "priv/repo/data/courses.json"
-                     )
-
   def list_courses do
-    {:ok, content} = File.read(@courses_file_path)
+    path = resolve_courses_file_path()
+    {:ok, content} = File.read(path)
 
     case Jason.decode(content) do
       {:ok, courses} ->
-        Logger.info("Successfully loaded courses from #{@courses_file_path}: #{inspect(courses)}")
+        Logger.info("Successfully loaded courses from #{path}: #{inspect(courses)}")
 
         {:ok,
          Enum.map(courses, fn course_map ->
@@ -64,5 +51,18 @@ defmodule Podcodar.Courses do
       end)
 
     {:ok, courses}
+  end
+
+  defp resolve_courses_file_path do
+    env_path = Application.get_env(:podcodar, :courses_file_path)
+
+    cond do
+      is_binary(env_path) and File.exists?(env_path) ->
+        env_path
+
+      true ->
+        priv_dir = :code.priv_dir(:podcodar) |> List.to_string()
+        Path.join(priv_dir, "repo/data/courses.json")
+    end
   end
 end

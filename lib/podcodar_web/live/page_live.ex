@@ -7,7 +7,7 @@ defmodule PodcodarWeb.PageLive do
     ~H"""
     <Layouts.app flash={@flash} current_scope={@current_scope}>
       <section class="text-center min-h-svh flex flex-col justify-center items-center gap-12 mt-[-6rem] bg-pattern p-6">
-        <div class="gap-4">
+        <div class="gap-4 mt-24">
           <h1 class="text-5xl font-bold">Educação em tecnologia acessível para todos!</h1>
           <h2 class="text-2xl">Do zero ao seu primeiro emprego sem pagar nada</h2>
         </div>

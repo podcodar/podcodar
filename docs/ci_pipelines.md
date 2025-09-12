@@ -7,6 +7,7 @@ This repository uses GitHub Actions to enforce quality gates on pull requests an
 - Elixir job: checks formatting, compiles with warnings as errors, and runs tests.
 - Deno validation: validates `priv/repo/data/courses.json` using `scripts/validate.ts`.
 - Assets build: builds Tailwind and esbuild via `mix assets.build`.
+  - Note: The Dockerfile compiles before asset build for production releases to ensure phoenix-colocated modules exist when esbuild runs.
 - Quality gateway: requires all the above jobs to pass before merge.
 
 ## Triggers
@@ -32,4 +33,3 @@ deno run --allow-read scripts/validate.ts priv/repo/data/courses.json
 - CI caches Mix `_build` and `deps` to speed up runs.
 - SQLite3 is installed in CI for Ecto SQL tests.
 - Deno uses `deno.json` for npm import of `zod`.
-
