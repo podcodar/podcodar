@@ -1,0 +1,27 @@
+version: "3.9"
+
+services:
+  podcodar:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: podcodar:latest
+    environment:
+      MIX_ENV: prod
+      PHX_SERVER: "true"
+      PHX_HOST: localhost
+      PORT: "4000"
+      DATABASE_PATH: /data/podcodar.db
+      # Generate one with: mix phx.gen.secret
+      SECRET_KEY_BASE: ${SECRET_KEY_BASE}
+    ports:
+      - "4000:4000"
+    volumes:
+      - podcodar_data:/data
+    restart: unless-stopped
+
+volumes:
+  podcodar_data:
+    driver: local
+
+

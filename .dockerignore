@@ -1,0 +1,90 @@
+# flyctl launch added from .elixir-tools/.gitignore
+.elixir-tools/**/*
+
+# flyctl launch added from .elixir_ls/.gitignore
+.elixir_ls/**/*
+
+# flyctl launch added from .gitignore
+# The directory Mix will write compiled artifacts to.
+_build
+
+# If you run "mix test --cover", coverage assets end up here.
+cover
+
+# The directory Mix downloads your dependencies sources to.
+deps
+
+# Where 3rd-party dependencies like ExDoc output generated docs.
+doc
+
+# Ignore .fetch files in case you like to edit your project deps locally.
+.fetch
+
+# If the VM crashes, it generates a dump, let's ignore it too.
+**/erl_crash.dump
+
+# Also ignore archive artifacts (built via "mix archive.build").
+**/*.ez
+
+# Temporary files, for example, from tests.
+tmp
+
+# Ignore package tarball (built via "mix hex.build").
+**/podcodar-*.tar
+
+# Ignore assets that are produced by build tools.
+priv/static/assets
+
+# Ignore digested assets cache.
+priv/static/cache_manifest.json
+
+# In case you use Node.js/npm, you want to ignore these.
+**/npm-debug.log
+assets/node_modules
+
+# Database files
+**/*.db
+**/*.db-*
+
+# Dotfiles
+**/.env*
+
+# flyctl launch added from apps/website/.gitignore
+# The directory Mix will write compiled artifacts to.
+apps/website/_build
+
+# If you run "mix test --cover", coverage assets end up here.
+apps/website/cover
+
+# The directory Mix downloads your dependencies sources to.
+apps/website/deps
+
+# Where 3rd-party dependencies like ExDoc output generated docs.
+apps/website/doc
+
+# Ignore .fetch files in case you like to edit your project deps locally.
+apps/website/.fetch
+
+# If the VM crashes, it generates a dump, let's ignore it too.
+apps/website/**/erl_crash.dump
+
+# Also ignore archive artifacts (built via "mix archive.build").
+apps/website/**/*.ez
+
+# Temporary files, for example, from tests.
+apps/website/tmp
+
+# Ignore package tarball (built via "mix hex.build").
+apps/website/**/website-*.tar
+
+# Ignore assets that are produced by build tools.
+apps/website/priv/static/assets
+
+# Ignore digested assets cache.
+apps/website/priv/static/cache_manifest.json
+
+# In case you use Node.js/npm, you want to ignore these.
+apps/website/**/npm-debug.log
+apps/website/assets/node_modules
+
+fly.toml
