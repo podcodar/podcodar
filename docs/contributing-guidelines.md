@@ -14,8 +14,8 @@ Adoramos nossos colaboradores! Aqui está como você pode contribuir:
   "title": "Gnome do Curso",
   "link": "Embedable URL do curso no YouTube",
   "description": "Breve descrição do curso (mínimo de 20 characters)",
-  "locale": "pt", // Deve set "en", "es", "fr", ou "pt" conforme `scripts/validate.ts`
-  "technologies": ["tecnologia 1", "tecnologia 2"] // Lista de tecnologias, máximo 5
+  "locale": "br",
+  "technologies": ["tecnologia 1", "tecnologia 2"]
 }
 ```
 
