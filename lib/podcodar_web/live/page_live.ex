@@ -45,7 +45,7 @@ defmodule PodcodarWeb.PageLive do
         <h2 class="text-center text-2xl font-semibold mb-6">Links</h2>
 
         <div class="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-full sm:max-w-xl md:max-w-2xl mx-auto">
-          <a href="https://discord.gg/podcodar" target="_blank" class="btn btn-outline">
+          <a href="https://discord.gg/vnEAM9sFb7" target="_blank" class="btn btn-outline">
             <.icon name="hero-chat-bubble-left-right" class="w-5 h-5" />
             <span class="ml-2">Discord</span>
           </a>

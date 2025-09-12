@@ -30,7 +30,7 @@ defmodule PodcodarWeb.Layouts do
         <label for="my-drawer-3" class="drawer-overlay"></label>
         <ul class="menu p-4 w-80 min-h-full bg-base-200">
           <div class="spacer mt-24" />
-          <li><a href="https://discord.gg/C4abRX5skH" target="_blank">Discord</a></li>
+          <li><a href="https://discord.gg/vnEAM9sFb7" target="_blank">Discord</a></li>
           <li><a href="https://github.com/podcodar/" target="_blank">GitHub</a></li>
           <li><a href="https://github.com/sponsors/podcodar" target="_blank">Patrocinar</a></li>
         </ul>
@@ -71,7 +71,7 @@ defmodule PodcodarWeb.Layouts do
 
         <div class="flex-none hidden lg:block">
           <ul class="menu menu-horizontal">
-            <li><a href="https://discord.gg/C4abRX5skH" target="_blank">Discord</a></li>
+            <li><a href="https://discord.gg/vnEAM9sFb7" target="_blank">Discord</a></li>
             <li><a href="https://github.com/podcodar/" target="_blank">GitHub</a></li>
             <li>
               <a href="https://github.com/sponsors/podcodar" target="_blank">Patrocinar</a>
