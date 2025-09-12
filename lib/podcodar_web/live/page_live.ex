@@ -121,9 +121,21 @@ defmodule PodcodarWeb.PageLive do
         </h2>
 
         <div class="flex flex-wrap justify-center gap-4 mt-6">
-          <div :for={contrib <- @contributors} class="avatar">
-            <div class="w-12 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
-              <img src={contrib.avatar_url} alt={contrib.login} />
+          <div :for={contrib <- @contributors} class="tooltip">
+            <div class="tooltip-content">
+              <div class="animate-bounce text-orange-400 text-xl font-black">@{contrib.login}</div>
+            </div>
+
+            <div class="avatar">
+              <div class="w-12 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
+                <a
+                  href={"https://github.com/#{contrib.login}"}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <img src={contrib.avatar_url} alt={contrib.login} />
+                </a>
+              </div>
             </div>
           </div>
         </div>
