@@ -11,7 +11,7 @@ Adoramos nossos colaboradores! Aqui está como você pode contribuir:
 
 ```jsonc
 {
-  "title": "Gnome do Curso",
+  "title": "Título do Curso",
   "link": "URL embedável do curso no YouTube",
   "description": "Breve descrição do curso (mínimo de 20 characters)",
   "locale": "br",
