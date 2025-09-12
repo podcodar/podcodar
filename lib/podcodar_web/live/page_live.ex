@@ -115,15 +115,17 @@ defmodule PodcodarWeb.PageLive do
         </div>
       </section>
 
-      <section class="my-20 px-3 max-w-full md:max-w-4xl mx-auto flex flex-col gap-12">
+      <section class="my-20 max-w-full md:max-w-4xl mx-auto flex flex-col gap-12 px-8">
         <h2 class="text-center text-2xl font-semibold">
           Agradecimentos especiais aos nossos colaboradores 🚀
         </h2>
 
-        <div class="flex flex-wrap justify-center gap-4 mt-6">
+        <div class="flex flex-wrap justify-center gap-4">
           <div :for={contrib <- @contributors} class="tooltip">
             <div class="tooltip-content">
-              <div class="animate-bounce text-orange-400 text-xl font-black">@{contrib.login}</div>
+              <div class="animate-bounce text-orange-400 text-xs md:text-xl font-black">
+                @{contrib.login}
+              </div>
             </div>
 
             <div class="avatar">
