@@ -22,26 +22,26 @@ defmodule PodcodarWeb.PageLive do
               autofocus
             />
 
-            <.link navigate={~p"/#"} class="btn btn-ghost">Estou com sorte</.link>
+            <.link navigate={~p"/courses"} class="btn btn-ghost">Estou com sorte</.link>
             <.button type="submit">Pesquisar</.button>
           </.form>
         </div>
 
         <div class="flex flex-wrap justify-center gap-4 max-w-full md:max-w-2xl">
-          <a href="/cursos?language=golang" class="btn btn-sm btn-dash btn-accent">Go</a>
-          <a href="/cursos?language=elixir" class="btn btn-sm btn-dash btn-accent">Elixir</a>
-          <a href="/cursos?language=python" class="btn btn-sm btn-dash btn-accent">Python</a>
-          <a href="/cursos?language=ruby" class="btn btn-sm btn-dash btn-accent">Ruby</a>
-          <a href="/cursos?framework=react.js" class="btn btn-sm btn-dash btn-accent">React</a>
-          <a href="/cursos?framework=node.js" class="btn btn-sm btn-dash btn-accent">Node</a>
-          <a href="/cursos?framework=laravel" class="btn btn-sm btn-dash btn-accent">Laravel</a>
-          <a href="/cursos?tool=sql" class="btn btn-sm btn-dash btn-accent">Postgres</a>
-          <a href="/cursos?framework=phoenix" class="btn btn-sm btn-dash btn-accent">Phoenix</a>
-          <a href="/cursos" class="btn btn-sm btn-dash btn-accent">Muito mais</a>
+          <a href="/courses?query=golang" class="btn btn-sm btn-dash btn-secondary">Go</a>
+          <a href="/courses?query=elixir" class="btn btn-sm btn-dash btn-secondary">Elixir</a>
+          <a href="/courses?query=python" class="btn btn-sm btn-dash btn-secondary">Python</a>
+          <a href="/courses?query=ruby" class="btn btn-sm btn-dash btn-secondary">Ruby</a>
+          <a href="/courses?query=react.js" class="btn btn-sm btn-dash btn-secondary">React</a>
+          <a href="/courses?query=node.js" class="btn btn-sm btn-dash btn-secondary">Node</a>
+          <a href="/courses?query=laravel" class="btn btn-sm btn-dash btn-secondary">Laravel</a>
+          <a href="/courses?tool=sql" class="btn btn-sm btn-dash btn-secondary">Postgres</a>
+          <a href="/courses?query=phoenix" class="btn btn-sm btn-dash btn-secondary">Phoenix</a>
+          <a href="/courses" class="btn btn-sm btn-dash btn-accent">Muito mais</a>
         </div>
       </section>
 
-      <section class="my-20 px-6 py-12 max-w-full md:max-w-4xl mx-auto gap-10 flex flex-col">
+      <section class="my-20 px-6 py-12 max-w-full md:max-w-4xl mx-auto gap-12 flex flex-col ">
         <h2 class="text-center text-2xl font-semibold mb-6">Links</h2>
 
         <div class="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-full sm:max-w-xl md:max-w-2xl mx-auto">
@@ -68,9 +68,10 @@ defmodule PodcodarWeb.PageLive do
         </div>
       </section>
 
-      <section class="my-20 px-6 py-12 max-w-full md:max-w-4xl mx-auto flex flex-col gap-10">
+      <section class="my-20 px-6 py-12 max-w-full md:max-w-4xl mx-auto flex flex-col gap-12">
+        <h2 class="text-center text-3xl font-bold">Nossa missão</h2>
+
         <div>
-          <h2 class="text-center text-3xl font-bold">Nossa missão</h2>
           <p class="mt-4">
             Acreditamos que a educação em tecnologia deve ser acessível a todos. Por isso, criamos a PodCodar para impulsionar sua jornada profissional nas áreas de tecnologia!
           </p>
@@ -83,9 +84,9 @@ defmodule PodcodarWeb.PageLive do
         </div>
       </section>
 
-      <section class="my-20 px-6 py-12 max-w-full md:max-w-4xl mx-auto flex flex-col gap-10">
+      <section class="my-20 px-6 py-12 max-w-full md:max-w-4xl mx-auto flex flex-col gap-12">
+        <h2 class="text-center text-3xl font-bold">Estatísticas da plataforma</h2>
         <div>
-          <h2 class="text-center text-3xl font-bold">Estatísticas da plataforma</h2>
           <div class="stats stats-horizontal shadow mt-4 w-full">
             <div class="stat">
               <div class="stat-title">💬 Membros</div>
@@ -96,26 +97,27 @@ defmodule PodcodarWeb.PageLive do
               <div class="stat-value">29</div>
             </div>
             <div class="stat">
-              <div class="stat-title">🌐 Visualizações Totais</div>
+              <div class="stat-title">🌐 Horas de cursos</div>
               <div class="stat-value">1421</div>
             </div>
           </div>
-          <p class="text-sm mt-2">Última atualização: há 3 horas</p>
-          <div class="mt-4 flex justify-center">
-            <a
-              href="https://github.com/danielbergholz/techschool.dev/blob/main/docs/contributing-guide.md"
-              class="btn btn-accent"
-              target="_blank"
-            >
-              Adicionar curso ao PodCodar
-            </a>
-          </div>
+          <p class="text-sm text-secondary text-center mt-2">Última atualização: há 7 horas</p>
+        </div>
+
+        <div class="mt-4 flex justify-center">
+          <a
+            href="https://github.com/podcodar/podcodar/blob/main/docs/contributing-guidelines.md"
+            class="btn btn-accent"
+            target="_blank"
+          >
+            Adicionar um curso
+          </a>
         </div>
       </section>
 
-      <section class="my-20 px-3 max-w-full md:max-w-4xl mx-auto flex flex-col gap-10">
+      <section class="my-20 px-3 max-w-full md:max-w-4xl mx-auto flex flex-col gap-12">
         <h2 class="text-center text-2xl font-semibold">
-          Agradecimentos especiais aos nossos contribuidores 🚀
+          Agradecimentos especiais aos nossos colaboradores 🚀
         </h2>
 
         <div class="flex flex-wrap justify-center gap-4 mt-6">
@@ -157,7 +159,13 @@ defmodule PodcodarWeb.PageLive do
     changeset = SearchQuery.changeset(%SearchQuery{}, params)
 
     if changeset.valid? do
-      {:noreply, assign(socket, :form, to_form(changeset))}
+      query = Ecto.Changeset.get_field(changeset, :query)
+      params = %{"query" => query}
+
+      {:noreply,
+       socket
+       |> assign(:form, to_form(changeset))
+       |> push_navigate(to: ~p"/courses?#{params}")}
     else
       {:noreply, assign(socket, :form, to_form(Map.put(changeset, :action, :insert)))}
     end

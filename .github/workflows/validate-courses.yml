@@ -1,0 +1,26 @@
+name: Run Courses validation
+
+on:
+  push:
+    paths:
+      - 'priv/repo/data/courses.json'
+  pull_request:
+    paths:
+      - 'priv/repo/data/courses.json'
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Setup Deno
+        uses: denoland/setup-deno@v2
+        with:
+          deno-version: v2.x
+
+      - name: Run Validation
+        run: deno --allow-read scripts/validate.ts ./priv/repo/data/courses.json
+

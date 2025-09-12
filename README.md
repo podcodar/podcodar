@@ -9,6 +9,10 @@ Now you can visit [`localhost:4000`](http://localhost:4000) from your browser.
 
 Ready to run in production? Please [check our deployment guides](https://hexdocs.pm/phoenix/deployment.html).
 
+## CI
+
+See `docs/ci_pipelines.md` for details on the GitHub Actions workflow and how to run equivalent steps locally.
+
 ## Learn more
 
 * Official website: https://www.phoenixframework.org/
