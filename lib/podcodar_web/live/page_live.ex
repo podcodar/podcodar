@@ -1,6 +1,7 @@
 defmodule PodcodarWeb.PageLive do
   use PodcodarWeb, :live_view
   alias Podcodar.SearchQuery
+  alias Podcodar.Cache
   require Logger
 
   def render(assigns) do
@@ -186,7 +187,23 @@ defmodule PodcodarWeb.PageLive do
   end
 
   def handle_info(:load_contributors, socket) do
-    contributors = fetch_contributors()
+    cached_contributors =
+      case Cache.get(:contributors) do
+        {:ok, contributors} -> contributors
+        :error -> nil
+      end
+
+    contributors = case cached_contributors do
+      nil ->
+        Logger.debug("Fetching contributors from GitHub API")
+        contributors = fetch_contributors()
+        Cache.put(:contributors, contributors, 3600) # cache for 1 hour
+        contributors
+
+      contributors -> 
+        Logger.debug("Using cached contributors")
+        contributors
+    end
 
     {:noreply, assign(socket, :contributors, contributors)}
   end

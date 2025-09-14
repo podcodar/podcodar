@@ -16,6 +16,8 @@ defmodule Podcodar.Application do
       {Phoenix.PubSub, name: Podcodar.PubSub},
       # Start a worker by calling: Podcodar.Worker.start_link(arg)
       # {Podcodar.Worker, arg},
+      # Github Caching
+      {Podcodar.Cache, []},
       # Start to serve requests, typically the last entry
       PodcodarWeb.Endpoint
     ]
