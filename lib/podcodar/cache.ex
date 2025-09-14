@@ -40,6 +40,8 @@ defmodule Podcodar.Cache do
       Process.send_after(self(), {:expire, key}, ttl * 1000)
     end
 
+    Logger.debug("Cache put for key: #{inspect(key)} with TTL: #{ttl} seconds")
+
     {:noreply, state}
   end
 
@@ -80,9 +82,11 @@ defmodule Podcodar.Cache do
   def cache(key, fun, ttl \\ 3600) when is_function(fun, 0) do
     case get(key) do
       {:ok, value} ->
+        Logger.debug("Cache hit for key: #{inspect(key)}")
         {:ok, value}
 
       :error ->
+        Logger.debug("Cache miss for key: #{inspect(key)}. Computing value...")
         value = fun.()
         put(key, value, ttl)
         {:ok, value}
