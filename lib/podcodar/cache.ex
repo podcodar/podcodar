@@ -76,4 +76,16 @@ defmodule Podcodar.Cache do
   def delete(key) do
     GenServer.cast(__MODULE__, {:expire, key})
   end
+
+  def cache(key, fun, ttl \\ 3600) when is_function(fun, 0) do
+    case get(key) do
+      {:ok, value} ->
+        {:ok, value}
+
+      :error ->
+        value = fun.()
+        put(key, value, ttl)
+        {:ok, value}
+    end
+  end
 end

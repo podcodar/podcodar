@@ -32,4 +32,34 @@ defmodule Podcodar.CacheTest do
     assert :ok == Cache.delete(:key)
     assert :error == Cache.get(:key)
   end
+
+  @tag :cache
+  test "caches a value using a function" do
+    fun = fn -> "computed_value" end
+
+    # First call computes and caches the value
+    assert {:ok, "computed_value"} == Cache.cache(:computed_key, fun)
+
+    # Second call retrieves the cached value
+    assert {:ok, "computed_value"} == Cache.get(:computed_key)
+  end
+
+  @tag :concurrent
+  test "handles concurrent cache access" do
+    fun = fn -> "concurrent_value" end
+
+    # Spawn multiple processes accessing the cache concurrently
+    tasks =
+      for _ <- 1..10 do
+        Task.async(fn -> Cache.cache(:concurrent_key, fun) end)
+      end
+
+    # Ensure all processes return the same cached value
+    assert Enum.all?(Task.await_many(tasks), &(&1 == {:ok, "concurrent_value"}))
+  end
+
+  @tag :invalid_key
+  test "returns an error when accessing an invalid key" do
+    assert :error == Cache.get(:nonexistent_key)
+  end
 end
