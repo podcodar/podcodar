@@ -186,7 +186,6 @@ defmodule PodcodarWeb.PageLive do
     end
   end
 
-
   def handle_info(:load_contributors, socket) do
     callback = fn -> fetch_contributors() end
     {:ok, contributors} = Cache.cache(:contributors, callback, 3600)
