@@ -1,5 +1,4 @@
 defmodule Podcodar.Cache do
-  alias ElixirSense.Core.State
   use GenServer
   require Logger
 
