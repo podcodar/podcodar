@@ -3,12 +3,6 @@ defmodule Podcodar.CacheTest do
 
   alias Podcodar.Cache
 
-  setup do
-    # Start the Cache GenServer before each test
-    {:ok, _pid} = Cache.start_link([])
-    :ok
-  end
-
   @tag :get
   test "retrieves a value from the cache" do
     Cache.put(:key, "value")
@@ -23,9 +17,11 @@ defmodule Podcodar.CacheTest do
 
   @tag :put_ttl
   test "stores a value in the cache with TTL and verifies expiration" do
-    assert :ok == Cache.put(:key, "value", 1) # TTL is 1 second
+    # TTL is 1 second
+    assert :ok == Cache.put(:key, "value", 1)
     assert {:ok, "value"} == Cache.get(:key)
-    :timer.sleep(1100) # Sleep for a bit more than 1 second
+    # Sleep for a bit more than 1 second
+    :timer.sleep(1100)
     assert :error == Cache.get(:key)
   end
 

@@ -193,17 +193,19 @@ defmodule PodcodarWeb.PageLive do
         :error -> nil
       end
 
-    contributors = case cached_contributors do
-      nil ->
-        Logger.debug("Fetching contributors from GitHub API")
-        contributors = fetch_contributors()
-        Cache.put(:contributors, contributors, 3600) # cache for 1 hour
-        contributors
+    contributors =
+      case cached_contributors do
+        nil ->
+          Logger.debug("Fetching contributors from GitHub API")
+          contributors = fetch_contributors()
+          # cache for 1 hour
+          Cache.put(:contributors, contributors, 3600)
+          contributors
 
-      contributors -> 
-        Logger.debug("Using cached contributors")
-        contributors
-    end
+        contributors ->
+          Logger.debug("Using cached contributors")
+          contributors
+      end
 
     {:noreply, assign(socket, :contributors, contributors)}
   end
