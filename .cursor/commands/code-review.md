@@ -5,6 +5,7 @@
 - Ensure naming is consistent and meaningful throughout the codebase.
 - Avoid unnecessary complexity or over-engineering.
 
+
 HTML:
 
 - use target for external links
