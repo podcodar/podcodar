@@ -74,13 +74,26 @@ defmodule PodcodarWeb.PageLive do
 
         <div>
           <p class="mt-4">
-            Acreditamos que a educação em tecnologia deve ser acessível a todos. Por isso, criamos a PodCodar para impulsionar sua jornada profissional nas áreas de tecnologia!
+            Criamos a PodCodar por acreditarmos que a educação em tecnologia é cada vez mais necessária, e por isso deve ser acessível há todos.
           </p>
           <p class="mt-4">
-            Como fazemos isso? Pesquisamos, avaliamos e organizamos conteúdos de alta qualidade, garantindo que você tenha acesso às melhores oportunidades de aprendizado. Além disso, oferecemos um espaço seguro para troca de ideias, além de mentorias personalizadas, entrevistas simuladas, e muito mais!
+            Nossa comunidade busca acelerar sua formação da área de tecnologia, oferecendo recursos gratuitos e suporte para que você possa alcançar seu primeiro emprego na área.
           </p>
+
+          <ol class="list-decimal list-inside ml-2 mt-4 space-y-2">
+            <li>Selecionamos, avaliamos e organizamos conteúdos de alta qualidade e gratúito</li>
+            <li>Conectamos pessoas da área, buscando criar oportunidades de aprendizado</li>
+            <li>Atividades exclusivas para membros:</li>
+            <ul class="list-disc list-inside ml-4 mt-4 space-y-2">
+              <li>Grupos de estudos</li>
+              <li>Entrevistas simuladas</li>
+              <li>Bolsa de estudos</li>
+              <li>E muito mais!</li>
+            </ul>
+          </ol>
+
           <p class="mt-4">
-            Junte-se a nós para transformar a educação em tecnologia no Brasil, tornando-a mais inclusiva e acessível! Comece hoje mesmo a se qualificar gratuitamente e alavanque sua carreira nas áreas de TI!
+            Junte-se a nós na missão de transformar a educação em tecnologia no Brasil, tornando-a mais inclusiva e acessível!
           </p>
         </div>
       </section>
@@ -90,19 +103,19 @@ defmodule PodcodarWeb.PageLive do
         <div>
           <div class="stats stats-horizontal shadow mt-4 w-full">
             <div class="stat">
-              <div class="stat-title">💬 Membros</div>
-              <div class="stat-value">253</div>
+              <div class="stat-title">💬 Membros ativos</div>
+              <div class="stat-value">256</div>
             </div>
             <div class="stat">
               <div class="stat-title">👩🏾‍💻 Empregos Conquistados</div>
-              <div class="stat-value">29</div>
+              <div class="stat-value">32</div>
             </div>
             <div class="stat">
               <div class="stat-title">🌐 Horas de cursos</div>
               <div class="stat-value">1421</div>
             </div>
           </div>
-          <p class="text-sm text-secondary text-center mt-2">Última atualização: há 7 horas</p>
+          <p class="text-sm text-secondary text-center mt-2">Última atualização: há 3 horas</p>
         </div>
 
         <div class="mt-4 flex justify-center">
