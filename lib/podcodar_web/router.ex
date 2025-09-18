@@ -17,6 +17,8 @@ defmodule PodcodarWeb.Router do
   scope "/", PodcodarWeb do
     pipe_through :browser
 
+    get "/discord", RedirectController, :discord
+
     live "/", PageLive, :home
     live "/courses", CoursesLive, :home
   end
