@@ -1,5 +1,3 @@
-version: "3.9"
-
 services:
   podcodar:
     build:
@@ -7,13 +5,14 @@ services:
       dockerfile: Dockerfile
     image: podcodar:latest
     environment:
-      MIX_ENV: prod
+      PORT: "4000"
       PHX_SERVER: "true"
       PHX_HOST: localhost
-      PORT: "4000"
       DATABASE_PATH: /data/podcodar.db
+      DISCORD_INVITE_URL: ${DISCORD_INVITE_URL}
       # Generate one with: mix phx.gen.secret
       SECRET_KEY_BASE: ${SECRET_KEY_BASE}
+      MIX_ENV: prod
     ports:
       - "4000:4000"
     volumes:

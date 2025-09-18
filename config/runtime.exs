@@ -111,3 +111,6 @@ if config_env() == :prod do
   #
   # See https://hexdocs.pm/swoosh/Swoosh.html#module-installation for details.
 end
+
+# App Data
+config :podcodar, discord_invite_url: System.fetch_env!("DISCORD_INVITE_URL")

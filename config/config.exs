@@ -73,16 +73,8 @@ config :logger, :default_formatter,
   format: "$time $metadata[$level] $message\n",
   metadata: [:request_id]
 
-# Courses data
+# App Data 
 config :podcodar, courses_file_path: Path.expand("../priv/repo/data/courses.json", __DIR__)
-
-config :podcodar,
-       :discord_invite_url,
-       System.get_env("DISCORD_INVITE_URL") ||
-         raise("""
-         environment variable DISCORD_INVITE_URL is missing.
-         Please set it to the invite URL for the Discord server.
-         """)
 
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
