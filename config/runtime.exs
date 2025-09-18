@@ -113,4 +113,6 @@ if config_env() == :prod do
 end
 
 # App Data
-config :podcodar, discord_invite_url: System.fetch_env!("DISCORD_INVITE_URL")
+if config_env() != :test do
+  config :podcodar, discord_invite_url: System.fetch_env!("DISCORD_INVITE_URL")
+end

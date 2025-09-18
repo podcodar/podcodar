@@ -83,6 +83,9 @@ jobs:
 
       - name: Tests are passing
         run: deno test
+        env:
+          DISCORD_INVITE_URL: ${{ secrets.DISCORD_INVITE_URL }}
+
 
   quality-gateway:
     name: Quality Gateway
