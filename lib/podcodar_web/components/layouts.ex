@@ -16,6 +16,7 @@ defmodule PodcodarWeb.Layouts do
     ~H"""
     <div class="bg-base-100 drawer">
       <input id="my-drawer-3" type="checkbox" class="drawer-toggle" />
+
       <div class="drawer-content flex flex-col min-h-screen">
         <.navbar current_scope={@current_scope} />
 
@@ -26,15 +27,21 @@ defmodule PodcodarWeb.Layouts do
         <.footer />
       </div>
 
-      <div class="drawer-side">
-        <label for="my-drawer-3" class="drawer-overlay"></label>
-        <ul class="menu p-4 w-80 min-h-full bg-base-200">
-          <div class="spacer mt-24" />
-          <li><a href="/discord" target="_blank">Discord</a></li>
-          <li><a href="https://github.com/podcodar/" target="_blank">GitHub</a></li>
-          <li><a href="https://github.com/sponsors/podcodar" target="_blank">Patrocinar</a></li>
-        </ul>
-      </div>
+      <.drawer />
+    </div>
+    """
+  end
+
+  def drawer(assigns) do
+    ~H"""
+    <div class="drawer-side">
+      <label for="my-drawer-3" class="drawer-overlay"></label>
+      <ul class="menu p-4 w-80 min-h-full bg-base-200">
+        <div class="spacer mt-24" />
+        <li><a href="/discord" target="_blank">Discord</a></li>
+        <li><a href="https://github.com/podcodar/" target="_blank">GitHub</a></li>
+        <li><a href="https://github.com/sponsors/podcodar" target="_blank">Patrocinar</a></li>
+      </ul>
     </div>
     """
   end
