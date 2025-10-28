@@ -1,40 +1,40 @@
-# Contribuindo
+# Contributing
 
-Adoramos nossos colaboradores! Aqui está como você pode contribuir:
+We love our contributors! Here's how you can contribute:
 
-- [Abra uma issue](https://github.com/podcodar/podcodar/issues) se você acredita ter encontrado um bug.
-- Faça um [pull request](https://github.com/podcodar/podcodar/pull) para adicionar novas funcionalidades, melhorar a Experiência de Desenvolvimento ou corrigir bugs.
+- [Open an issue](https://github.com/podcodar/podcodar/issues) if you believe you have found a bug.
+- Make a [pull request](https://github.com/podcodar/podcodar/pull) to add new features, improve the Developer Experience, or fix bugs.
 
-## Adicionando um novo curso
+## Adding a new course
 
-- Adicione uma nova entrada no arquivo JSON `priv/repo/data/courses.json`. O arquivo deve ter a seguinte estrutura:
+- Add a new entry to the JSON file `priv/repo/data/courses.json`. The file should have the following structure:
 
 ```jsonc
 {
-  "title": "Título do Curso",
-  "link": "URL embedável do curso no YouTube",
-  "description": "Breve descrição do curso (mínimo de 20 characters)",
+  "title": "Course Title",
+  "link": "Embeddable YouTube URL of the course",
+  "description": "Brief description of the course (minimum 20 characters)",
   "locale": "br",
-  "technologies": ["tecnologia 1", "tecnologia 2"]
+  "technologies": ["technology 1", "technology 2"]
 }
 ```
 
-- Para obter o `link`, vá até a página do curso no YouTube e copie a última parte da URL. Por exemplo, para um vídeo, se a URL for `https://www.youtube.com/watch?v=kUMe1FH4CHE`, o `link` é `https://www.youtube.com/embed/kUMe1FH4CHE`. Para uma playlist, use o formato `https://www.youtube.com/embed/videoseries?list=id_da_playlist`.
+- To get the `link`, go to the course page on YouTube and copy the last part of the URL. For example, for a video, if the URL is `https://www.youtube.com/watch?v=kUMe1FH4CHE`, the `link` is `https://www.youtube.com/embed/kUMe1FH4CHE`. For a playlist, use the format `https://www.youtube.com/embed/videoseries?list=playlist_id`.
 
-### Notas importantes
+### Important notes
 
-- Certifique-se de que as tecnologias listadas em `technologies` estejam incluídas no arquivo de validação `scripts/validate.ts`. Consulte as tecnologias suportadas no memento.
-- Cursos devem focar em tópicos específicos. Se o curso aborda apenas um framework, liste apenas esse framework em `technologies`. Se o curso aborda múltiplos assuntos, liste todos de forma abrangente.
+- Make sure that the technologies listed in `technologies` are included in the [validation file](../scripts/validate.ts).
+- Courses should focus on specific topics. If the course covers only one framework, list only that framework in `technologies`. If the course covers multiple subjects, list them all comprehensively.
 
-Exemplo:
+Example:
 
-Curso "Desenvolvimento Web Completo":
+"Complete Web Development" Course:
 
 ```jsonc
 {
-  "title": "Desenvolvimento Web Completo",
+  "title": "Complete Web Development",
   "link": "https://www.youtube.com/embed/videoseries?list=PL1234567890",
-  "description": "Curso que ensina HTML, CSS, JavaScript e mais!",
+  "description": "Course that teaches HTML, CSS, JavaScript, and more!",
   "locale": "br",
   "technologies": ["HTML", "CSS", "JavaScript", "React", "Node.js"]
 }
@@ -42,20 +42,19 @@ Curso "Desenvolvimento Web Completo":
 
 ## FAQ
 
-### Isso dá muito trabalho, eu só quero adicionar um curso!
+### This is a lot of work, I just want to add a course!
 
-Entendemos. Estamos trabalhando para tornar todo esse processo mais fácil. Enquanto isso, se você quiser adicionar um curso, basta abrir uma issue com os detalhes do curso e nós o adicionaremos para você.
+We understand. We are working to make this whole process easier. In the meantime, if you want to add a course, just open an issue with the course details and we will add it for you.
 
-### Que tipo de conteúdo posso adicionar?
+### What kind of content can I add?
 
-O foco principal desta plataforma são cursos de desenvolvimento web. Mas sinta-se à vontade para adicionar conteúdo sobre: Inteligência Artificial, Ciência de Dados, Machine Learning, DevOps, Desenvolvimento Mobile, etc.
+The main focus of this platform is web development courses. But feel free to add content about: Artificial Intelligence, Data Science, Machine Learning, DevOps, Mobile Development, etc.
 
-### Que tipo de conteúdo não posso adicionar?
+### What kind of content can I not add?
 
-- Conteúdo que não seja relacionado à programação. Isso inclui: música, filmes, programas de TV, etc.
-- Conteúdo de criadores com qualquer tipo de comportamento inadequado, como: racismo, sexismo, homofobia, etc. Isso é completamente inaceitável e não será tolerado nesta comunidade.
+- Content that is not related to programming. This includes: music, movies, TV shows, etc.
+- Content from creators with any kind of inappropriate behavior, such as: racism, sexism, homophobia, etc. This is completely unacceptable and will not be tolerated in this community.
 
-## Voltar
+## Back
 
 [README](../README.md)
-

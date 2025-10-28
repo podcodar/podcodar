@@ -16,17 +16,18 @@ This repository uses GitHub Actions to enforce quality gates on pull requests an
 
 ## Local development
 
-- Format check: `mix format --check-formatted`
-- Lint/compile strictly: `mix compile --warning-as-errors`
-- Run tests (with DB setup alias): `mix test`
-- Build assets: `mix assets.build`
-- Pre-commit all-in-one: `mix precommit`
-- Validate courses JSON with Deno:
-
-```bash
-# Requires Deno 2.x
-deno run --allow-read scripts/validate.ts priv/repo/data/courses.json
-```
+- Elixir:
+  - Format check: `mix format --check-formatted`
+  - Lint/compile strictly: `mix compile --warning-as-errors`
+  - Run tests (with DB setup alias): `mix test`
+  - Build assets: `mix assets.build`
+  - Pre-commit all-in-one: `mix precommit`
+- Deno:
+  - Validate courses JSON:
+    ```bash
+    # Requires Deno 2.x
+    deno run --allow-read scripts/validate.ts priv/repo/data/courses.json
+    ```
 
 ## Notes
 
