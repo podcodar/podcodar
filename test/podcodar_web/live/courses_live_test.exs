@@ -3,11 +3,9 @@ defmodule PodcodarWeb.CoursesLiveTest do
 
   import Phoenix.LiveViewTest
 
-  describe "CoursesLive" do
-    test "renders the courses page", %{conn: conn} do
-      {:ok, view, _html} = live(conn, "/courses")
+  test "renders the courses page", %{conn: conn} do
+    {:ok, view, _html} = live(conn, "/courses")
 
-      assert has_element?(view, "h1", "Cursos Disponíveis")
-    end
+    assert has_element?(view, "h1", "Cursos Disponíveis")
   end
 end

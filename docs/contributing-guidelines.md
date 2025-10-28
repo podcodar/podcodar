@@ -23,7 +23,7 @@ Adoramos nossos colaboradores! Aqui está como você pode contribuir:
 
 ### Notas importantes
 
-- Certifique-se de que as tecnologias listadas em `technologies` estejam incluídas no arquivo de validação `scripts/validate.ts`. Consulte as tecnologias suportadas no memento.
+- Certifique-se de que as tecnologias listadas em `technologies` estejam incluídas no [arquivo de validação](../scripts/validate.ts).
 - Cursos devem focar em tópicos específicos. Se o curso aborda apenas um framework, liste apenas esse framework em `technologies`. Se o curso aborda múltiplos assuntos, liste todos de forma abrangente.
 
 Exemplo:
@@ -58,4 +58,3 @@ O foco principal desta plataforma são cursos de desenvolvimento web. Mas sinta-
 ## Voltar
 
 [README](../README.md)
-

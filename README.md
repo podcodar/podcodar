@@ -1,65 +1,66 @@
-# Podcodar
+# Podcodar 🎙️
 
-To start your Phoenix server:
+[![CI](https://github.com/podcodar/podcodar/actions/workflows/elixir.yml/badge.svg)](https://github.com/podcodar/podcodar/actions/workflows/elixir.yml)
 
-* Run `mix setup` to install and setup dependencies
-* Start Phoenix endpoint with `mix phx.server` or inside IEx with `iex -S mix phx.server`
+Bem-vindo ao **Podcodar**, uma plataforma de código aberto dedicada a tornar a educação em tecnologia acessível para todos no Brasil! Nossa missão é simples: acelerar sua jornada na área de tecnologia, oferecendo recursos gratuitos e de alta qualidade, desde o nível iniciante até sua primeira oportunidade de emprego.
 
-Now you can visit [`localhost:4000`](http://localhost:4000) from your browser.
+## 🚀 Sobre o Projeto
 
-## Docker (local)
+Acreditamos que o conhecimento deve ser livre e acessível. A Podcodar é uma comunidade que seleciona, avalia e organiza os melhores conteúdos gratuitos disponíveis na internet. Além de uma curadoria de cursos, oferecemos:
 
-Build and run with Docker Compose (SQLite persisted at `/data`):
+- **Grupos de estudo:** Aprenda em conjunto com outros desenvolvedores.
+- **Entrevistas simuladas:** Prepare-se para o mercado de trabalho.
+- **Bolsas de estudo:** Apoiamos o seu desenvolvimento.
+- **E muito mais!**
+
+Este repositório contém o código-fonte da nossa plataforma, construída com [Phoenix Framework](https://www.phoenixframework.org/), Elixir e uma pitada de Deno.
+
+## 🛠️ Começando
+
+Quer rodar o projeto localmente? Siga os passos abaixo.
+
+1.  **Instale as dependências:**
+    ```bash
+    mix setup
+    ```
+2.  **Inicie o servidor Phoenix:**
+    ```bash
+    mix phx.server
+    ```
+
+Pronto! Agora você pode acessar a plataforma em [`localhost:4000`](http://localhost:4000) no seu navegador.
+
+### Usando Docker
+
+Prefere usar Docker? Sem problemas! O banco de dados SQLite será persistido no diretório `/data`.
 
 ```bash
+# Construir e iniciar os contêineres
 docker compose up -d --build
-```
 
-Environment (compose sets defaults):
-
-* `PHX_SERVER=true`
-* `PHX_HOST=localhost`
-* `PORT=4000`
-* `DATABASE_PATH=/data/podcodar.db`
-* `SECRET_KEY_BASE` (set a secure value for local use)
-
-Stop:
-
-```bash
+# Parar os contêineres
 docker compose down
 ```
 
-## Fly.io (production)
+## ✨ Contribua
 
-Deploy using the included `fly.toml` and Dockerfile:
+Este projeto é feito pela comunidade, para a comunidade. Adoramos contribuições! Se você quer ajudar a melhorar a Podcodar, aqui estão algumas formas:
 
-```bash
-fly deploy
-```
+- **Adicione um curso:** Encontrou um curso incrível e gratuito? Adicione-o à nossa plataforma!
+- **Reporte um bug:** Encontrou algo que não funciona como deveria? [Abra uma issue](https://github.com/podcodar/podcodar/issues).
+- **Sugira uma funcionalidade:** Tem uma ideia para tornar a Podcodar ainda melhor? Adoraríamos ouvir!
+- **Melhore o código:** É desenvolvedor? Faça um [fork do repositório](https://github.com/podcodar/podcodar/fork) e envie um pull request!
 
-Key settings in `fly.toml`:
+Para começar, leia nosso **[Guia de Contribuição](docs/contributing-guidelines.md)**.
 
-* `PORT=8080` env (Fly maps to container port)
-* `internal_port = 4000` (Phoenix listens on 4000)
-* SQLite file at `DATABASE_PATH=/data/podcodar.db`
-* VM size: 256MB
+## 💬 Comunidade
 
-## Assets
+Junte-se a nós em nossa missão de transformar a educação em tecnologia no Brasil!
 
-Build assets locally:
+- **Discord:** [Participe da nossa comunidade no Discord](https://discord.gg/vnEAM9sFb7)
+- **GitHub:** [Siga-nos no GitHub](https://github.com/podcodar)
+- **Patrocine:** [Apoie nosso trabalho](https://github.com/sponsors/podcodar)
 
-```bash
-mix assets.build
-```
+---
 
-## CI
-
-See `docs/ci_pipelines.md` for details on the GitHub Actions workflow and how to run equivalent steps locally.
-
-## Learn more
-
-* Official website: [https://www.phoenixframework.org/](https://www.phoenixframework.org/)
-* Guides: [https://hexdocs.pm/phoenix/overview.html](https://hexdocs.pm/phoenix/overview.html)
-* Docs: [https://hexdocs.pm/phoenix](https://hexdocs.pm/phoenix)
-* Forum: [https://elixirforum.com/c/phoenix-forum](https://elixirforum.com/c/phoenix-forum)
-* Source: [https://github.com/phoenixframework/phoenix](https://github.com/phoenixframework/phoenix)
+Feito com ❤️ pela comunidade Podcodar.
