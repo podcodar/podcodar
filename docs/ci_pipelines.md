@@ -1,36 +1,36 @@
-# CI Pipelines
+# Pipelines de CI
 
-This repository uses GitHub Actions to enforce quality gates on pull requests and pushes to `main`.
+Este repositório usa GitHub Actions para garantir a qualidade do código em pull requests e pushes para a branch `main`.
 
 ## Workflows
 
-- Elixir job: checks formatting, compiles with warnings as errors, and runs tests.
-- Deno validation: validates `priv/repo/data/courses.json` using `scripts/validate.ts`.
-- Assets build: builds Tailwind and esbuild via `mix assets.build`.
-  - Note: The Dockerfile compiles before asset build for production releases to ensure phoenix-colocated modules exist when esbuild runs.
-- Quality gateway: requires all the above jobs to pass before merge.
+- Job Elixir: verifica a formatação, compila com warnings como erros e executa os testes.
+- Validação Deno: valida o arquivo `priv/repo/data/courses.json` usando `scripts/validate.ts`.
+- Build de assets: compila Tailwind e esbuild via `mix assets.build`.
+  - Nota: O Dockerfile compila o código antes do build de assets para lançamentos de produção, garantindo que os módulos colocados pelo Phoenix existam quando o esbuild for executado.
+- Gateway de qualidade: exige que todos os jobs acima passem antes do merge.
 
-## Triggers
+## Gatilhos
 
-- On `push` and `pull_request` targeting `main`.
+- Em `push` e `pull_request` direcionados à branch `main`.
 
-## Local development
+## Desenvolvimento local
 
 - Elixir:
-  - Format check: `mix format --check-formatted`
-  - Lint/compile strictly: `mix compile --warning-as-errors`
-  - Run tests (with DB setup alias): `mix test`
-  - Build assets: `mix assets.build`
-  - Pre-commit all-in-one: `mix precommit`
+  - Checagem de formatação: `mix format --check-formatted`
+  - Lint/compilação estrita: `mix compile --warning-as-errors`
+  - Executar testes (com alias de configuração do DB): `mix test`
+  - Build de assets: `mix assets.build`
+  - Pre-commit tudo-em-um: `mix precommit`
 - Deno:
-  - Validate courses JSON:
+  - Validar JSON de cursos:
     ```bash
-    # Requires Deno 2.x
+    # Requer Deno 2.x
     deno run --allow-read scripts/validate.ts priv/repo/data/courses.json
     ```
 
-## Notes
+## Notas
 
-- CI caches Mix `_build` and `deps` to speed up runs.
-- SQLite3 is installed in CI for Ecto SQL tests.
-- Deno uses `deno.json` for npm import of `zod`.
+- O CI armazena em cache os diretórios `_build` e `deps` do Mix para acelerar as execuções.
+- O SQLite3 é instalado no CI para os testes Ecto SQL.
+- O Deno usa o arquivo `deno.json` para importar o `zod` via npm.

@@ -1,52 +1,52 @@
 # Podcodar
 
-To start your Phoenix server:
+Para iniciar o servidor Phoenix:
 
-* Run `mix setup` to install and setup dependencies
-* Start Phoenix endpoint with `mix phx.server` or inside IEx with `iex -S mix phx.server`
+* Execute `mix setup` para instalar e configurar as dependências
+* Inicie o endpoint do Phoenix com `mix phx.server` ou dentro do IEx com `iex -S mix phx.server`
 
-Now you can visit [`localhost:4000`](http://localhost:4000) from your browser.
+Agora você pode visitar [`localhost:4000`](http://localhost:4000) no seu navegador.
 
 ## Docker (local)
 
-Build and run with Docker Compose (SQLite persisted at `/data`):
+Compile e execute com o Docker Compose (o banco de dados SQLite será salvo em `/data`):
 
 ```bash
 docker compose up -d --build
 ```
 
-Environment (compose sets defaults):
+Ambiente (o Compose define os padrões):
 
 * `PHX_SERVER=true`
 * `PHX_HOST=localhost`
 * `PORT=4000`
 * `DATABASE_PATH=/data/podcodar.db`
-* `SECRET_KEY_BASE` (set a secure value for local use)
+* `SECRET_KEY_BASE` (defina um valor seguro para uso local)
 
-Stop:
+Parar:
 
 ```bash
 docker compose down
 ```
 
-## Fly.io (production)
+## Fly.io (produção)
 
-Deploy using the included `fly.toml` and Dockerfile:
+Faça o deploy usando o `fly.toml` e o Dockerfile incluídos:
 
 ```bash
 fly deploy
 ```
 
-Key settings in `fly.toml`:
+Principais configurações em `fly.toml`:
 
-* `PORT=8080` env (Fly maps to container port)
-* `internal_port = 4000` (Phoenix listens on 4000)
-* SQLite file at `DATABASE_PATH=/data/podcodar.db`
-* VM size: 256MB
+* `PORT=8080` (o Fly mapeia para a porta do contêiner)
+* `internal_port = 4000` (o Phoenix escuta na porta 4000)
+* Arquivo SQLite em `DATABASE_PATH=/data/podcodar.db`
+* Tamanho da VM: 256MB
 
 ## Assets
 
-Build assets locally:
+Compile os assets localmente:
 
 ```bash
 mix assets.build
@@ -54,12 +54,12 @@ mix assets.build
 
 ## CI
 
-See `docs/ci_pipelines.md` for details on the GitHub Actions workflow and how to run equivalent steps locally.
+Consulte `docs/ci_pipelines.md` para obter detalhes sobre o workflow do GitHub Actions e como executar os passos equivalentes localmente.
 
-## Learn more
+## Saiba mais
 
-* Official website: [https://www.phoenixframework.org/](https://www.phoenixframework.org/)
-* Guides: [https://hexdocs.pm/phoenix/overview.html](https://hexdocs.pm/phoenix/overview.html)
-* Docs: [https://hexdocs.pm/phoenix](https://hexdocs.pm/phoenix)
-* Forum: [https://elixirforum.com/c/phoenix-forum](https://elixirforum.com/c/phoenix-forum)
-* Source: [https://github.com/phoenixframework/phoenix](https://github.com/phoenixframework/phoenix)
+* Site oficial: [https://www.phoenixframework.org/](https://www.phoenixframework.org/)
+* Guias: [https://hexdocs.pm/phoenix/overview.html](https://hexdocs.pm/phoenix/overview.html)
+* Documentação: [https://hexdocs.pm/phoenix](https://hexdocs.pm/phoenix)
+* Fórum: [https://elixirforum.com/c/phoenix-forum](https://elixirforum.com/c/phoenix-forum)
+* Código-fonte: [https://github.com/phoenixframework/phoenix](https://github.com/phoenixframework/phoenix)
