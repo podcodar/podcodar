@@ -13,7 +13,7 @@ Acreditamos que o conhecimento deve ser livre e acessível. A Podcodar é uma co
 - **Bolsas de estudo:** Apoiamos o seu desenvolvimento.
 - **E muito mais!**
 
-Este repositório contém o código-fonte da nossa plataforma, construída com [Phoenix Framework](https://www.phoenixframework.org/), Elixir e uma pitada de Deno.
+Este repositório contém o código-fonte da nossa plataforma, construída com [Phoenix Framework](https://www.phoenixframework.org/), Elixir e uma pitada de Deno. A plataforma agora inclui autenticação de usuários, permitindo que membros da comunidade façam login, registrem-se e gerenciem suas contas.
 
 ## 🛠️ Começando
 
@@ -29,6 +29,14 @@ Quer rodar o projeto localmente? Siga os passos abaixo.
     ```
 
 Pronto! Agora você pode acessar a plataforma em [`localhost:4000`](http://localhost:4000) no seu navegador.
+
+#### Contas de Usuário
+
+A plataforma suporta autenticação baseada em email. Usuários podem:
+- Registrar uma nova conta com email
+- Receber um link mágico para login sem senha
+- Ou definir uma senha para login tradicional
+- Gerenciar configurações da conta (email, senha)
 
 ### Usando Docker
 
