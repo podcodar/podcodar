@@ -114,5 +114,8 @@ end
 
 # App Data
 if config_env() != :test do
-  config :podcodar, discord_invite_url: System.fetch_env!("DISCORD_INVITE_URL")
+  config :podcodar,
+    discord_invite_url: System.fetch_env!("DISCORD_INVITE_URL"),
+    github_org_url: System.fetch_env!("GITHUB_ORG_URL"),
+    sponsor_url: System.fetch_env!("SPONSOR_URL")
 end

@@ -57,6 +57,8 @@ defmodule PodcodarWeb.Router do
     pipe_through [:browser]
 
     # redirects
+    get "/github", RedirectController, :github
+    get "/sponsor", RedirectController, :sponsor
     get "/discord", RedirectController, :discord
 
     live_session :current_user,
