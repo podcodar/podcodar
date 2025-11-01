@@ -165,7 +165,6 @@ defmodule PodcodarWeb.PageLive do
 
     {:ok,
      socket
-     |> assign(:current_scope, nil)
      |> assign(:form, to_form(changeset))
      |> assign(:contributors, [])
      |> then(fn socket ->

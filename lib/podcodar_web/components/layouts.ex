@@ -9,11 +9,13 @@ defmodule PodcodarWeb.Layouts do
   embed_templates "layouts/*"
 
   attr :flash, :map, required: true, doc: "the map of flash messages"
-  attr :current_scope, :map, default: nil, doc: "the current scope"
+  attr :current_scope, :map, required: true, doc: "the current scope"
   slot :inner_block, required: true
 
   def app(assigns) do
     ~H"""
+    <.flash_group flash={@flash} />
+
     <div class="bg-base-100 drawer">
       <input id="my-drawer-3" type="checkbox" class="drawer-toggle" />
 
@@ -27,7 +29,7 @@ defmodule PodcodarWeb.Layouts do
         <.footer />
       </div>
 
-      <.drawer />
+      <.drawer current_scope={@current_scope} />
     </div>
     """
   end
@@ -36,11 +38,14 @@ defmodule PodcodarWeb.Layouts do
     ~H"""
     <div class="drawer-side">
       <label for="my-drawer-3" class="drawer-overlay"></label>
-      <ul class="menu p-4 w-80 min-h-full bg-base-200">
+      <ul class="menu p-4 w-80 min-h-full bg-base-200 gap-2">
         <div class="spacer mt-24" />
-        <li><a href="/discord" target="_blank">Discord</a></li>
-        <li><a href="https://github.com/podcodar/" target="_blank">GitHub</a></li>
-        <li><a href="https://github.com/sponsors/podcodar" target="_blank">Patrocinar</a></li>
+
+        <.social_links />
+
+        <div class="spacer flex-1" />
+
+        <.menu_links current_scope={@current_scope} />
       </ul>
     </div>
     """
@@ -74,19 +79,67 @@ defmodule PodcodarWeb.Layouts do
             <img src={~p"/images/logo.svg"} width="36" alt="PodCodar logo" />
             <span class="text-lg font-bold">PodCodar</span>
           </a>
+
+          <ul class="menu menu-horizontal gap-2 hidden lg:flex">
+            <.social_links />
+          </ul>
         </div>
 
-        <div class="flex-none hidden lg:block">
-          <ul class="menu menu-horizontal">
-            <li><a href="/discord" target="_blank">Discord</a></li>
-            <li><a href="https://github.com/podcodar/" target="_blank">GitHub</a></li>
-            <li>
-              <a href="https://github.com/sponsors/podcodar" target="_blank">Patrocinar</a>
-            </li>
+        <div class="flex-none hidden lg:flex">
+          <ul class="menu menu-horizontal gap-2">
+            <.menu_links current_scope={@current_scope} />
           </ul>
         </div>
       </div>
     </div>
+    """
+  end
+
+  def menu_links(assigns) do
+    ~H"""
+    <%= if @current_scope do %>
+      <li>
+        <.link navigate={~p"/users/settings"}>
+          <.icon name="hero-user" class="w-4 h-4" /> {@current_scope.user.email}
+        </.link>
+      </li>
+      <li>
+        <.link navigate={~p"/users/settings"}>
+          <.icon name="hero-cog-6-tooth" class="w-4 h-4" /> Settings
+        </.link>
+      </li>
+      <li>
+        <.link navigate={~p"/users/log-out"} method="delete">
+          <.icon name="hero-arrow-left-on-rectangle" class="w-4 h-4" /> Log out
+        </.link>
+      </li>
+    <% else %>
+      <li>
+        <.link navigate={~p"/users/register"}>
+          <.icon name="hero-user-plus" class="w-4 h-4" /> Register
+        </.link>
+      </li>
+      <li>
+        <.link navigate={~p"/users/log-in"} class="btn btn-primary">
+          <.icon name="hero-arrow-right-on-rectangle" class="w-4 h-4" /> Log in
+        </.link>
+      </li>
+    <% end %>
+    """
+  end
+
+  def social_links(assigns) do
+    ~H"""
+    <li>
+      <a href="/discord" target="_blank">
+        <.icon name="hero-chat-bubble-left-right" class="w-4 h-4" /> Discord
+      </a>
+    </li>
+    <li>
+      <a href="https://github.com/podcodar/" target="_blank">
+        <.icon name="hero-code-bracket" class="w-4 h-4" /> GitHub
+      </a>
+    </li>
     """
   end
 
@@ -105,7 +158,7 @@ defmodule PodcodarWeb.Layouts do
 
   def flash_group(assigns) do
     ~H"""
-    <div id={@id} aria-live="polite">
+    <div id={@id} class="toast toast-top mt-18 toast-end z-50" aria-live="polite">
       <.flash kind={:info} flash={@flash} />
       <.flash kind={:error} flash={@flash} />
 
@@ -138,7 +191,10 @@ defmodule PodcodarWeb.Layouts do
 
   def theme_toggle(assigns) do
     ~H"""
-    <div class="card relative flex flex-row items-center border-2 border-base-300 bg-base-300 rounded-full">
+    <div
+      id="theme-toggle"
+      class="card relative flex flex-row items-center border-2 border-base-300 bg-base-300 rounded-full"
+    >
       <div class="absolute w-1/3 h-full rounded-full border-1 border-base-200 bg-base-100 left-0 transition-[left]" />
 
       <button

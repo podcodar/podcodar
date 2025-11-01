@@ -1,5 +1,6 @@
 [tasks]
 hello = "echo 'Hello, World!'"
+precommit = "mix precommit"
 
 [env]
 _.file = '.env'
