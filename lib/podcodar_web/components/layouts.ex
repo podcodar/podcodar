@@ -16,6 +16,21 @@ defmodule PodcodarWeb.Layouts do
     ~H"""
     <.flash_group flash={@flash} />
 
+    <!-- Settings Modal -->
+    <input type="checkbox" id="settings-modal" class="modal-toggle" />
+    <div class="modal">
+      <div class="modal-box">
+        <h3 class="font-bold text-lg">Settings</h3>
+        <p class="py-4">Choose your preferred theme:</p>
+        <div class="flex justify-center py-4">
+          <.theme_toggle id="modal-theme-toggle" />
+        </div>
+        <div class="modal-action">
+          <label for="settings-modal" class="btn">Close</label>
+        </div>
+      </div>
+    </div>
+
     <div class="bg-base-100 drawer">
       <input id="my-drawer-3" type="checkbox" class="drawer-toggle" />
 
@@ -31,6 +46,12 @@ defmodule PodcodarWeb.Layouts do
 
       <.drawer current_scope={@current_scope} />
     </div>
+
+    <script>
+      window.addEventListener("phx:toggle-settings-modal", () => {
+        document.getElementById("settings-modal").checked = true;
+      });
+    </script>
     """
   end
 
@@ -97,6 +118,15 @@ defmodule PodcodarWeb.Layouts do
 
   def menu_links(assigns) do
     ~H"""
+    <li class="hidden lg:flex">
+      <button
+        class="btn btn-ghost"
+        phx-click={JS.dispatch("phx:toggle-settings-modal")}
+      >
+        <.icon name="hero-cog-6-tooth" class="w-4 h-4" />
+      </button>
+    </li>
+
     <%= if @current_scope do %>
       <li>
         <.link navigate={~p"/users/settings"}>
@@ -104,12 +134,11 @@ defmodule PodcodarWeb.Layouts do
         </.link>
       </li>
       <li>
-        <.link navigate={~p"/users/settings"}>
-          <.icon name="hero-cog-6-tooth" class="w-4 h-4" /> Settings
-        </.link>
-      </li>
-      <li>
-        <.link navigate={~p"/users/log-out"} method="delete">
+        <.link
+          href={~p"/users/log-out"}
+          method="delete"
+          data-confirm="Are you sure you want to log out?"
+        >
           <.icon name="hero-arrow-left-on-rectangle" class="w-4 h-4" /> Log out
         </.link>
       </li>
@@ -125,20 +154,25 @@ defmodule PodcodarWeb.Layouts do
         </.link>
       </li>
     <% end %>
+
+    <li class="flex lg:hidden btn-sm">
+      <.theme_toggle />
+    </li>
     """
   end
 
   def social_links(assigns) do
     ~H"""
     <li>
-      <a href="/discord" target="_blank">
+      <.link navigate={~p"/discord"} target="_blank">
         <.icon name="hero-chat-bubble-left-right" class="w-4 h-4" /> Discord
-      </a>
+      </.link>
     </li>
+
     <li>
-      <a href="https://github.com/podcodar/" target="_blank">
+      <.link navigate={~p"/github"} target="_blank">
         <.icon name="hero-code-bracket" class="w-4 h-4" /> GitHub
-      </a>
+      </.link>
     </li>
     """
   end
@@ -189,20 +223,22 @@ defmodule PodcodarWeb.Layouts do
     """
   end
 
+  @doc """
+  Provides dark vs light theme toggle based on themes defined in app.css.
+
+  See <head> in root.html.heex which applies the theme before page load.
+  """
   def theme_toggle(assigns) do
     ~H"""
-    <div
-      id="theme-toggle"
-      class="card relative flex flex-row items-center border-2 border-base-300 bg-base-300 rounded-full"
-    >
-      <div class="absolute w-1/3 h-full rounded-full border-1 border-base-200 bg-base-100 left-0 transition-[left]" />
+    <div class="card relative flex flex-row items-center border-2 border-base-300 bg-base-300 rounded-full">
+      <div class="absolute w-1/3 h-full rounded-full border-1 border-base-200 bg-base-100 brightness-200 left-0 [[data-theme=light]_&]:left-1/3 [[data-theme=dark]_&]:left-2/3 transition-[left]" />
 
       <button
         class="flex p-2 cursor-pointer w-1/3"
         phx-click={JS.dispatch("phx:set-theme")}
         data-phx-theme="system"
       >
-        <.icon name="hero-computer-desktop-micro" class="size-4 opacity-75 hover:opacity-100" />
+        <.icon name="hero-computer-desktop-micro" class="size-4 opacity-75 hover:opacity-100 mx-auto" />
       </button>
 
       <button
@@ -210,7 +246,7 @@ defmodule PodcodarWeb.Layouts do
         phx-click={JS.dispatch("phx:set-theme")}
         data-phx-theme="light"
       >
-        <.icon name="hero-sun-micro" class="size-4 opacity-75 hover:opacity-100" />
+        <.icon name="hero-sun-micro" class="size-4 opacity-75 hover:opacity-100 mx-auto" />
       </button>
 
       <button
@@ -218,7 +254,7 @@ defmodule PodcodarWeb.Layouts do
         phx-click={JS.dispatch("phx:set-theme")}
         data-phx-theme="dark"
       >
-        <.icon name="hero-moon-micro" class="size-4 opacity-75 hover:opacity-100" />
+        <.icon name="hero-moon-micro" class="size-4 opacity-75 hover:opacity-100 mx-auto" />
       </button>
     </div>
     """
