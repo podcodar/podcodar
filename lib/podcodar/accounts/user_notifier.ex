@@ -6,10 +6,13 @@ defmodule Podcodar.Accounts.UserNotifier do
 
   # Delivers the email using the application mailer.
   defp deliver(recipient, subject, body) do
+    from_address = Application.get_env(:podcodar, :email_from_address)
+    from_name = Application.get_env(:podcodar, :email_from_name)
+
     email =
       new()
       |> to(recipient)
-      |> from({"Podcodar", "contact@example.com"})
+      |> from({from_name, from_address})
       |> subject(subject)
       |> text_body(body)
 

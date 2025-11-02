@@ -26,6 +26,10 @@ config :podcodar, Podcodar.Mailer, adapter: Swoosh.Adapters.Test
 # Disable swoosh api client as it is only required for production adapters
 config :swoosh, :api_client, false
 
+# Configure email sender defaults for test
+config :podcodar, :email_from_address, "contact@example.com"
+config :podcodar, :email_from_name, "Podcodar"
+
 # Print only warnings and errors during test
 config :logger, level: :none
 

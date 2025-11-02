@@ -30,7 +30,7 @@ if config_env() == :prod do
 
   config :podcodar, Podcodar.Repo,
     database: database_path,
-    pool_size: String.to_integer(System.get_env("POOL_SIZE") || "5")
+    pool_size: String.to_integer(System.get_env("POOL_SIZE", "5"))
 
   # The secret key base is used to sign/encrypt cookies and other secrets.
   # A default value is used in config/dev.exs and config/test.exs but you
@@ -44,8 +44,8 @@ if config_env() == :prod do
       You can generate one by calling: mix phx.gen.secret
       """
 
-  host = System.get_env("PHX_HOST") || "example.com"
-  port = String.to_integer(System.get_env("PORT") || "4000")
+  host = System.get_env("PHX_HOST", "example.com")
+  port = String.to_integer(System.get_env("PORT", "4000"))
 
   config :podcodar, :dns_cluster_query, System.get_env("DNS_CLUSTER_QUERY")
 
@@ -95,21 +95,43 @@ if config_env() == :prod do
 
   # ## Configuring the mailer
   #
-  # In production you need to configure the mailer to use a different adapter.
-  # Also, you may need to configure the Swoosh API client of your choice if you
-  # are not using SMTP. Here is an example of the configuration:
-  #
-  #     config :website, Website.Mailer,
-  #       adapter: Swoosh.Adapters.Mailgun,
-  #       api_key: System.get_env("MAILGUN_API_KEY"),
-  #       domain: System.get_env("MAILGUN_DOMAIN")
-  #
-  # For this example you need include a HTTP client required by Swoosh API client.
-  # Swoosh supports Hackney and Finch out of the box:
-  #
-  #     config :swoosh, :api_client, Swoosh.ApiClient.Hackney
-  #
-  # See https://hexdocs.pm/swoosh/Swoosh.html#module-installation for details.
+  # Configure Resend adapter for production email delivery
+  config :podcodar, Podcodar.Mailer,
+    adapter: Resend.Swoosh.Adapter,
+    api_key: System.fetch_env!("RESEND_API_KEY")
+
+  # Configure email sender information
+  config :podcodar,
+    email_from_address: System.get_env("EMAIL_FROM_ADDRESS", "contact@example.com"),
+    email_from_name: System.get_env("EMAIL_FROM_NAME", "Podcodar")
+end
+
+# Configure email adapter for development (optional Resend testing)
+# If RESEND_API_KEY is set, use Resend adapter (for testing production email)
+# Otherwise, use Local adapter (mailbox preview at /dev/mailbox)
+if config_env() == :dev do
+  if System.get_env("RESEND_API_KEY") do
+    # Use Resend adapter when testing production email configuration
+    config :podcodar, Podcodar.Mailer,
+      adapter: Resend.Swoosh.Adapter,
+      api_key: System.get_env("RESEND_API_KEY")
+
+    # Enable Swoosh API client for Resend
+    config :swoosh, :api_client, Swoosh.ApiClient.Req
+  else
+    # Default: use Local adapter for mailbox preview
+    config :podcodar, Podcodar.Mailer, adapter: Swoosh.Adapters.Local
+
+    # Disable swoosh api client as it is only required for production adapters.
+    config :swoosh, :api_client, false
+  end
+
+  # Configure email sender defaults for development
+  config :podcodar,
+         :email_from_address,
+         System.get_env("EMAIL_FROM_ADDRESS", "contact@example.com")
+
+  config :podcodar, :email_from_name, System.get_env("EMAIL_FROM_NAME", "Podcodar")
 end
 
 # App Data
