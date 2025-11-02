@@ -23,4 +23,3 @@ volumes:
   podcodar_data:
     driver: local
 
-
