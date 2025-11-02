@@ -6,9 +6,37 @@ This is a web application written using the Phoenix web framework.
 
 - Use `mix precommit` alias when you are done with all changes and fix any pending issues
 - Use the already included and available `:req` (`Req`) library for HTTP requests, **avoid** `:httpoison`, `:tesla`, and `:httpc`. Req is included by default and is the preferred HTTP client for Phoenix apps
-- We use [mise](https://mise.jdx.dev/) for tool management (see `mise.toml`)
+- We use [mise](https://mise.jdx.dev/) for tools and system dependencies management (see `mise.toml`)
 - The system has tmux available, which can be used to run long-running commands in the background
 - Use Playwright for creating temporary scripts to validate UI interfaces
+
+### Folder structure
+
+```sh
+docs/    # docs folder
+spec/    # spec folder
+lib/     # elixir source code
+assets/  # frontend assets (js, css, etc)
+test/    # elixir tests
+priv/    # private data (migrations, seeds, etc)
+config/  # configuration files
+scripts/ # project related scripts (deno, bash, etc)
+```
+
+### Languages
+
+#### PT-BR
+
+- /docs
+- README.md
+- any text inside code
+
+#### EN-US
+
+- /specs
+- AGENTS.md
+- any code file
+- all other files
 
 ## Deployment/runtime notes
 
@@ -163,7 +191,7 @@ Controllers automatically have the `current_scope` available if they use the `:b
 - `Ecto.Schema` fields always use the `:string` type, even for `:text`, columns, ie: `field :name, :string`
 - `Ecto.Changeset.validate_number/2` **DOES NOT SUPPORT the `:allow_nil` option**. By default, Ecto validations only run if a change for the given field exists and the change value is not nil, so such as option is never needed
 - You **must** use `Ecto.Changeset.get_field(changeset, :field)` to access changeset fields
-- Fields which are set programatically, such as `user_id`, must not be listed in `cast` calls or similar for security purposes. Instead they must be explicitly set when creating the struct
+- Fields which are set programmatically, such as `user_id`, must not be listed in `cast` calls or similar for security purposes. Instead they must be explicitly set when creating the struct
 <!-- phoenix:ecto-end -->
 <!-- phoenix:html-start -->
 ## Phoenix HTML guidelines

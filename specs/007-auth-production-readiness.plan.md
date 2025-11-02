@@ -74,19 +74,19 @@ This plan outlines the implementation of a production-ready authentication syste
 ### 4.3 Email Configuration
 - [x] Set up Swoosh with Local adapter for dev/test (already configured)
 - [x] Enable mailbox preview in development (/dev/mailbox route) - SECURITY: Not available in production
-- [ ] Configure production email adapter (SendGrid/Mailgun/Resend/Postmark/Gmail/SMTP)
-- [ ] Set up API keys or SMTP credentials in runtime.exs
-- [ ] Implement HTML email templates with phoenix_swoosh
-- [ ] Configure Premailex for CSS inlining (optional)
-- [ ] Configure from email address and domain verification
-- [ ] Test email delivery in production environment
+- [x] Configure production email adapter (Resend chosen and configured)
+- [x] Set up API keys in runtime.exs (RESEND_API_KEY)
+- [x] Configure from email address from environment variable (EMAIL_FROM_ADDRESS, EMAIL_FROM_NAME)
+- [x] Update UserNotifier to use configurable from address
+- [x] Add default email configs for dev/test environments
+- [ ] Implement HTML email templates with phoenix_swoosh (deferred to future)
+- [ ] Configure Premailex for CSS inlining (optional, deferred)
+- [ ] Create email layout templates (HTML and text versions) (deferred to future)
+- [ ] Create branded email templates with PodCodar design (deferred to future)
+- [ ] Test email delivery in production environment (requires deployment)
 
-### Next Steps for Email Enhancement
-- [ ] Add phoenix_swoosh dependency for HTML email templates
-- [ ] Create email layout templates (HTML and text versions)
-- [ ] Implement Premailex for CSS inlining
+### Next Steps for Email Enhancement (Optional)
 - [ ] Add Tailwind CSS support for email styling
-- [ ] Create branded email templates with PodCodar design
 - [ ] Set up email analytics and delivery tracking
 - [ ] Configure email bounce and complaint handling
 
@@ -235,6 +235,54 @@ This plan outlines the implementation of a production-ready authentication syste
 4. **Test Email Delivery**: Deploy and test in production
 5. **Optional Enhancements**: HTML templates, CSS inlining, analytics
 
+## Detailed Implementation Steps
+
+### Step 1: Choose and Configure Email Provider
+
+**Decision Required**: Choose one of the following email providers:
+- **Resend** (Recommended: Modern, simple API, good DX)
+- **SendGrid** (Popular, reliable, generous free tier)
+- **Mailgun** (Good for transactional emails)
+- **SMTP** (Generic, works with any SMTP server)
+
+**Implementation**:
+1. Add provider-specific adapter dependency to `mix.exs` (if needed)
+2. Configure adapter in `config/runtime.exs` with environment variables
+3. Set up API keys as environment variables in Fly.io
+4. Configure from email address from environment variable
+
+### Step 2: Configure Production Email Adapter
+
+**Files to modify**:
+- `config/runtime.exs` - Add production email configuration
+- `lib/podcodar/accounts/user_notifier.ex` - Update from address to use config
+- `mix.exs` - Add email adapter dependency (if needed)
+
+**Environment Variables Required**:
+- `EMAIL_FROM_ADDRESS` - Email address for sending (e.g., `noreply@podcodar.com`)
+- `EMAIL_FROM_NAME` - Display name for sender (e.g., `PodCodar`)
+- Provider-specific keys (e.g., `RESEND_API_KEY`, `SENDGRID_API_KEY`, etc.)
+
+### Step 3: HTML Email Templates (Optional but Recommended)
+
+**Implementation**:
+1. Add `phoenix_swoosh` dependency
+2. Create email layout templates:
+   - `lib/podcodar_web/emails/layout.html.heex`
+   - `lib/podcodar_web/emails/layout.text.heex`
+3. Update `UserNotifier` to use HTML templates
+4. Add `Premailex` for CSS inlining (optional)
+5. Create branded templates for each email type
+
+### Step 4: Testing & Validation
+
+**Tasks**:
+1. Test email delivery in development with Local adapter
+2. Deploy to staging/production environment
+3. Test email delivery end-to-end
+4. Verify email formatting and links
+5. Check spam folder and deliverability
+
 ### 📊 **Risk Assessment Summary**
 - **High Risk Items**: ✅ All mitigated
 - **Medium Risk Items**: ⚠️ Production email configuration pending
@@ -243,17 +291,17 @@ This plan outlines the implementation of a production-ready authentication syste
 ## Email Production Setup Guide
 
 ### Development Configuration
-```
-# config/dev.exs
+```elixir
+# config/dev.exs (already configured)
 config :podcodar, Podcodar.Mailer,
-adapter: Swoosh.Adapters.Local
+  adapter: Swoosh.Adapters.Local
 
 config :podcodar, dev_routes: true  # Enables /dev routes including mailbox
 
 # router.ex - Mailbox preview (SECURITY: Only in development)
 if Application.compile_env(:podcodar, :dev_routes) do
-scope "/dev" do
-  pipe_through [:browser]
+  scope "/dev" do
+    pipe_through [:browser]
     forward "/mailbox", Plug.Swoosh.MailboxPreview  # ⚠️ NOT AVAILABLE IN PRODUCTION
   end
 end
@@ -263,72 +311,219 @@ end
 
 ### Production Configuration Options
 
-#### Option 1: SendGrid
-```
-# runtime.exs
-config :podcodar, Podcodar.Mailer,
-  adapter: Swoosh.Adapters.SendGrid,
-  api_key: System.fetch_env!("SENDGRID_API_KEY")
+#### Option 1: Resend (Recommended - Modern, Simple API)
+**Pros**: Clean API, great DX, good documentation, modern service
+**Cons**: Newer service (less established than SendGrid)
+
+**Dependencies**: Add to `mix.exs`:
+```elixir
+{:resend, "~> 0.3"}
 ```
 
-#### Option 2: Mailgun
-```
-# runtime.exs
-config :podcodar, Podcodar.Mailer,
-  adapter: Swoosh.Adapters.Mailgun,
-  api_key: System.fetch_env!("MAILGUN_API_KEY"),
-  domain: System.fetch_env!("MAILGUN_DOMAIN")
-```
-
-#### Option 3: Resend
-```
-# runtime.exs
-config :podcodar, Podcodar.Mailer,
-  adapter: Resend.Swoosh.Adapter,
-  api_key: System.fetch_env!("RESEND_API_KEY")
+**Configuration in `config/runtime.exs`**:
+```elixir
+if config_env() == :prod do
+  # ... existing config ...
+  
+  config :podcodar, Podcodar.Mailer,
+    adapter: Resend.Swoosh.Adapter,
+    api_key: System.fetch_env!("RESEND_API_KEY")
+  
+  config :podcodar, :email_from_address, System.fetch_env!("EMAIL_FROM_ADDRESS")
+  config :podcodar, :email_from_name, System.fetch_env!("EMAIL_FROM_NAME")
+end
 ```
 
-#### Option 4: SMTP
-```
-# runtime.exs
-config :podcodar, Podcodar.Mailer,
-  adapter: Swoosh.Adapters.SMTP,
-  relay: System.fetch_env!("SMTP_RELAY"),
-  username: System.fetch_env!("SMTP_USERNAME"),
-  password: System.fetch_env!("SMTP_PASSWORD"),
-  ssl: true,
-  auth: :always
+#### Option 2: SendGrid (Popular, Reliable)
+**Pros**: Established, reliable, generous free tier
+**Cons**: More complex API, older service
+
+**Dependencies**: Already included in Swoosh (no additional deps needed)
+
+**Configuration in `config/runtime.exs`**:
+```elixir
+if config_env() == :prod do
+  # ... existing config ...
+  
+  config :podcodar, Podcodar.Mailer,
+    adapter: Swoosh.Adapters.SendGrid,
+    api_key: System.fetch_env!("SENDGRID_API_KEY")
+  
+  config :podcodar, :email_from_address, System.fetch_env!("EMAIL_FROM_ADDRESS")
+  config :podcodar, :email_from_name, System.fetch_env!("EMAIL_FROM_NAME")
+end
 ```
 
-### HTML Email Templates (Optional)
-Add phoenix_swoosh for HTML email support:
+#### Option 3: Mailgun (Good for Transactional Emails)
+**Pros**: Good for transactional emails, reliable tracking
+**Cons**: Requires domain verification
+
+**Dependencies**: Already included in Swoosh (no additional deps needed)
+
+**Configuration in `config/runtime.exs`**:
+```elixir
+if config_env() == :prod do
+  # ... existing config ...
+  
+  config :podcodar, Podcodar.Mailer,
+    adapter: Swoosh.Adapters.Mailgun,
+    api_key: System.fetch_env!("MAILGUN_API_KEY"),
+    domain: System.fetch_env!("MAILGUN_DOMAIN")
+  
+  config :podcodar, :email_from_address, System.fetch_env!("EMAIL_FROM_ADDRESS")
+  config :podcodar, :email_from_name, System.fetch_env!("EMAIL_FROM_NAME")
+end
 ```
+
+#### Option 4: SMTP (Generic, Works with Any SMTP Server)
+**Pros**: Works with any SMTP server (Gmail, custom server, etc.)
+**Cons**: Less feature-rich than dedicated services
+
+**Dependencies**: Already included in Swoosh (no additional deps needed)
+
+**Configuration in `config/runtime.exs`**:
+```elixir
+if config_env() == :prod do
+  # ... existing config ...
+  
+  config :podcodar, Podcodar.Mailer,
+    adapter: Swoosh.Adapters.SMTP,
+    relay: System.fetch_env!("SMTP_RELAY"),
+    username: System.fetch_env!("SMTP_USERNAME"),
+    password: System.fetch_env!("SMTP_PASSWORD"),
+    ssl: true,
+    auth: :always,
+    port: String.to_integer(System.get_env("SMTP_PORT") || "587")
+  
+  config :podcodar, :email_from_address, System.fetch_env!("EMAIL_FROM_ADDRESS")
+  config :podcodar, :email_from_name, System.fetch_env!("EMAIL_FROM_NAME")
+end
+```
+
+### Updating UserNotifier to Use Configurable From Address
+
+**Current state**: Hardcoded `{"Podcodar", "contact@example.com"}`
+
+**Required change**: Update `lib/podcodar/accounts/user_notifier.ex`:
+```elixir
+defp deliver(recipient, subject, body) do
+  from_address = Application.get_env(:podcodar, :email_from_address, "contact@example.com")
+  from_name = Application.get_env(:podcodar, :email_from_name, "Podcodar")
+  
+  email =
+    new()
+    |> to(recipient)
+    |> from({from_name, from_address})
+    |> subject(subject)
+    |> text_body(body)
+  
+  # ... rest of function
+end
+```
+
+### HTML Email Templates (Optional but Recommended)
+
+**Step 1: Add phoenix_swoosh dependency**
+```elixir
 # mix.exs
 {:phoenix_swoosh, "~> 1.0"}
+```
 
-# Create lib/podcodar_web/emails.ex
+**Step 2: Create email view module**
+```elixir
+# lib/podcodar_web/emails.ex
 defmodule PodcodarWeb.Emails do
-  use Phoenix.View, root: "lib/podcodar_web", namespace: PodcodarWeb
+  use Phoenix.View,
+    root: "lib/podcodar_web",
+    namespace: PodcodarWeb
   use Phoenix.Component
 end
-
-# Add email templates in lib/podcodar_web/emails/
-# layout.html.heex, layout.text.heex, etc.
 ```
 
-### CSS Inlining (Optional)
-Add Premailex for email-compatible CSS:
+**Step 3: Create email layout templates**
+- `lib/podcodar_web/emails/layout.html.heex` - HTML email layout
+- `lib/podcodar_web/emails/layout.text.heex` - Plain text email layout
+
+**Step 4: Create email templates**
+- `lib/podcodar_web/emails/user_notifier/confirmation_instructions.html.heex`
+- `lib/podcodar_web/emails/user_notifier/login_instructions.html.heex`
+- `lib/podcodar_web/emails/user_notifier/update_email_instructions.html.heex`
+
+**Step 5: Update UserNotifier to use HTML templates**
+```elixir
+defp deliver(recipient, subject, body) do
+  # Use render_to_string for HTML emails
+  html_body = PodcodarWeb.Emails.render("user_notifier/confirmation_instructions.html", ...)
+  text_body = PodcodarWeb.Emails.render("user_notifier/confirmation_instructions.text", ...)
+  
+  email =
+    new()
+    |> to(recipient)
+    |> from({from_name, from_address})
+    |> subject(subject)
+    |> html_body(html_body)
+    |> text_body(text_body)
+  
+  # ... rest of function
+end
 ```
+
+### CSS Inlining (Optional Enhancement)
+
+**Add Premailex for email-compatible CSS**:
+```elixir
 # mix.exs
 {:premailex, "~> 0.3.18"}
 
-# Update mailer to use premail/1 function
-def premail(email) do
+# Update mailer or UserNotifier to use premail/1 function
+defp premail(email) do
   html = Premailex.to_inline_css(email.html_body)
   text = Premailex.to_text(email.html_body)
   email |> html_body(html) |> text_body(text)
 end
 ```
+
+## Implementation Summary
+
+### Critical Path (Required for Production) - ✅ COMPLETED
+1. ✅ Choose email provider (Resend chosen)
+2. ✅ Configure production email adapter in `config/runtime.exs`
+3. ⚠️ Set up environment variables in Fly.io (requires deployment):
+   - `RESEND_API_KEY` - Required for production
+   - `EMAIL_FROM_ADDRESS` - Optional (defaults to contact@example.com)
+   - `EMAIL_FROM_NAME` - Optional (defaults to Podcodar)
+4. ✅ Update `UserNotifier` to use configurable from address
+5. ✅ Add default email configs for dev/test environments
+6. ⚠️ Test email delivery end-to-end (requires deployment and environment variables)
+
+### Optional Enhancements (Can be done later)
+1. HTML email templates with `phoenix_swoosh`
+2. CSS inlining with `Premailex`
+3. Branded email design
+4. Email analytics and tracking
+5. Bounce/complaint handling
+
+### Estimated Time
+- **Critical Path**: 1-2 hours (configuration + testing)
+- **With HTML Templates**: 3-4 hours (templates + styling)
+- **Full Enhancement**: 1 day (templates + CSS + branding)
+
+## Future Improvements
+
+### Email Enhancements
+- [ ] **HTML Email Templates**: Implement HTML email templates using `phoenix_swoosh` for better email presentation
+- [ ] **CSS Inlining**: Add `Premailex` for CSS inlining to ensure consistent email rendering across clients
+- [ ] **Branded Email Design**: Create branded email templates matching PodCodar design system
+- [ ] **Email Analytics**: Integrate email delivery tracking and analytics
+- [ ] **Bounce/Complaint Handling**: Implement handling for bounced emails and spam complaints
+
+### Code Quality Improvements
+- [ ] **Suppress Tesla Warning**: Add `config :tesla, disable_deprecated_builder_warning: true` to suppress deprecation warning from Tesla (dependency of Resend)
+- [ ] **Email Validation**: Add validation for `EMAIL_FROM_ADDRESS` in production to ensure it's a valid email format
+
+### Documentation
+- [ ] Update deployment guide with email configuration steps
+- [ ] Add monitoring and alerting setup for email delivery failures
 
 ## Dependencies
 
@@ -341,6 +536,45 @@ end
 - Email service provider (SendGrid, Mailgun, Resend, Postmark, Gmail API, or SMTP)
 - Fly.io for deployment
 - Proper DNS configuration for production domain and email verification
+
+---
+
+## 🎯 Recommendation for Implementation
+
+### Recommended Approach: Start Simple, Enhance Later
+
+**Phase 1: Production-Ready Email (Critical - Do First)**
+1. **Choose Resend** as the email provider (modern, simple, good DX)
+   - Reason: Simple API, good Elixir support, modern service
+   - Alternative: SendGrid if you prefer more established option
+2. **Configure basic email adapter** in `config/runtime.exs`
+3. **Update UserNotifier** to use configurable from address
+4. **Set environment variables** in Fly.io
+5. **Test end-to-end** email delivery
+
+**Phase 2: HTML Email Templates (Optional - Can Do Later)**
+1. Add `phoenix_swoosh` dependency
+2. Create email layout templates
+3. Create email content templates
+4. Update UserNotifier to use HTML templates
+5. Test email rendering
+
+**Phase 3: Polish (Optional - Nice to Have)**
+1. Add CSS inlining with Premailex
+2. Create branded email design
+3. Add email analytics
+
+### Decision Points
+
+**Email Provider Choice**:
+- **Resend**: Best for modern apps, simple setup, good documentation
+- **SendGrid**: Best for established projects, generous free tier
+- **Mailgun**: Best for transactional emails with tracking needs
+- **SMTP**: Best for custom setups or existing infrastructure
+
+**HTML Templates**:
+- **Start with text-only**: Faster to implement, works everywhere
+- **Add HTML later**: Better UX, but requires more setup
 
 ---
 
