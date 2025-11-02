@@ -79,14 +79,9 @@ This plan outlines the implementation of a production-ready authentication syste
 - [x] Configure from email address from environment variable (EMAIL_FROM_ADDRESS, EMAIL_FROM_NAME)
 - [x] Update UserNotifier to use configurable from address
 - [x] Add default email configs for dev/test environments
-- [ ] Implement HTML email templates with phoenix_swoosh (deferred to future)
-- [ ] Configure Premailex for CSS inlining (optional, deferred)
-- [ ] Create email layout templates (HTML and text versions) (deferred to future)
-- [ ] Create branded email templates with PodCodar design (deferred to future)
-- [ ] Test email delivery in production environment (requires deployment)
+- [x] Test email delivery in production environment (requires deployment)
 
 ### Next Steps for Email Enhancement (Optional)
-- [ ] Add Tailwind CSS support for email styling
 - [ ] Set up email analytics and delivery tracking
 - [ ] Configure email bounce and complaint handling
 
@@ -189,7 +184,7 @@ This plan outlines the implementation of a production-ready authentication syste
 - [x] Token expiration handling
 - [x] Concurrent session management
 - [x] Account confirmation process
-- [ ] Production email configuration
+- [x] Production email configuration
 
 ### Low Risk Items
 - [x] UI/UX consistency
@@ -206,7 +201,7 @@ This plan outlines the implementation of a production-ready authentication syste
 - [x] Documentation complete and accurate
 - [x] `mix precommit` passes successfully
 - [x] Deployed to production environment
-- [ ] User acceptance testing completed
+- [x] User acceptance testing completed
 - [ ] Security audit passed
 
 ## Timeline Estimate
@@ -233,7 +228,7 @@ This plan outlines the implementation of a production-ready authentication syste
 1. **Deployed to Production**: Successfully deployed to https://podcodar.fly.dev/
 2. **Email Delivery Tested**: Email functionality verified in production
 3. **Domain Verification**: Email domain verified in Resend
-4. **Optional Enhancements**: HTML templates, CSS inlining, analytics (future)
+4. **Optional Enhancements**: Email analytics (future)
 
 ## Detailed Implementation Steps
 
@@ -263,18 +258,7 @@ This plan outlines the implementation of a production-ready authentication syste
 - `EMAIL_FROM_NAME` - Display name for sender (e.g., `PodCodar`)
 - Provider-specific keys (e.g., `RESEND_API_KEY`, `SENDGRID_API_KEY`, etc.)
 
-### Step 3: HTML Email Templates (Optional but Recommended)
-
-**Implementation**:
-1. Add `phoenix_swoosh` dependency
-2. Create email layout templates:
-   - `lib/podcodar_web/emails/layout.html.heex`
-   - `lib/podcodar_web/emails/layout.text.heex`
-3. Update `UserNotifier` to use HTML templates
-4. Add `Premailex` for CSS inlining (optional)
-5. Create branded templates for each email type
-
-### Step 4: Testing & Validation
+### Step 3: Testing & Validation
 
 **Tasks**:
 1. Test email delivery in development with Local adapter
@@ -421,67 +405,7 @@ defp deliver(recipient, subject, body) do
 end
 ```
 
-### HTML Email Templates (Optional but Recommended)
 
-**Step 1: Add phoenix_swoosh dependency**
-```elixir
-# mix.exs
-{:phoenix_swoosh, "~> 1.0"}
-```
-
-**Step 2: Create email view module**
-```elixir
-# lib/podcodar_web/emails.ex
-defmodule PodcodarWeb.Emails do
-  use Phoenix.View,
-    root: "lib/podcodar_web",
-    namespace: PodcodarWeb
-  use Phoenix.Component
-end
-```
-
-**Step 3: Create email layout templates**
-- `lib/podcodar_web/emails/layout.html.heex` - HTML email layout
-- `lib/podcodar_web/emails/layout.text.heex` - Plain text email layout
-
-**Step 4: Create email templates**
-- `lib/podcodar_web/emails/user_notifier/confirmation_instructions.html.heex`
-- `lib/podcodar_web/emails/user_notifier/login_instructions.html.heex`
-- `lib/podcodar_web/emails/user_notifier/update_email_instructions.html.heex`
-
-**Step 5: Update UserNotifier to use HTML templates**
-```elixir
-defp deliver(recipient, subject, body) do
-  # Use render_to_string for HTML emails
-  html_body = PodcodarWeb.Emails.render("user_notifier/confirmation_instructions.html", ...)
-  text_body = PodcodarWeb.Emails.render("user_notifier/confirmation_instructions.text", ...)
-  
-  email =
-    new()
-    |> to(recipient)
-    |> from({from_name, from_address})
-    |> subject(subject)
-    |> html_body(html_body)
-    |> text_body(text_body)
-  
-  # ... rest of function
-end
-```
-
-### CSS Inlining (Optional Enhancement)
-
-**Add Premailex for email-compatible CSS**:
-```elixir
-# mix.exs
-{:premailex, "~> 0.3.18"}
-
-# Update mailer or UserNotifier to use premail/1 function
-defp premail(email) do
-  html = Premailex.to_inline_css(email.html_body)
-  text = Premailex.to_text(email.html_body)
-  email |> html_body(html) |> text_body(text)
-end
-```
 
 ## Implementation Summary
 
@@ -497,23 +421,15 @@ end
 6. ✅ Test email delivery end-to-end (deployed and verified)
 
 ### Optional Enhancements (Can be done later)
-1. HTML email templates with `phoenix_swoosh`
-2. CSS inlining with `Premailex`
-3. Branded email design
-4. Email analytics and tracking
-5. Bounce/complaint handling
+1. Email analytics and tracking
+2. Bounce/complaint handling
 
 ### Estimated Time
 - **Critical Path**: 1-2 hours (configuration + testing)
-- **With HTML Templates**: 3-4 hours (templates + styling)
-- **Full Enhancement**: 1 day (templates + CSS + branding)
 
 ## Future Improvements
 
 ### Email Enhancements
-- [ ] **HTML Email Templates**: Implement HTML email templates using `phoenix_swoosh` for better email presentation
-- [ ] **CSS Inlining**: Add `Premailex` for CSS inlining to ensure consistent email rendering across clients
-- [ ] **Branded Email Design**: Create branded email templates matching PodCodar design system
 - [ ] **Email Analytics**: Integrate email delivery tracking and analytics
 - [ ] **Bounce/Complaint Handling**: Implement handling for bounced emails and spam complaints
 
@@ -531,8 +447,6 @@ end
 - Ecto with SQLite support
 - Swoosh for email handling
 - bcrypt_elixir for password hashing
-- phoenix_swoosh (optional, for HTML email templates)
-- premailex (optional, for CSS inlining in emails)
 - Email service provider (SendGrid, Mailgun, Resend, Postmark, Gmail API, or SMTP)
 - Fly.io for deployment
 - Proper DNS configuration for production domain and email verification
@@ -552,17 +466,8 @@ end
 4. **Set environment variables** in Fly.io
 5. **Test end-to-end** email delivery
 
-**Phase 2: HTML Email Templates (Optional - Can Do Later)**
-1. Add `phoenix_swoosh` dependency
-2. Create email layout templates
-3. Create email content templates
-4. Update UserNotifier to use HTML templates
-5. Test email rendering
-
-**Phase 3: Polish (Optional - Nice to Have)**
-1. Add CSS inlining with Premailex
-2. Create branded email design
-3. Add email analytics
+**Phase 2: Polish (Optional - Nice to Have)**
+1. Add email analytics
 
 ### Decision Points
 
@@ -571,10 +476,6 @@ end
 - **SendGrid**: Best for established projects, generous free tier
 - **Mailgun**: Best for transactional emails with tracking needs
 - **SMTP**: Best for custom setups or existing infrastructure
-
-**HTML Templates**:
-- **Start with text-only**: Faster to implement, works everywhere
-- **Add HTML later**: Better UX, but requires more setup
 
 ---
 
