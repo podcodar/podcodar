@@ -9,7 +9,7 @@ defmodule PodcodarWeb.Layouts do
   embed_templates "layouts/*"
 
   attr :flash, :map, required: true, doc: "the map of flash messages"
-  attr :current_scope, :map, required: true, doc: "the current scope"
+  attr :current_scope, :map, default: nil, doc: "the current scope"
   slot :inner_block, required: true
 
   def app(assigns) do
