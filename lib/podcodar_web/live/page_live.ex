@@ -46,26 +46,29 @@ defmodule PodcodarWeb.PageLive do
         <h2 class="text-center text-2xl font-semibold mb-6">Links</h2>
 
         <div class="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-full sm:max-w-xl md:max-w-2xl mx-auto">
-          <a href="https://discord.gg/vnEAM9sFb7" target="_blank" class="btn btn-outline">
+          <.link navigate={~p"/discord"} target="_blank" class="btn btn-outline">
             <.icon name="hero-chat-bubble-left-right" class="w-5 h-5" />
             <span class="ml-2">Discord</span>
-          </a>
-          <a href="https://github.com/podcodar" target="_blank" class="btn btn-outline">
+          </.link>
+
+          <.link navigate={~p"/github"} target="_blank" class="btn btn-outline">
             <.icon name="hero-heart" class="w-5 h-5" />
             <span class="ml-2">GitHub</span>
-          </a>
-          <a href="https://github.com/sponsors/podcodar" target="_blank" class="btn btn-outline">
+          </.link>
+
+          <.link navigate={~p"/sponsor"} target="_blank" class="btn btn-outline">
             <.icon name="hero-currency-dollar" class="w-5 h-5" />
             <span class="ml-2">Patrocinar</span>
-          </a>
-          <a
+          </.link>
+
+          <.link
             href="https://github.com/podcodar/.github/blob/main/TRANSPARENCY.md"
             target="_blank"
             class="btn btn-outline"
           >
             <.icon name="hero-document-text" class="w-5 h-5" />
             <span class="ml-2">Transparência</span>
-          </a>
+          </.link>
         </div>
       </section>
 
@@ -165,7 +168,6 @@ defmodule PodcodarWeb.PageLive do
 
     {:ok,
      socket
-     |> assign(:current_scope, nil)
      |> assign(:form, to_form(changeset))
      |> assign(:contributors, [])
      |> then(fn socket ->

@@ -6,6 +6,37 @@ This is a web application written using the Phoenix web framework.
 
 - Use `mix precommit` alias when you are done with all changes and fix any pending issues
 - Use the already included and available `:req` (`Req`) library for HTTP requests, **avoid** `:httpoison`, `:tesla`, and `:httpc`. Req is included by default and is the preferred HTTP client for Phoenix apps
+- We use [mise](https://mise.jdx.dev/) for tools and system dependencies management (see `mise.toml`)
+- The system has tmux available, which can be used to run long-running commands in the background
+- Use Playwright for creating temporary scripts to validate UI interfaces
+
+### Folder structure
+
+```sh
+docs/    # docs folder
+spec/    # spec folder
+lib/     # elixir source code
+assets/  # frontend assets (js, css, etc)
+test/    # elixir tests
+priv/    # private data (migrations, seeds, etc)
+config/  # configuration files
+scripts/ # project related scripts (deno, bash, etc)
+```
+
+### Languages
+
+#### PT-BR
+
+- /docs
+- README.md
+- any text inside code
+
+#### EN-US
+
+- /specs
+- AGENTS.md
+- any code file
+- all other files
 
 ## Deployment/runtime notes
 
@@ -27,6 +58,67 @@ This is a web application written using the Phoenix web framework.
 - **Always** use the imported `<.input>` component for form inputs from `core_components.ex` when available. `<.input>` is imported and using it will will save steps and prevent errors
 - If you override the default input classes (`<.input class="myclass px-2 py-1 rounded-lg">)`) class with your own values, no default classes are inherited, so your
 custom classes must fully style the input
+
+<!-- phoenix-gen-auth-start -->
+## Authentication
+
+- **Always** handle authentication flow at the router level with proper redirects
+- **Always** be mindful of where to place routes. `phx.gen.auth` creates multiple router plugs and `live_session` scopes:
+  - A plug `:fetch_current_scope_for_user` that is included in the default browser pipeline
+  - A plug `:require_authenticated_user` that redirects to the log in page when the user is not authenticated
+  - A `live_session :current_user` scope - for routes that need the current user but don't require authentication, similar to `:fetch_current_scope_for_user`
+  - A `live_session :require_authenticated_user` scope - for routes that require authentication, similar to the plug with the same name
+  - In both cases, a `@current_scope` is assigned to the Plug connection and LiveView socket
+  - A plug `redirect_if_user_is_authenticated` that redirects to a default path in case the user is authenticated - useful for a registration page that should only be shown to unauthenticated users
+- **Always let the user know in which router scopes, `live_session`, and pipeline you are placing the route, AND SAY WHY**
+- `phx.gen.auth` assigns the `current_scope` assign - it **does not assign a `current_user` assign**
+- Always pass the assign `current_scope` to context modules as first argument. When performing queries, use `current_scope.user` to filter the query results
+- To derive/access `current_user` in templates, **always use the `@current_scope.user`**, never use **`@current_user`** in templates or LiveViews
+- **Never** duplicate `live_session` names. A `live_session :current_user` can only be defined __once__ in the router, so all routes for the `live_session :current_user`  must be grouped in a single block
+- Anytime you hit `current_scope` errors or the logged in session isn't displaying the right content, **always double check the router and ensure you are using the correct plug and `live_session` as described below**
+
+### Routes that require authentication
+
+LiveViews that require login should **always be placed inside the __existing__ `live_session :require_authenticated_user` block**:
+
+    scope "/", AppWeb do
+      pipe_through [:browser, :require_authenticated_user]
+
+      live_session :require_authenticated_user,
+        on_mount: [{PodcodarWeb.UserAuth, :require_authenticated}] do
+        # phx.gen.auth generated routes
+        live "/users/settings", UserLive.Settings, :edit
+        live "/users/settings/confirm-email/:token", UserLive.Settings, :confirm_email
+        # our own routes that require logged in user
+        live "/", MyLiveThatRequiresAuth, :index
+      end
+    end
+
+Controller routes must be placed in a scope that sets the `:require_authenticated_user` plug:
+
+    scope "/", AppWeb do
+      pipe_through [:browser, :require_authenticated_user]
+
+      get "/", MyControllerThatRequiresAuth, :index
+    end
+
+### Routes that work with or without authentication
+
+LiveViews that can work with or without authentication, **always use the __existing__ `:current_user` scope**, ie:
+
+    scope "/", MyAppWeb do
+      pipe_through [:browser]
+
+      live_session :current_user,
+        on_mount: [{PodcodarWeb.UserAuth, :mount_current_scope}] do
+        # our own routes that work with or without authentication
+        live "/", PublicLive
+      end
+    end
+
+Controllers automatically have the `current_scope` available if they use the `:browser` pipeline.
+
+<!-- phoenix-gen-auth-end -->
 
 <!-- usage-rules-start -->
 <!-- phoenix:elixir-start -->
@@ -99,7 +191,7 @@ custom classes must fully style the input
 - `Ecto.Schema` fields always use the `:string` type, even for `:text`, columns, ie: `field :name, :string`
 - `Ecto.Changeset.validate_number/2` **DOES NOT SUPPORT the `:allow_nil` option**. By default, Ecto validations only run if a change for the given field exists and the change value is not nil, so such as option is never needed
 - You **must** use `Ecto.Changeset.get_field(changeset, :field)` to access changeset fields
-- Fields which are set programatically, such as `user_id`, must not be listed in `cast` calls or similar for security purposes. Instead they must be explicitly set when creating the struct
+- Fields which are set programmatically, such as `user_id`, must not be listed in `cast` calls or similar for security purposes. Instead they must be explicitly set when creating the struct
 <!-- phoenix:ecto-end -->
 <!-- phoenix:html-start -->
 ## Phoenix HTML guidelines

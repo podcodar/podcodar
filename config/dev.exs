@@ -81,5 +81,8 @@ config :phoenix_live_view,
   # Enable helpful, but potentially expensive runtime checks
   enable_expensive_runtime_checks: true
 
-# Disable swoosh api client as it is only required for production adapters.
-config :swoosh, :api_client, false
+# Email adapter configuration is handled in config/runtime.exs
+# This allows runtime checking of RESEND_API_KEY environment variable.
+# Default: Local adapter (mailbox preview at /dev/mailbox)
+
+# INFO: To test Resend: Set RESEND_API_KEY environment variable before starting server

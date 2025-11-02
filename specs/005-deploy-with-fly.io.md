@@ -47,12 +47,12 @@ Create `fly.toml` with:
 
 ## Definition of Done
 
-- [ ] `Dockerfile` created and builds successfully
-- [ ] `docker-compose.yml` created and runs application locally
-- [ ] `fly.toml` created with proper configuration
-- [ ] Application deploys to Fly.io without errors
-- [ ] Health checks pass in production
-- [ ] Application accessible via Fly.io URL
+- [x] `Dockerfile` created and builds successfully
+- [x] `docker-compose.yml` created and runs application locally
+- [x] `fly.toml` created with proper configuration
+- [x] Application deploys to Fly.io without errors
+- [x] Health checks pass in production
+- [x] Application accessible via Fly.io URL
 
 ## Testing Commands
 

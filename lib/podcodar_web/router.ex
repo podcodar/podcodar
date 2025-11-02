@@ -1,26 +1,20 @@
 defmodule PodcodarWeb.Router do
   use PodcodarWeb, :router
 
+  import PodcodarWeb.UserAuth
+
   pipeline :browser do
     plug :accepts, ["html"]
     plug :fetch_session
     plug :fetch_live_flash
-    plug :put_root_layout, html: {PodcodarWeb.Layouts, :root}
     plug :protect_from_forgery
     plug :put_secure_browser_headers
+    plug :fetch_current_scope_for_user
+    plug :put_root_layout, html: {PodcodarWeb.Layouts, :root}
   end
 
   pipeline :api do
     plug :accepts, ["json"]
-  end
-
-  scope "/", PodcodarWeb do
-    pipe_through :browser
-
-    get "/discord", RedirectController, :discord
-
-    live "/", PageLive, :home
-    live "/courses", CoursesLive, :home
   end
 
   # Other scopes may use custom stacks.
@@ -43,5 +37,43 @@ defmodule PodcodarWeb.Router do
       live_dashboard "/dashboard", metrics: PodcodarWeb.Telemetry
       forward "/mailbox", Plug.Swoosh.MailboxPreview
     end
+  end
+
+  ## Authentication routes
+
+  scope "/", PodcodarWeb do
+    pipe_through [:browser, :require_authenticated_user]
+
+    live_session :require_authenticated_user,
+      on_mount: [{PodcodarWeb.UserAuth, :require_authenticated}] do
+      live "/users/settings", UserLive.Settings, :edit
+      live "/users/settings/confirm-email/:token", UserLive.Settings, :confirm_email
+    end
+
+    post "/users/update-password", UserSessionController, :update_password
+  end
+
+  scope "/", PodcodarWeb do
+    pipe_through [:browser]
+
+    # redirects
+    get "/github", RedirectController, :github
+    get "/sponsor", RedirectController, :sponsor
+    get "/discord", RedirectController, :discord
+
+    live_session :current_user,
+      on_mount: [{PodcodarWeb.UserAuth, :mount_current_scope}] do
+      # Pages
+      live "/", PageLive, :home
+      live "/courses", CoursesLive, :home
+
+      # App Pages
+      live "/users/register", UserLive.Registration, :new
+      live "/users/log-in", UserLive.Login, :new
+      live "/users/log-in/:token", UserLive.Confirmation, :new
+    end
+
+    post "/users/log-in", UserSessionController, :create
+    delete "/users/log-out", UserSessionController, :delete
   end
 end

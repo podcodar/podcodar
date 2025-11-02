@@ -1,25 +1,27 @@
 # Podcodar 🎙️
 
-[![CI](https://github.com/podcodar/podcodar/actions/workflows/elixir.yml/badge.svg)](https://github.com/podcodar/podcodar/actions/workflows/elixir.yml)
+[![CI](https://github.com/podcodar/podcodar/actions/workflows/ci.yml/badge.svg)](https://github.com/podcodar/podcodar/actions/workflows/ci.yml)
+[![Fly Deploy](https://github.com/podcodar/podcodar/actions/workflows/deploy.yml/badge.svg)](https://github.com/podcodar/podcodar/actions/workflows/deploy.yml)
+[![Run Courses validation](https://github.com/podcodar/podcodar/actions/workflows/validate-courses.yml/badge.svg)](https://github.com/podcodar/podcodar/actions/workflows/validate-courses.yml)
 
 Bem-vindo ao **Podcodar**, uma plataforma de código aberto dedicada a tornar a educação em tecnologia acessível para todos no Brasil! Nossa missão é simples: acelerar sua jornada na área de tecnologia, oferecendo recursos gratuitos e de alta qualidade, desde o nível iniciante até sua primeira oportunidade de emprego.
 
 ## 🚀 Sobre o Projeto
 
-Acreditamos que o conhecimento deve ser livre e acessível. A Podcodar é uma comunidade que seleciona, avalia e organiza os melhores conteúdos gratuitos disponíveis na internet. Além de uma curadoria de cursos, oferecemos:
+Acreditamos que o conhecimento deve set livre e acessível. A Podcodar é uma comunidade que seleciona, avalia e organiza os melhores conteúdos gratuitos disponíveis na internet. Além de uma curadoria de cursos, oferecemos:
 
 - **Grupos de estudo:** Aprenda em conjunto com outros desenvolvedores.
 - **Entrevistas simuladas:** Prepare-se para o mercado de trabalho.
 - **Bolsas de estudo:** Apoiamos o seu desenvolvimento.
 - **E muito mais!**
 
-Este repositório contém o código-fonte da nossa plataforma, construída com [Phoenix Framework](https://www.phoenixframework.org/), Elixir e uma pitada de Deno.
+Este repositório contém o código-fonte da nossa plataforma, construída com [Phoenix Framework](https://www.phoenixframework.org/), Elixir e uma pitada de Deno. A plataforma agora inclui autenticação de usuários, permitindo que membros da comunidade façam login, registrem-se e gerenciem suas contas.
 
 ## 🛠️ Começando
 
 Quer rodar o projeto localmente? Siga os passos abaixo.
 
-1.  **Instale as dependências:**
+1.  **Install as dependências:**
     ```bash
     mix setup
     ```
@@ -29,6 +31,14 @@ Quer rodar o projeto localmente? Siga os passos abaixo.
     ```
 
 Pronto! Agora você pode acessar a plataforma em [`localhost:4000`](http://localhost:4000) no seu navegador.
+
+#### Contas de Usuário
+
+A plataforma suporta autenticação baseada em email. Usuários podem:
+- Registrar uma nova conta com email
+- Receber um link mágico para login sem senha
+- Ou definir uma senha para login tradicional
+- Gerenciar configurações da conta (email, senha)
 
 ### Usando Docker
 

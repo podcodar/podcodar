@@ -4,15 +4,15 @@ services:
       context: .
       dockerfile: Dockerfile
     image: podcodar:latest
+    env_file:
+      - path: .env
+        required: true
     environment:
       PORT: "4000"
       PHX_SERVER: "true"
       PHX_HOST: localhost
-      DATABASE_PATH: /data/podcodar.db
-      DISCORD_INVITE_URL: ${DISCORD_INVITE_URL}
-      # Generate one with: mix phx.gen.secret
-      SECRET_KEY_BASE: ${SECRET_KEY_BASE}
       MIX_ENV: prod
+      DATABASE_PATH: /data/podcodar.db
     ports:
       - "4000:4000"
     volumes:
@@ -22,5 +22,4 @@ services:
 volumes:
   podcodar_data:
     driver: local
-
 

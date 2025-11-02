@@ -106,4 +106,6 @@
 
 .bg-pattern {
   background-image: url("/images/pattern.svg");
+  background-repeat: no-repeat;
+  background-size: cover;
 }

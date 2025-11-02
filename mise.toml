@@ -1,5 +1,7 @@
 [tasks]
 hello = "echo 'Hello, World!'"
+precommit = "mix precommit"
+fmt = "deno run -A npm:prettier --write **/*.md"
 
 [env]
 _.file = '.env'
