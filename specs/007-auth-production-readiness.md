@@ -90,7 +90,6 @@ Based on the Phoenix authentication documentation and security considerations, w
 - [x] Set up email configuration in runtime.exs (RESEND_API_KEY, EMAIL_FROM_ADDRESS, EMAIL_FROM_NAME)
 - [x] Set up email domain verification and API keys in production (completed via Fly.io secrets)
 - [x] Deploy to production and test email delivery
-- [ ] Implement HTML email templates (optional enhancement - deferred)
 - [ ] Set up monitoring and error tracking
 
 ## Definition of Done (Full Production Readiness)
