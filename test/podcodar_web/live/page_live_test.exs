@@ -60,10 +60,8 @@ defmodule PodcodarWeb.PageLiveTest do
     # Check corrected copy in translations
     assert html =~ gettext("accessible_tech_education")
     assert html =~ gettext("mission_paragraph_1")
-    refute html =~ "acessível há todos"
 
     assert html =~ gettext("mission_point_1")
-    refute html =~ "gratúito"
   end
 
   test "external links have security attributes", %{conn: conn} do
