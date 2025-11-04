@@ -94,6 +94,9 @@ config :podcodar, PodcodarWeb.Gettext,
 # App Data
 config :podcodar, courses_file_path: Path.expand("../priv/repo/data/courses.json", __DIR__)
 
+# disable tesla warning
+config :tesla, disable_deprecated_builder_warning: true
+
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
 import_config "#{config_env()}.exs"
