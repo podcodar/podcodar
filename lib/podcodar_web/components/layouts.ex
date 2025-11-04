@@ -35,7 +35,7 @@ defmodule PodcodarWeb.Layouts do
           <div>
             <p class="py-2">{gettext("choose_preferred_language")}</p>
             <div class="flex justify-center py-4">
-              <.language_selector current_locale={Map.get(assigns, :locale, "pt-br")} />
+              <.language_selector current_locale={Map.get(assigns, :locale)} />
             </div>
           </div>
         </div>
@@ -204,8 +204,12 @@ defmodule PodcodarWeb.Layouts do
       </li>
     <% end %>
 
-    <li class="flex lg:hidden btn-sm">
-      <.theme_toggle />
+    <div class="lg:hidden">
+      <.language_selector current_locale={Map.get(assigns, :locale)} />
+    </div>
+
+    <li class="flex lg:hidden">
+      <.theme_toggle id="drawer-theme-toggle" />
     </li>
     """
   end
@@ -317,8 +321,13 @@ defmodule PodcodarWeb.Layouts do
     doc: "Current locale in HTML format (pt-br or en)"
 
   def language_selector(assigns) do
-    current_locale = assigns.current_locale |> String.downcase()
-    pt_active = current_locale == "pt-br" || current_locale == "pt_br"
+    current_locale =
+      assigns.current_locale ||
+        "pt-br"
+        |> String.downcase()
+        |> String.replace("_", "-")
+
+    pt_active = current_locale == "pt-br"
     en_active = current_locale == "en"
 
     assigns =
@@ -329,7 +338,7 @@ defmodule PodcodarWeb.Layouts do
       |> assign(:en_active, en_active)
 
     ~H"""
-    <form action={~p"/locale"} method="post" class="flex gap-2" id="language-selector-form">
+    <form action={~p"/locale"} method="post" class="grid grid-cols-2 gap-2 w-full">
       <input type="hidden" name="_method" value="put" />
       <input type="hidden" name="_csrf_token" value={get_csrf_token()} />
 
