@@ -9,8 +9,12 @@ defmodule PodcodarWeb.PageLive do
     <Layouts.app flash={@flash} current_scope={@current_scope}>
       <section class="text-center min-h-svh flex flex-col justify-center items-center gap-12 mt-[-6rem] bg-pattern p-6">
         <div class="gap-4 mt-24">
-          <h1 class="text-5xl font-bold">Educação em tecnologia acessível para todos!</h1>
-          <h2 class="text-2xl">Do zero ao seu primeiro emprego sem pagar nada</h2>
+          <h1 class="text-3xl sm:text-4xl md:text-5xl font-bold">
+            Educação em tecnologia acessível para todos!
+          </h1>
+          <h2 class="text-lg sm:text-xl md:text-2xl">
+            Do zero ao seu primeiro emprego sem pagar nada
+          </h2>
         </div>
 
         <div class="min-w-full md:min-w-3xl">
@@ -45,18 +49,18 @@ defmodule PodcodarWeb.PageLive do
       <section class="my-20 px-6 py-12 max-w-full md:max-w-4xl mx-auto gap-12 flex flex-col ">
         <h2 class="text-center text-2xl font-semibold mb-6">Links</h2>
 
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-full sm:max-w-xl md:max-w-2xl mx-auto">
-          <.link navigate={~p"/discord"} target="_blank" class="btn btn-outline">
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 max-w-full sm:max-w-xl md:max-w-2xl mx-auto">
+          <.link navigate={~p"/discord"} target="_blank" rel="noopener" class="btn btn-outline">
             <.icon name="hero-chat-bubble-left-right" class="w-5 h-5" />
             <span class="ml-2">Discord</span>
           </.link>
 
-          <.link navigate={~p"/github"} target="_blank" class="btn btn-outline">
+          <.link navigate={~p"/github"} target="_blank" rel="noopener" class="btn btn-outline">
             <.icon name="hero-heart" class="w-5 h-5" />
             <span class="ml-2">GitHub</span>
           </.link>
 
-          <.link navigate={~p"/sponsor"} target="_blank" class="btn btn-outline">
+          <.link navigate={~p"/sponsor"} target="_blank" rel="noopener" class="btn btn-outline">
             <.icon name="hero-currency-dollar" class="w-5 h-5" />
             <span class="ml-2">Patrocinar</span>
           </.link>
@@ -64,6 +68,7 @@ defmodule PodcodarWeb.PageLive do
           <.link
             href="https://github.com/podcodar/.github/blob/main/TRANSPARENCY.md"
             target="_blank"
+            rel="noopener"
             class="btn btn-outline"
           >
             <.icon name="hero-document-text" class="w-5 h-5" />
@@ -126,6 +131,7 @@ defmodule PodcodarWeb.PageLive do
             href="https://github.com/podcodar/podcodar/blob/main/docs/contributing-guidelines.md"
             class="btn btn-accent"
             target="_blank"
+            rel="noopener"
           >
             Adicionar um curso
           </a>
@@ -150,7 +156,7 @@ defmodule PodcodarWeb.PageLive do
                 <a
                   href={"https://github.com/#{contrib.login}"}
                   target="_blank"
-                  rel="noopener noreferrer"
+                  rel="noopener"
                 >
                   <img src={contrib.avatar_url} alt={contrib.login} />
                 </a>
