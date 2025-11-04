@@ -1,4 +1,4 @@
-defmodule PodcodarWeb.Hooks.SetLocale do
+defmodule PodcodarWeb.Hooks.Locale do
   @moduledoc """
   Hook to configure Gettext locale and assign for all LiveViews.
 
@@ -8,14 +8,14 @@ defmodule PodcodarWeb.Hooks.SetLocale do
   """
   import Phoenix.Component
 
-  def on_mount(:default, _params, %{"locale" => locale}, socket) do
+  def on_mount(:set_locale, _params, %{"locale" => locale}, socket) do
     Gettext.put_locale(PodcodarWeb.Gettext, locale)
 
     {:cont, assign(socket, :locale, locale)}
   end
 
   # catch-all case
-  def on_mount(:default, _params, _session, socket) do
+  def on_mount(:set_locale, _params, _session, socket) do
     default_locale =
       Application.fetch_env!(:podcodar, PodcodarWeb.Gettext)[:default_locale]
       |> to_string()

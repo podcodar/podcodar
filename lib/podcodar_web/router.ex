@@ -48,7 +48,7 @@ defmodule PodcodarWeb.Router do
     live_session :require_authenticated_user,
       on_mount: [
         {PodcodarWeb.UserAuth, :require_authenticated},
-        PodcodarWeb.Hooks.SetLocale
+        {PodcodarWeb.Hooks.Locale, :set_locale}
       ] do
       live "/users/settings", UserLive.Settings, :edit
       live "/users/settings/confirm-email/:token", UserLive.Settings, :confirm_email
@@ -68,7 +68,7 @@ defmodule PodcodarWeb.Router do
     live_session :current_user,
       on_mount: [
         {PodcodarWeb.UserAuth, :mount_current_scope},
-        PodcodarWeb.Hooks.SetLocale
+        {PodcodarWeb.Hooks.Locale, :set_locale}
       ] do
       # Pages
       live "/", PageLive, :home
