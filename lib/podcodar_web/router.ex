@@ -46,7 +46,10 @@ defmodule PodcodarWeb.Router do
     pipe_through [:browser, :require_authenticated_user]
 
     live_session :require_authenticated_user,
-      on_mount: [{PodcodarWeb.UserAuth, :require_authenticated}] do
+      on_mount: [
+        {PodcodarWeb.UserAuth, :require_authenticated},
+        {PodcodarWeb.Hooks.SetLocale, :set_locale}
+      ] do
       live "/users/settings", UserLive.Settings, :edit
       live "/users/settings/confirm-email/:token", UserLive.Settings, :confirm_email
     end
@@ -63,7 +66,10 @@ defmodule PodcodarWeb.Router do
     get "/discord", RedirectController, :discord
 
     live_session :current_user,
-      on_mount: [{PodcodarWeb.UserAuth, :mount_current_scope}] do
+      on_mount: [
+        {PodcodarWeb.UserAuth, :mount_current_scope},
+        {PodcodarWeb.Hooks.SetLocale, :set_locale}
+      ] do
       # Pages
       live "/", PageLive, :home
       live "/courses", CoursesLive, :home
@@ -84,8 +90,16 @@ defmodule PodcodarWeb.Router do
 
   defp put_locale_in_assigns(conn, _opts) do
     locale = get_session(conn, :locale) || "pt_BR"
-    # Convert to HTML lang format (pt_BR -> pt-br)
-    html_lang = locale |> String.downcase() |> String.replace("_", "-")
+
+    # Configure Gettext locale for this request
+    Gettext.put_locale(PodcodarWeb.Gettext, locale)
+
+    # Convert to HTML lang format (pt_BR -> pt-br) for root layout
+    html_lang =
+      locale
+      |> String.downcase()
+      |> String.replace("_", "-")
+
     assign(conn, :locale, html_lang)
   end
 end

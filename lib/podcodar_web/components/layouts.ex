@@ -20,13 +20,28 @@ defmodule PodcodarWeb.Layouts do
     <input type="checkbox" id="settings-modal" class="modal-toggle" />
     <div class="modal">
       <div class="modal-box">
-        <h3 class="font-bold text-lg">Settings</h3>
-        <p class="py-4">Choose your preferred theme:</p>
-        <div class="flex justify-center py-4">
-          <.theme_toggle id="modal-theme-toggle" />
+        <h3 class="font-bold text-lg">{gettext("settings")}</h3>
+
+        <div class="py-4 space-y-6">
+          <div>
+            <p class="py-2">{gettext("choose_preferred_theme")}</p>
+            <div class="flex justify-center py-4">
+              <.theme_toggle id="modal-theme-toggle" />
+            </div>
+          </div>
+
+          <div class="divider" />
+
+          <div>
+            <p class="py-2">{gettext("choose_preferred_language")}</p>
+            <div class="flex justify-center py-4">
+              <.language_selector current_locale={Map.get(assigns, :locale, "pt-br")} />
+            </div>
+          </div>
         </div>
+
         <div class="modal-action">
-          <label for="settings-modal" class="btn">Close</label>
+          <label for="settings-modal" class="btn">{gettext("close")}</label>
         </div>
       </div>
     </div>
@@ -50,7 +65,41 @@ defmodule PodcodarWeb.Layouts do
     <script>
       window.addEventListener("phx:toggle-settings-modal", () => {
         document.getElementById("settings-modal").checked = true;
+        // Update language selector buttons when modal opens
+        updateLanguageSelector();
       });
+
+      // Update language selector based on HTML lang attribute
+      function updateLanguageSelector() {
+        const form = document.getElementById("language-selector-form");
+        if (!form) return;
+
+        const currentLang = document.documentElement.getAttribute("lang") || "pt-br";
+        const localeMap = {
+          "pt-br": "pt_BR",
+          "en": "en"
+        };
+        const currentLocale = localeMap[currentLang] || "pt_BR";
+
+        const buttons = form.querySelectorAll("button[data-locale]");
+        buttons.forEach(button => {
+          const buttonLocale = button.getAttribute("data-locale");
+          if (buttonLocale === currentLocale) {
+            button.classList.remove("btn-outline");
+            button.classList.add("btn-primary");
+          } else {
+            button.classList.remove("btn-primary");
+            button.classList.add("btn-outline");
+          }
+        });
+      }
+
+      // Update on page load
+      if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", updateLanguageSelector);
+      } else {
+        updateLanguageSelector();
+      }
     </script>
     """
   end
@@ -257,6 +306,53 @@ defmodule PodcodarWeb.Layouts do
         <.icon name="hero-moon-micro" class="size-4 opacity-75 hover:opacity-100 mx-auto" />
       </button>
     </div>
+    """
+  end
+
+  @doc """
+  Provides language selector for switching between available locales.
+  """
+  attr :current_locale, :string,
+    default: "pt-br",
+    doc: "Current locale in HTML format (pt-br or en)"
+
+  def language_selector(assigns) do
+    current_locale = assigns.current_locale |> String.downcase()
+    pt_active = current_locale == "pt-br" || current_locale == "pt_br"
+    en_active = current_locale == "en"
+
+    assigns =
+      assigns
+      |> assign(:pt_class, if(pt_active, do: "btn-primary", else: "btn-outline"))
+      |> assign(:en_class, if(en_active, do: "btn-primary", else: "btn-outline"))
+      |> assign(:pt_active, pt_active)
+      |> assign(:en_active, en_active)
+
+    ~H"""
+    <form action={~p"/locale"} method="post" class="flex gap-2" id="language-selector-form">
+      <input type="hidden" name="_method" value="put" />
+      <input type="hidden" name="_csrf_token" value={get_csrf_token()} />
+
+      <button
+        type="submit"
+        name="locale"
+        value="pt_BR"
+        class={["btn", "btn-sm", @pt_class]}
+        data-locale="pt_BR"
+      >
+        🇧🇷 Português
+      </button>
+
+      <button
+        type="submit"
+        name="locale"
+        value="en"
+        class={["btn", "btn-sm", @en_class]}
+        data-locale="en"
+      >
+        🇺🇸 English
+      </button>
+    </form>
     """
   end
 end
