@@ -4,10 +4,21 @@ defmodule PodcodarWeb.PageLive do
   alias Podcodar.Cache
   require Logger
 
+  # list of suggested searches
+  @suggested_searches [
+    "golang",
+    "elixir",
+    "python",
+    "phoenix",
+    "docker",
+    "ash",
+    "sql"
+  ]
+
   def render(assigns) do
     ~H"""
-    <Layouts.app flash={@flash} current_scope={@current_scope}>
-      <section class="text-center min-h-svh flex flex-col justify-center items-center gap-12 mt-[-6rem] bg-pattern p-6">
+    <Layouts.app flash={@flash} current_scope={@current_scope} locale={@locale}>
+      <section class="text-center min-h-svh flex flex-col justify-center items-center gap-12 mt-[-4rem] bg-pattern p-8 md:p-16">
         <div class="gap-4 mt-24">
           <h1 class="text-3xl sm:text-4xl md:text-5xl font-bold">
             {gettext("accessible_tech_education")}
@@ -17,7 +28,7 @@ defmodule PodcodarWeb.PageLive do
           </h2>
         </div>
 
-        <div class="min-w-full md:min-w-3xl">
+        <div class="w-full md:min-w-3xl">
           <.form for={@form} id="home-search-form" phx-change="validate" phx-submit="search">
             <.input
               field={@form[:query]}
@@ -32,21 +43,19 @@ defmodule PodcodarWeb.PageLive do
           </.form>
         </div>
 
-        <div class="flex flex-wrap justify-center gap-4 max-w-full md:max-w-2xl">
-          <a href="/courses?query=golang" class="btn btn-sm btn-dash btn-secondary">Go</a>
-          <a href="/courses?query=elixir" class="btn btn-sm btn-dash btn-secondary">Elixir</a>
-          <a href="/courses?query=python" class="btn btn-sm btn-dash btn-secondary">Python</a>
-          <a href="/courses?query=ruby" class="btn btn-sm btn-dash btn-secondary">Ruby</a>
-          <a href="/courses?query=react.js" class="btn btn-sm btn-dash btn-secondary">React</a>
-          <a href="/courses?query=node.js" class="btn btn-sm btn-dash btn-secondary">Node</a>
-          <a href="/courses?query=laravel" class="btn btn-sm btn-dash btn-secondary">Laravel</a>
-          <a href="/courses?tool=sql" class="btn btn-sm btn-dash btn-secondary">Postgres</a>
-          <a href="/courses?query=phoenix" class="btn btn-sm btn-dash btn-secondary">Phoenix</a>
-          <a href="/courses" class="btn btn-sm btn-dash btn-accent">Muito mais</a>
+        <div class="flex flex-wrap justify-center gap-4 max-w-full md:max-w-2xl px-8">
+          <.link
+            :for={term <- @suggested_searches}
+            navigate={~p"/courses?query=#{term}"}
+            class="btn btn-sm btn-dash btn-secondary"
+          >
+            {term}
+          </.link>
+          <a href="/courses" class="btn btn-sm btn-dash btn-accent">{gettext("much_more")}</a>
         </div>
       </section>
 
-      <section class="my-20 px-6 py-12 max-w-full md:max-w-4xl mx-auto gap-12 flex flex-col ">
+      <section class="max-w-full md:max-w-4xl mx-auto gap-12 flex flex-col p-16">
         <h2 class="text-center text-2xl font-semibold mb-6">{gettext("links")}</h2>
 
         <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 max-w-full sm:max-w-xl md:max-w-2xl mx-auto">
@@ -77,7 +86,7 @@ defmodule PodcodarWeb.PageLive do
         </div>
       </section>
 
-      <section class="my-20 px-6 py-12 max-w-full md:max-w-4xl mx-auto flex flex-col gap-12">
+      <section class="max-w-full md:max-w-4xl mx-auto flex flex-col gap-12 p-16">
         <h2 class="text-center text-3xl font-bold">{gettext("our_mission")}</h2>
 
         <div>
@@ -106,7 +115,7 @@ defmodule PodcodarWeb.PageLive do
         </div>
       </section>
 
-      <section class="my-20 px-6 py-12 max-w-full md:max-w-4xl mx-auto flex flex-col gap-12">
+      <section class="max-w-full md:max-w-4xl mx-auto flex flex-col gap-12 p-16">
         <h2 class="text-center text-3xl font-bold">{gettext("platform_statistics")}</h2>
         <div>
           <div class="stats stats-horizontal shadow mt-4 w-full">
@@ -138,12 +147,12 @@ defmodule PodcodarWeb.PageLive do
         </div>
       </section>
 
-      <section class="my-20 max-w-full md:max-w-4xl mx-auto flex flex-col gap-12 px-8">
+      <section class="max-w-full md:max-w-4xl mx-auto flex flex-col gap-12 p-16">
         <h2 class="text-center text-2xl font-semibold">
           {gettext("special_thanks_to_contributors")}
         </h2>
 
-        <div class="flex flex-wrap justify-center gap-4">
+        <div class="flex flex-wrap justify-center gap-4 px-4">
           <div :for={contrib <- @contributors} class="tooltip">
             <div class="tooltip-content">
               <div class="animate-bounce text-orange-400 text-xs md:text-xl font-black">
@@ -176,6 +185,7 @@ defmodule PodcodarWeb.PageLive do
      socket
      |> assign(:form, to_form(changeset))
      |> assign(:contributors, [])
+     |> assign(suggested_searches: @suggested_searches)
      |> then(fn socket ->
        if connected?(socket), do: send(self(), :load_contributors)
        socket

@@ -25,7 +25,7 @@ defmodule PodcodarWeb.CoursesLive do
 
   def render(assigns) do
     ~H"""
-    <Layouts.app flash={@flash} current_scope={@current_scope}>
+    <Layouts.app flash={@flash} current_scope={@current_scope} locale={@locale}>
       <div class="container mx-auto py-8 px-4">
         <h1 class="text-2xl font-bold mb-4">{gettext("available_courses")}</h1>
 

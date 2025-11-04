@@ -10,7 +10,7 @@ defmodule PodcodarWeb.Router do
     plug :protect_from_forgery
     plug :put_secure_browser_headers
     plug :fetch_current_scope_for_user
-    plug :put_locale_in_assigns
+    plug PodcodarWeb.Plugs.Locale, default: "pt_BR"
     plug :put_root_layout, html: {PodcodarWeb.Layouts, :root}
   end
 
@@ -48,7 +48,7 @@ defmodule PodcodarWeb.Router do
     live_session :require_authenticated_user,
       on_mount: [
         {PodcodarWeb.UserAuth, :require_authenticated},
-        {PodcodarWeb.Hooks.SetLocale, :set_locale}
+        PodcodarWeb.Hooks.SetLocale
       ] do
       live "/users/settings", UserLive.Settings, :edit
       live "/users/settings/confirm-email/:token", UserLive.Settings, :confirm_email
@@ -68,7 +68,7 @@ defmodule PodcodarWeb.Router do
     live_session :current_user,
       on_mount: [
         {PodcodarWeb.UserAuth, :mount_current_scope},
-        {PodcodarWeb.Hooks.SetLocale, :set_locale}
+        PodcodarWeb.Hooks.SetLocale
       ] do
       # Pages
       live "/", PageLive, :home
@@ -86,20 +86,5 @@ defmodule PodcodarWeb.Router do
     post "/users/log-in", UserSessionController, :create
     delete "/users/log-out", UserSessionController, :delete
     put "/locale", LocaleController, :update
-  end
-
-  defp put_locale_in_assigns(conn, _opts) do
-    locale = get_session(conn, :locale) || "pt_BR"
-
-    # Configure Gettext locale for this request
-    Gettext.put_locale(PodcodarWeb.Gettext, locale)
-
-    # Convert to HTML lang format (pt_BR -> pt-br) for root layout
-    html_lang =
-      locale
-      |> String.downcase()
-      |> String.replace("_", "-")
-
-    assign(conn, :locale, html_lang)
   end
 end

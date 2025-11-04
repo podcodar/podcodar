@@ -11,7 +11,7 @@ defmodule PodcodarWeb.NotFoundLive do
 
   def render(assigns) do
     ~H"""
-    <Layouts.app flash={@flash} current_scope={@current_scope}>
+    <Layouts.app flash={@flash} current_scope={@current_scope} locale={@locale}>
       <div class="min-h-screen flex items-center justify-center px-4">
         <div class="text-center">
           <div class="text-6xl font-bold text-primary mb-4">404</div>

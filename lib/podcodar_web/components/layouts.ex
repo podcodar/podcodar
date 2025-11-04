@@ -10,6 +10,7 @@ defmodule PodcodarWeb.Layouts do
 
   attr :flash, :map, required: true, doc: "the map of flash messages"
   attr :current_scope, :map, default: nil, doc: "the current scope"
+  attr :locale, :string, required: true, doc: "the current locale"
   slot :inner_block, required: true
 
   def app(assigns) do
@@ -35,7 +36,7 @@ defmodule PodcodarWeb.Layouts do
           <div>
             <p class="py-2">{gettext("choose_preferred_language")}</p>
             <div class="flex justify-center py-4">
-              <.language_selector current_locale={Map.get(assigns, :locale)} />
+              <.language_selector current_locale={@locale} id="language-selector-form-modal" />
             </div>
           </div>
         </div>
@@ -50,7 +51,7 @@ defmodule PodcodarWeb.Layouts do
       <input id="my-drawer-3" type="checkbox" class="drawer-toggle" />
 
       <div class="drawer-content flex flex-col min-h-screen">
-        <.navbar current_scope={@current_scope} />
+        <.navbar current_scope={@current_scope} locale={@locale} />
 
         <main class="flex-grow">
           {render_slot(@inner_block)}
@@ -59,47 +60,13 @@ defmodule PodcodarWeb.Layouts do
         <.footer />
       </div>
 
-      <.drawer current_scope={@current_scope} />
+      <.drawer current_scope={@current_scope} locale={@locale} />
     </div>
 
     <script>
       window.addEventListener("phx:toggle-settings-modal", () => {
         document.getElementById("settings-modal").checked = true;
-        // Update language selector buttons when modal opens
-        updateLanguageSelector();
       });
-
-      // Update language selector based on HTML lang attribute
-      function updateLanguageSelector() {
-        const form = document.getElementById("language-selector-form");
-        if (!form) return;
-
-        const currentLang = document.documentElement.getAttribute("lang") || "pt-br";
-        const localeMap = {
-          "pt-br": "pt_BR",
-          "en": "en"
-        };
-        const currentLocale = localeMap[currentLang] || "pt_BR";
-
-        const buttons = form.querySelectorAll("button[data-locale]");
-        buttons.forEach(button => {
-          const buttonLocale = button.getAttribute("data-locale");
-          if (buttonLocale === currentLocale) {
-            button.classList.remove("btn-outline");
-            button.classList.add("btn-primary");
-          } else {
-            button.classList.remove("btn-primary");
-            button.classList.add("btn-outline");
-          }
-        });
-      }
-
-      // Update on page load
-      if (document.readyState === "loading") {
-        document.addEventListener("DOMContentLoaded", updateLanguageSelector);
-      } else {
-        updateLanguageSelector();
-      }
     </script>
     """
   end
@@ -115,7 +82,11 @@ defmodule PodcodarWeb.Layouts do
 
         <div class="spacer flex-1" />
 
-        <.menu_links current_scope={@current_scope} />
+        <.menu_links
+          current_scope={@current_scope}
+          locale={@locale}
+          language_selector_id="language-selector-form-drawer"
+        />
       </ul>
     </div>
     """
@@ -157,13 +128,24 @@ defmodule PodcodarWeb.Layouts do
 
         <div class="flex-none hidden lg:flex">
           <ul class="menu menu-horizontal gap-2">
-            <.menu_links current_scope={@current_scope} />
+            <.menu_links
+              current_scope={@current_scope}
+              locale={@locale}
+              language_selector_id="language-selector-form-navbar"
+            />
           </ul>
         </div>
       </div>
     </div>
     """
   end
+
+  attr :current_scope, :map, default: nil
+  attr :locale, :string, required: true
+
+  attr :language_selector_id, :string,
+    default: "language-selector-form",
+    doc: "Unique ID for the language selector form"
 
   def menu_links(assigns) do
     ~H"""
@@ -205,7 +187,7 @@ defmodule PodcodarWeb.Layouts do
     <% end %>
 
     <div class="lg:hidden">
-      <.language_selector current_locale={Map.get(assigns, :locale)} />
+      <.language_selector current_locale={@locale} id={@language_selector_id} />
     </div>
 
     <li class="flex lg:hidden">
@@ -320,12 +302,13 @@ defmodule PodcodarWeb.Layouts do
     default: "pt-br",
     doc: "Current locale in HTML format (pt-br or en)"
 
+  attr :id, :string, default: "language-selector-form", doc: "Unique ID for the form"
+
   def language_selector(assigns) do
     current_locale =
-      assigns.current_locale ||
-        "pt-br"
-        |> String.downcase()
-        |> String.replace("_", "-")
+      assigns.current_locale
+      |> String.downcase()
+      |> String.replace("_", "-")
 
     pt_active = current_locale == "pt-br"
     en_active = current_locale == "en"
@@ -338,7 +321,12 @@ defmodule PodcodarWeb.Layouts do
       |> assign(:en_active, en_active)
 
     ~H"""
-    <form action={~p"/locale"} method="post" class="grid grid-cols-2 gap-2 w-full">
+    <form
+      action={~p"/locale"}
+      method="post"
+      class="grid grid-cols-2 gap-2 w-full"
+      id={@id}
+    >
       <input type="hidden" name="_method" value="put" />
       <input type="hidden" name="_csrf_token" value={get_csrf_token()} />
 

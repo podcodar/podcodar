@@ -6,18 +6,22 @@ defmodule PodcodarWeb.Hooks.SetLocale do
   The locale is already configured in the plug, but we need to set it
   in the socket for LiveView templates.
   """
+  import Phoenix.Component
 
-  def on_mount(:set_locale, _params, session, socket) do
-    locale = session["locale"] || "pt_BR"
-
-    # Configure Gettext locale (already set in plug, but ensure it's set here too)
+  def on_mount(:default, _params, %{"locale" => locale}, socket) do
     Gettext.put_locale(PodcodarWeb.Gettext, locale)
 
-    # Convert to HTML lang format (pt_BR -> pt-br) for use in templates
-    html_lang = locale |> String.downcase() |> String.replace("_", "-")
+    {:cont, assign(socket, :locale, locale)}
+  end
 
-    socket = Phoenix.Component.assign(socket, :locale, html_lang)
+  # catch-all case
+  def on_mount(:default, _params, _session, socket) do
+    default_locale =
+      Application.fetch_env!(:podcodar, PodcodarWeb.Gettext)[:default_locale]
+      |> to_string()
 
-    {:cont, socket}
+    Gettext.put_locale(PodcodarWeb.Gettext, default_locale)
+
+    {:cont, assign(socket, :locale, default_locale)}
   end
 end
