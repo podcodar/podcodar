@@ -10,6 +10,7 @@ defmodule PodcodarWeb.Router do
     plug :protect_from_forgery
     plug :put_secure_browser_headers
     plug :fetch_current_scope_for_user
+    plug PodcodarWeb.Plugs.Locale, default: "pt_BR"
     plug :put_root_layout, html: {PodcodarWeb.Layouts, :root}
   end
 
@@ -45,7 +46,10 @@ defmodule PodcodarWeb.Router do
     pipe_through [:browser, :require_authenticated_user]
 
     live_session :require_authenticated_user,
-      on_mount: [{PodcodarWeb.UserAuth, :require_authenticated}] do
+      on_mount: [
+        {PodcodarWeb.UserAuth, :require_authenticated},
+        {PodcodarWeb.Hooks.Locale, :set_locale}
+      ] do
       live "/users/settings", UserLive.Settings, :edit
       live "/users/settings/confirm-email/:token", UserLive.Settings, :confirm_email
     end
@@ -62,7 +66,10 @@ defmodule PodcodarWeb.Router do
     get "/discord", RedirectController, :discord
 
     live_session :current_user,
-      on_mount: [{PodcodarWeb.UserAuth, :mount_current_scope}] do
+      on_mount: [
+        {PodcodarWeb.UserAuth, :mount_current_scope},
+        {PodcodarWeb.Hooks.Locale, :set_locale}
+      ] do
       # Pages
       live "/", PageLive, :home
       live "/courses", CoursesLive, :home
@@ -72,11 +79,12 @@ defmodule PodcodarWeb.Router do
       live "/users/log-in", UserLive.Login, :new
       live "/users/log-in/:token", UserLive.Confirmation, :new
 
-      # 404 - Not Found 
+      # 404 - Not Found
       live "/*path", NotFoundLive, :index
     end
 
     post "/users/log-in", UserSessionController, :create
     delete "/users/log-out", UserSessionController, :delete
+    put "/locale", LocaleController, :update
   end
 end

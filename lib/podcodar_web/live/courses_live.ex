@@ -13,7 +13,7 @@ defmodule PodcodarWeb.CoursesLive do
     {:ok,
      socket
      |> assign(
-       page_title: "Cursos",
+       page_title: gettext("courses"),
        courses: courses,
        search_form:
          to_form(%{
@@ -25,16 +25,16 @@ defmodule PodcodarWeb.CoursesLive do
 
   def render(assigns) do
     ~H"""
-    <Layouts.app flash={@flash} current_scope={@current_scope}>
+    <Layouts.app flash={@flash} current_scope={@current_scope} locale={@locale}>
       <div class="container mx-auto py-8 px-4">
-        <h1 class="text-2xl font-bold mb-4">Cursos Disponíveis</h1>
+        <h1 class="text-2xl font-bold mb-4">{gettext("available_courses")}</h1>
 
         <div class="mb-4">
-          <.form for={@search_form} phx-change="filter">
+          <.form for={@search_form} id="search-form" phx-change="filter">
             <.input
               field={@search_form[:query]}
               type="search"
-              placeholder="Pesquise cursos..."
+              placeholder={gettext("search_courses")}
               phx-debounce="420"
               phx-hook="FocusAndCursorToEnd"
             />
@@ -42,7 +42,7 @@ defmodule PodcodarWeb.CoursesLive do
         </div>
 
         <div :if={@courses == []} class="card-body">
-          <p class="text-center">Curso não encontrado 😭</p>
+          <p class="text-center">{gettext("course_not_found")}</p>
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -90,7 +90,7 @@ defmodule PodcodarWeb.CoursesLive do
                     target="_blank"
                     rel="noopener noreferrer"
                   >
-                    Acessar Curso
+                    {gettext("access_course")}
                   </a>
                 </div>
               </div>

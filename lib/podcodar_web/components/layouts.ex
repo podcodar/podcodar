@@ -10,6 +10,7 @@ defmodule PodcodarWeb.Layouts do
 
   attr :flash, :map, required: true, doc: "the map of flash messages"
   attr :current_scope, :map, default: nil, doc: "the current scope"
+  attr :locale, :string, required: true, doc: "the current locale"
   slot :inner_block, required: true
 
   def app(assigns) do
@@ -20,13 +21,28 @@ defmodule PodcodarWeb.Layouts do
     <input type="checkbox" id="settings-modal" class="modal-toggle" />
     <div class="modal">
       <div class="modal-box">
-        <h3 class="font-bold text-lg">Settings</h3>
-        <p class="py-4">Choose your preferred theme:</p>
-        <div class="flex justify-center py-4">
-          <.theme_toggle id="modal-theme-toggle" />
+        <h3 class="font-bold text-lg">{gettext("settings")}</h3>
+
+        <div class="py-4 space-y-6">
+          <div>
+            <p class="py-2">{gettext("choose_preferred_theme")}</p>
+            <div class="flex justify-center py-4">
+              <.theme_toggle id="modal-theme-toggle" />
+            </div>
+          </div>
+
+          <div class="divider" />
+
+          <div>
+            <p class="py-2">{gettext("choose_preferred_language")}</p>
+            <div class="flex justify-center py-4">
+              <.language_selector current_locale={@locale} id="language-selector-form-modal" />
+            </div>
+          </div>
         </div>
+
         <div class="modal-action">
-          <label for="settings-modal" class="btn">Close</label>
+          <label for="settings-modal" class="btn">{gettext("close")}</label>
         </div>
       </div>
     </div>
@@ -35,7 +51,7 @@ defmodule PodcodarWeb.Layouts do
       <input id="my-drawer-3" type="checkbox" class="drawer-toggle" />
 
       <div class="drawer-content flex flex-col min-h-screen">
-        <.navbar current_scope={@current_scope} />
+        <.navbar current_scope={@current_scope} locale={@locale} />
 
         <main class="flex-grow">
           {render_slot(@inner_block)}
@@ -44,7 +60,7 @@ defmodule PodcodarWeb.Layouts do
         <.footer />
       </div>
 
-      <.drawer current_scope={@current_scope} />
+      <.drawer current_scope={@current_scope} locale={@locale} />
     </div>
 
     <script>
@@ -66,7 +82,11 @@ defmodule PodcodarWeb.Layouts do
 
         <div class="spacer flex-1" />
 
-        <.menu_links current_scope={@current_scope} />
+        <.menu_links
+          current_scope={@current_scope}
+          locale={@locale}
+          language_selector_id="language-selector-form-drawer"
+        />
       </ul>
     </div>
     """
@@ -108,13 +128,24 @@ defmodule PodcodarWeb.Layouts do
 
         <div class="flex-none hidden lg:flex">
           <ul class="menu menu-horizontal gap-2">
-            <.menu_links current_scope={@current_scope} />
+            <.menu_links
+              current_scope={@current_scope}
+              locale={@locale}
+              language_selector_id="language-selector-form-navbar"
+            />
           </ul>
         </div>
       </div>
     </div>
     """
   end
+
+  attr :current_scope, :map, default: nil
+  attr :locale, :string, required: true
+
+  attr :language_selector_id, :string,
+    default: "language-selector-form",
+    doc: "Unique ID for the language selector form"
 
   def menu_links(assigns) do
     ~H"""
@@ -137,26 +168,30 @@ defmodule PodcodarWeb.Layouts do
         <.link
           href={~p"/users/log-out"}
           method="delete"
-          data-confirm="Are you sure you want to log out?"
+          data-confirm={gettext("are_you_sure_log_out")}
         >
-          <.icon name="hero-arrow-left-on-rectangle" class="w-4 h-4" /> Log out
+          <.icon name="hero-arrow-left-on-rectangle" class="w-4 h-4" /> {gettext("log_out")}
         </.link>
       </li>
     <% else %>
       <li>
         <.link navigate={~p"/users/register"}>
-          <.icon name="hero-user-plus" class="w-4 h-4" /> Register
+          <.icon name="hero-user-plus" class="w-4 h-4" /> {gettext("sign_up")}
         </.link>
       </li>
       <li>
         <.link navigate={~p"/users/log-in"} class="btn btn-primary">
-          <.icon name="hero-arrow-right-on-rectangle" class="w-4 h-4" /> Log in
+          <.icon name="hero-arrow-right-on-rectangle" class="w-4 h-4" /> {gettext("log_in")}
         </.link>
       </li>
     <% end %>
 
-    <li class="flex lg:hidden btn-sm">
-      <.theme_toggle />
+    <div class="lg:hidden">
+      <.language_selector current_locale={@locale} id={@language_selector_id} />
+    </div>
+
+    <li class="flex lg:hidden">
+      <.theme_toggle id="drawer-theme-toggle" />
     </li>
     """
   end
@@ -257,6 +292,64 @@ defmodule PodcodarWeb.Layouts do
         <.icon name="hero-moon-micro" class="size-4 opacity-75 hover:opacity-100 mx-auto" />
       </button>
     </div>
+    """
+  end
+
+  @doc """
+  Provides language selector for switching between available locales.
+  """
+  attr :current_locale, :string,
+    default: "pt-br",
+    doc: "Current locale in HTML format (pt-br or en)"
+
+  attr :id, :string, default: "language-selector-form", doc: "Unique ID for the form"
+
+  def language_selector(assigns) do
+    current_locale =
+      assigns.current_locale
+      |> String.downcase()
+      |> String.replace("_", "-")
+
+    pt_active = current_locale == "pt-br"
+    en_active = current_locale == "en"
+
+    assigns =
+      assigns
+      |> assign(:pt_class, if(pt_active, do: "btn-primary", else: "btn-outline"))
+      |> assign(:en_class, if(en_active, do: "btn-primary", else: "btn-outline"))
+      |> assign(:pt_active, pt_active)
+      |> assign(:en_active, en_active)
+
+    ~H"""
+    <form
+      action={~p"/locale"}
+      method="post"
+      class="grid grid-cols-2 gap-2 w-full"
+      id={@id}
+    >
+      <input type="hidden" name="_method" value="put" />
+      <input type="hidden" name="_csrf_token" value={get_csrf_token()} />
+
+      <button
+        type="submit"
+        name="locale"
+        value="pt_BR"
+        class={["btn", "btn-sm", @pt_class]}
+        data-locale="pt_BR"
+      >
+        🇧🇷 Português
+      </button>
+
+      <button
+        type="submit"
+        name="locale"
+        value="en"
+        class={["btn", "btn-sm", @en_class]}
+        data-locale="en"
+      >
+        🇺🇸 English
+      </button>
+    </form>
     """
   end
 end

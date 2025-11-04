@@ -33,6 +33,10 @@ defmodule PodcodarWeb.ConnCase do
 
   setup tags do
     Podcodar.DataCase.setup_sandbox(tags)
+
+    # Set default locale for tests
+    Gettext.put_locale(PodcodarWeb.Gettext, "en")
+
     {:ok, conn: Phoenix.ConnTest.build_conn()}
   end
 

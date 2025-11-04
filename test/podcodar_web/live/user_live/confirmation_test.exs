@@ -3,6 +3,7 @@ defmodule PodcodarWeb.UserLive.ConfirmationTest do
 
   import Phoenix.LiveViewTest
   import Podcodar.AccountsFixtures
+  use Gettext, backend: PodcodarWeb.Gettext
 
   alias Podcodar.Accounts
 
@@ -18,7 +19,7 @@ defmodule PodcodarWeb.UserLive.ConfirmationTest do
         end)
 
       {:ok, _lv, html} = live(conn, ~p"/users/log-in/#{token}")
-      assert html =~ "Confirm and stay logged in"
+      assert html =~ gettext("confirm_and_stay_logged_in")
     end
 
     test "renders login page for confirmed user", %{conn: conn, confirmed_user: user} do
@@ -29,7 +30,7 @@ defmodule PodcodarWeb.UserLive.ConfirmationTest do
 
       {:ok, _lv, html} = live(conn, ~p"/users/log-in/#{token}")
       refute html =~ "Confirm my account"
-      assert html =~ "Log in"
+      assert html =~ gettext("log_in")
     end
 
     test "confirms the given token once", %{conn: conn, unconfirmed_user: user} do
@@ -46,7 +47,7 @@ defmodule PodcodarWeb.UserLive.ConfirmationTest do
       conn = follow_trigger_action(form, conn)
 
       assert Phoenix.Flash.get(conn.assigns.flash, :info) =~
-               "User confirmed successfully"
+               gettext("user_confirmed_successfully")
 
       assert Accounts.get_user!(user.id).confirmed_at
       # we are logged in now
@@ -60,7 +61,7 @@ defmodule PodcodarWeb.UserLive.ConfirmationTest do
         live(conn, ~p"/users/log-in/#{token}")
         |> follow_redirect(conn, ~p"/users/log-in")
 
-      assert html =~ "Magic link is invalid or it has expired"
+      assert html =~ gettext("magic_link_invalid_or_expired")
     end
 
     test "logs confirmed user in without changing confirmed_at", %{
@@ -80,7 +81,7 @@ defmodule PodcodarWeb.UserLive.ConfirmationTest do
       conn = follow_trigger_action(form, conn)
 
       assert Phoenix.Flash.get(conn.assigns.flash, :info) =~
-               "Welcome back!"
+               gettext("welcome_back")
 
       assert Accounts.get_user!(user.id).confirmed_at == user.confirmed_at
 
@@ -91,7 +92,7 @@ defmodule PodcodarWeb.UserLive.ConfirmationTest do
         live(conn, ~p"/users/log-in/#{token}")
         |> follow_redirect(conn, ~p"/users/log-in")
 
-      assert html =~ "Magic link is invalid or it has expired"
+      assert html =~ gettext("magic_link_invalid_or_expired")
     end
 
     test "raises error for invalid token", %{conn: conn} do
@@ -99,7 +100,7 @@ defmodule PodcodarWeb.UserLive.ConfirmationTest do
         live(conn, ~p"/users/log-in/invalid-token")
         |> follow_redirect(conn, ~p"/users/log-in")
 
-      assert html =~ "Magic link is invalid or it has expired"
+      assert html =~ gettext("magic_link_invalid_or_expired")
     end
   end
 end

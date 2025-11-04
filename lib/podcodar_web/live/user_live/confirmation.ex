@@ -6,10 +6,10 @@ defmodule PodcodarWeb.UserLive.Confirmation do
   @impl true
   def render(assigns) do
     ~H"""
-    <Layouts.app flash={@flash} current_scope={@current_scope}>
+    <Layouts.app flash={@flash} current_scope={@current_scope} locale={@locale}>
       <div class="mx-auto max-w-sm">
         <div class="text-center">
-          <.header>Welcome {@user.email}</.header>
+          <.header>{gettext("welcome")} {@user.email}</.header>
         </div>
 
         <.form
@@ -25,13 +25,16 @@ defmodule PodcodarWeb.UserLive.Confirmation do
           <.button
             name={@form[:remember_me].name}
             value="true"
-            phx-disable-with="Confirming..."
+            phx-disable-with={gettext("confirming")}
             class="btn btn-primary w-full"
           >
-            Confirm and stay logged in
+            {gettext("confirm_and_stay_logged_in")}
           </.button>
-          <.button phx-disable-with="Confirming..." class="btn btn-primary btn-soft w-full mt-2">
-            Confirm and log in only this time
+          <.button
+            phx-disable-with={gettext("confirming")}
+            class="btn btn-primary btn-soft w-full mt-2"
+          >
+            {gettext("confirm_and_log_in_only_this_time")}
           </.button>
         </.form>
 
@@ -46,26 +49,29 @@ defmodule PodcodarWeb.UserLive.Confirmation do
         >
           <input type="hidden" name={@form[:token].name} value={@form[:token].value} />
           <%= if @current_scope do %>
-            <.button phx-disable-with="Logging in..." class="btn btn-primary w-full">
-              Log in
+            <.button phx-disable-with={gettext("logging_in")} class="btn btn-primary w-full">
+              {gettext("log_in")}
             </.button>
           <% else %>
             <.button
               name={@form[:remember_me].name}
               value="true"
-              phx-disable-with="Logging in..."
+              phx-disable-with={gettext("logging_in")}
               class="btn btn-primary w-full"
             >
-              Keep me logged in on this device
+              {gettext("keep_me_logged_in_on_this_device")}
             </.button>
-            <.button phx-disable-with="Logging in..." class="btn btn-primary btn-soft w-full mt-2">
-              Log me in only this time
+            <.button
+              phx-disable-with={gettext("logging_in")}
+              class="btn btn-primary btn-soft w-full mt-2"
+            >
+              {gettext("log_me_in_only_this_time")}
             </.button>
           <% end %>
         </.form>
 
         <p :if={!@user.confirmed_at} class="alert alert-outline mt-8">
-          Tip: If you prefer passwords, you can enable them in the user settings.
+          {gettext("tip_enable_passwords_in_settings")}
         </p>
       </div>
     </Layouts.app>
@@ -82,7 +88,7 @@ defmodule PodcodarWeb.UserLive.Confirmation do
     else
       {:ok,
        socket
-       |> put_flash(:error, "Magic link is invalid or it has expired.")
+       |> put_flash(:error, gettext("magic_link_invalid_or_expired"))
        |> push_navigate(to: ~p"/users/log-in")}
     end
   end
