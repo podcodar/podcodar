@@ -16,18 +16,18 @@ msgstr ""
 msgid "Actions"
 msgstr "Actions"
 
-#: lib/podcodar_web/components/layouts.ex:227
-#: lib/podcodar_web/components/layouts.ex:239
+#: lib/podcodar_web/components/layouts.ex:242
+#: lib/podcodar_web/components/layouts.ex:254
 #, elixir-autogen, elixir-format
 msgid "Attempting to reconnect"
 msgstr "Attempting to reconnect"
 
-#: lib/podcodar_web/components/layouts.ex:234
+#: lib/podcodar_web/components/layouts.ex:249
 #, elixir-autogen, elixir-format
 msgid "Something went wrong!"
 msgstr "Something went wrong!"
 
-#: lib/podcodar_web/components/layouts.ex:222
+#: lib/podcodar_web/components/layouts.ex:237
 #, elixir-autogen, elixir-format
 msgid "We can't find the internet"
 msgstr "We can't find the internet"
@@ -172,8 +172,8 @@ msgstr "Last updated: 3 hours ago"
 msgid "links"
 msgstr "Links"
 
-#: lib/podcodar_web/components/layouts.ex:169
-#: lib/podcodar_web/live/user_live/confirmation.ex:50
+#: lib/podcodar_web/components/layouts.ex:184
+#: lib/podcodar_web/live/user_live/confirmation.ex:53
 #: lib/podcodar_web/live/user_live/login.ex:13
 #: lib/podcodar_web/live/user_live/registration.ex:18
 #, elixir-autogen, elixir-format
@@ -270,7 +270,7 @@ msgstr "You are running the local mail adapter."
 msgid "scholarships"
 msgstr "Scholarships"
 
-#: lib/podcodar_web/components/layouts.ex:164
+#: lib/podcodar_web/components/layouts.ex:179
 #: lib/podcodar_web/live/user_live/login.ex:22
 #, elixir-autogen, elixir-format, fuzzy
 msgid "sign_up"
@@ -346,12 +346,12 @@ msgstr "Register for an account"
 msgid "to_your_account_now"
 msgstr " to your account now."
 
-#: lib/podcodar_web/components/layouts.ex:156
+#: lib/podcodar_web/components/layouts.ex:171
 #, elixir-autogen, elixir-format
 msgid "are_you_sure_log_out"
 msgstr "Are you sure you want to log out?"
 
-#: lib/podcodar_web/components/layouts.ex:158
+#: lib/podcodar_web/components/layouts.ex:173
 #, elixir-autogen, elixir-format
 msgid "log_out"
 msgstr "Log out"
@@ -361,7 +361,7 @@ msgstr "Log out"
 msgid "account_settings"
 msgstr "Account Settings"
 
-#: lib/podcodar_web/live/user_live/settings.ex:28
+#: lib/podcodar_web/live/user_live/settings.ex:29
 #, elixir-autogen, elixir-format
 msgid "change_email"
 msgstr "Change Email"
@@ -371,7 +371,7 @@ msgstr "Change Email"
 msgid "changing"
 msgstr "Changing..."
 
-#: lib/podcodar_web/live/user_live/confirmation.ex:34
+#: lib/podcodar_web/live/user_live/confirmation.ex:37
 #, elixir-autogen, elixir-format
 msgid "confirm_and_log_in_only_this_time"
 msgstr "Confirm and log in only this time"
@@ -381,50 +381,51 @@ msgstr "Confirm and log in only this time"
 msgid "confirm_and_stay_logged_in"
 msgstr "Confirm and stay logged in"
 
-#: lib/podcodar_web/live/user_live/settings.ex:59
+#: lib/podcodar_web/live/user_live/settings.ex:61
 #, elixir-autogen, elixir-format
 msgid "confirm_new_password"
 msgstr "Confirm new password"
 
 #: lib/podcodar_web/live/user_live/confirmation.ex:28
-#: lib/podcodar_web/live/user_live/confirmation.ex:33
+#: lib/podcodar_web/live/user_live/confirmation.ex:34
 #, elixir-autogen, elixir-format
 msgid "confirming"
 msgstr "Confirming..."
 
-#: lib/podcodar_web/live/user_live/settings.ex:126
+#: lib/podcodar_web/live/user_live/settings.ex:128
 #, elixir-autogen, elixir-format
 msgid "email_change_confirmation_link_sent"
 msgstr "A link to confirm your email change has been sent to the new address."
 
-#: lib/podcodar_web/live/user_live/settings.ex:79
+#: lib/podcodar_web/live/user_live/settings.ex:81
 #, elixir-autogen, elixir-format
 msgid "email_change_link_invalid_or_expired"
 msgstr "Email change link is invalid or it has expired."
 
-#: lib/podcodar_web/live/user_live/settings.ex:76
+#: lib/podcodar_web/live/user_live/settings.ex:78
 #, elixir-autogen, elixir-format
 msgid "email_changed_successfully"
 msgstr "Email changed successfully."
 
-#: lib/podcodar_web/live/user_live/confirmation.ex:59
+#: lib/podcodar_web/live/user_live/confirmation.ex:62
 #, elixir-autogen, elixir-format
 msgid "keep_me_logged_in_on_this_device"
 msgstr "Keep me logged in on this device"
 
-#: lib/podcodar_web/live/user_live/confirmation.ex:62
+#: lib/podcodar_web/live/user_live/confirmation.ex:68
 #, elixir-autogen, elixir-format
 msgid "log_me_in_only_this_time"
 msgstr "Log me in only this time"
 
-#: lib/podcodar_web/live/user_live/confirmation.ex:49
-#: lib/podcodar_web/live/user_live/confirmation.ex:56
-#: lib/podcodar_web/live/user_live/confirmation.ex:61
+#: lib/podcodar_web/live/user_live/confirmation.ex:52
+#: lib/podcodar_web/live/user_live/confirmation.ex:59
+#: lib/podcodar_web/live/user_live/confirmation.ex:65
 #, elixir-autogen, elixir-format
 msgid "logging_in"
 msgstr "Logging in..."
 
-#: lib/podcodar_web/live/user_live/confirmation.ex:85
+#: lib/podcodar_web/controllers/user_session_controller.ex:27
+#: lib/podcodar_web/live/user_live/confirmation.ex:91
 #, elixir-autogen, elixir-format
 msgid "magic_link_invalid_or_expired"
 msgstr "Magic link is invalid or it has expired."
@@ -439,22 +440,22 @@ msgstr "Manage your account email address and password settings"
 msgid "much_more"
 msgstr "Much more"
 
-#: lib/podcodar_web/live/user_live/settings.ex:52
+#: lib/podcodar_web/live/user_live/settings.ex:54
 #, elixir-autogen, elixir-format
 msgid "new_password"
 msgstr "New password"
 
-#: lib/podcodar_web/live/user_live/settings.ex:63
+#: lib/podcodar_web/live/user_live/settings.ex:65
 #, elixir-autogen, elixir-format
 msgid "save_password"
 msgstr "Save Password"
 
-#: lib/podcodar_web/live/user_live/settings.ex:62
+#: lib/podcodar_web/live/user_live/settings.ex:64
 #, elixir-autogen, elixir-format
 msgid "saving"
 msgstr "Saving..."
 
-#: lib/podcodar_web/live/user_live/confirmation.ex:68
+#: lib/podcodar_web/live/user_live/confirmation.ex:74
 #, elixir-autogen, elixir-format
 msgid "tip_enable_passwords_in_settings"
 msgstr "Tip: If you prefer passwords, you can enable them in the user settings."
@@ -463,3 +464,38 @@ msgstr "Tip: If you prefer passwords, you can enable them in the user settings."
 #, elixir-autogen, elixir-format
 msgid "welcome"
 msgstr "Welcome"
+
+#: lib/podcodar_web/controllers/user_session_controller.ex:43
+#, elixir-autogen, elixir-format
+msgid "invalid_email_or_password"
+msgstr "Invalid email or password."
+
+#: lib/podcodar_web/controllers/user_session_controller.ex:64
+#, elixir-autogen, elixir-format
+msgid "logged_out_successfully"
+msgstr "Logged out successfully."
+
+#: lib/podcodar_web/controllers/user_session_controller.ex:59
+#, elixir-autogen, elixir-format
+msgid "password_updated_successfully"
+msgstr "Password updated successfully."
+
+#: lib/podcodar_web/controllers/user_session_controller.ex:8
+#, elixir-autogen, elixir-format
+msgid "user_confirmed_successfully"
+msgstr "User confirmed successfully."
+
+#: lib/podcodar_web/controllers/user_session_controller.ex:12
+#, elixir-autogen, elixir-format
+msgid "welcome_back"
+msgstr "Welcome back."
+
+#: lib/podcodar/accounts/user.ex:80
+#, elixir-autogen, elixir-format
+msgid "does not match password"
+msgstr ""
+
+#: lib/podcodar/accounts/user.ex:40
+#, elixir-autogen, elixir-format
+msgid "must have the @ sign and no spaces"
+msgstr ""

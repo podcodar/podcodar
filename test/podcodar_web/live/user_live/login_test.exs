@@ -71,7 +71,7 @@ defmodule PodcodarWeb.UserLive.LoginTest do
       render_submit(form, %{user: %{remember_me: true}})
 
       conn = follow_trigger_action(form, conn)
-      assert Phoenix.Flash.get(conn.assigns.flash, :error) == "invalid_email_or_password"
+      assert Phoenix.Flash.get(conn.assigns.flash, :error) == gettext("invalid_email_or_password")
       assert redirected_to(conn) == ~p"/users/log-in"
     end
   end

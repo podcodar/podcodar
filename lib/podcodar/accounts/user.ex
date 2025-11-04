@@ -1,6 +1,7 @@
 defmodule Podcodar.Accounts.User do
   use Ecto.Schema
   import Ecto.Changeset
+  use Gettext, backend: PodcodarWeb.Gettext
 
   @primary_key {:id, :binary_id, autogenerate: true}
   @foreign_key_type :binary_id
@@ -36,7 +37,7 @@ defmodule Podcodar.Accounts.User do
       changeset
       |> validate_required([:email])
       |> validate_format(:email, ~r/^[^@,;\s]+@[^@,;\s]+$/,
-        message: "must have the @ sign and no spaces"
+        message: gettext("must have the @ sign and no spaces")
       )
       |> validate_length(:email, max: 160)
 
@@ -76,7 +77,7 @@ defmodule Podcodar.Accounts.User do
   def password_changeset(user, attrs, opts \\ []) do
     user
     |> cast(attrs, [:password])
-    |> validate_confirmation(:password, message: "does not match password")
+    |> validate_confirmation(:password, message: gettext("does not match password"))
     |> validate_password(opts)
   end
 

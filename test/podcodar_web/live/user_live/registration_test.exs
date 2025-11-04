@@ -5,6 +5,10 @@ defmodule PodcodarWeb.UserLive.RegistrationTest do
   import Podcodar.AccountsFixtures
   use Gettext, backend: PodcodarWeb.Gettext
 
+  setup %{conn: conn} do
+    %{conn: Phoenix.ConnTest.init_test_session(conn, %{"locale" => "en"})}
+  end
+
   describe "Registration page" do
     test "renders registration page", %{conn: conn} do
       {:ok, _lv, html} = live(conn, ~p"/users/register")
@@ -32,7 +36,7 @@ defmodule PodcodarWeb.UserLive.RegistrationTest do
         |> render_change(user: %{"email" => "with spaces"})
 
       assert result =~ gettext("register_for_an_account")
-      assert result =~ "must have the @ sign and no spaces"
+      assert result =~ gettext("must have the @ sign and no spaces")
     end
   end
 
@@ -62,7 +66,7 @@ defmodule PodcodarWeb.UserLive.RegistrationTest do
         )
         |> render_submit()
 
-      assert result =~ "has already been taken"
+      assert result =~ gettext("has already been taken")
     end
   end
 

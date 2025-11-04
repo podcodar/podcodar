@@ -29,7 +29,7 @@ defmodule PodcodarWeb.UserLive.ConfirmationTest do
         end)
 
       {:ok, _lv, html} = live(conn, ~p"/users/log-in/#{token}")
-      refute html =~ "Confirm my account"
+      refute html =~ gettext("Confirm my account")
       assert html =~ gettext("log_in")
     end
 

@@ -5,6 +5,10 @@ defmodule PodcodarWeb.PageLiveTest do
   import Phoenix.HTML
   use Gettext, backend: PodcodarWeb.Gettext
 
+  setup %{conn: conn} do
+    %{conn: Phoenix.ConnTest.init_test_session(conn, %{"locale" => "en"})}
+  end
+
   test "home page shows main content", %{conn: conn} do
     {:ok, _view, html} = live(conn, "/")
 
@@ -23,7 +27,7 @@ defmodule PodcodarWeb.PageLiveTest do
       |> render_submit(%{"search_query" => %{"query" => ""}})
 
     assert html =~
-             "can't be blank"
+             gettext("can't be blank")
              |> html_escape()
              |> safe_to_string()
 
@@ -33,7 +37,7 @@ defmodule PodcodarWeb.PageLiveTest do
       |> element("#home-search-form")
       |> render_change(%{"search_query" => %{"query" => "a"}})
 
-    assert html =~ "should be at least"
+    assert html =~ gettext("should be at least")
 
     # valid input clears errors
     html =
@@ -49,7 +53,7 @@ defmodule PodcodarWeb.PageLiveTest do
       |> render_change(%{"search_query" => %{"query" => ""}})
 
     assert html =~
-             "can't be blank"
+             gettext("can't be blank")
              |> html_escape()
              |> safe_to_string()
   end

@@ -72,7 +72,7 @@ defmodule PodcodarWeb.UserLive.SettingsTest do
         })
 
       assert result =~ gettext("change_email")
-      assert result =~ "must have the @ sign and no spaces"
+      assert result =~ gettext("must have the @ sign and no spaces")
     end
 
     test "renders errors with invalid data (phx-submit)", %{conn: conn, user: user} do
@@ -86,7 +86,7 @@ defmodule PodcodarWeb.UserLive.SettingsTest do
         |> render_submit()
 
       assert result =~ gettext("change_email")
-      assert result =~ "did not change"
+      assert result =~ gettext("did not change")
     end
   end
 
@@ -125,6 +125,7 @@ defmodule PodcodarWeb.UserLive.SettingsTest do
     end
 
     test "renders errors with invalid data (phx-change)", %{conn: conn} do
+      conn = Phoenix.ConnTest.init_test_session(conn, %{"locale" => "en"})
       {:ok, lv, _html} = live(conn, ~p"/users/settings")
 
       result =
@@ -138,11 +139,12 @@ defmodule PodcodarWeb.UserLive.SettingsTest do
         })
 
       assert result =~ gettext("save_password")
-      assert result =~ "should be at least 12 character(s)"
-      assert result =~ "does not match password"
+      assert result =~ gettext("should be at least 12 character(s)")
+      assert result =~ gettext("does not match password")
     end
 
     test "renders errors with invalid data (phx-submit)", %{conn: conn} do
+      conn = Phoenix.ConnTest.init_test_session(conn, %{"locale" => "en"})
       {:ok, lv, _html} = live(conn, ~p"/users/settings")
 
       result =
@@ -156,8 +158,8 @@ defmodule PodcodarWeb.UserLive.SettingsTest do
         |> render_submit()
 
       assert result =~ gettext("save_password")
-      assert result =~ "should be at least 12 character(s)"
-      assert result =~ "does not match password"
+      assert result =~ gettext("should be at least 12 character(s)")
+      assert result =~ gettext("does not match password")
     end
   end
 
