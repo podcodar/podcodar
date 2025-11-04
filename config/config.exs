@@ -86,7 +86,10 @@ config :logger, :default_formatter,
   format: "$time $metadata[$level] $message\n",
   metadata: [:request_id]
 
-# App Data 
+# Configure gettext locales
+config :podcodar, PodcodarWeb.Gettext, locales: [:en, :"pt-BR"], default_locale: :"pt-BR"
+
+# App Data
 config :podcodar, courses_file_path: Path.expand("../priv/repo/data/courses.json", __DIR__)
 
 # Import environment specific config. This must remain at the bottom
