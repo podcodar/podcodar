@@ -3,13 +3,14 @@ defmodule PodcodarWeb.UserLive.RegistrationTest do
 
   import Phoenix.LiveViewTest
   import Podcodar.AccountsFixtures
+  use Gettext, backend: PodcodarWeb.Gettext
 
   describe "Registration page" do
     test "renders registration page", %{conn: conn} do
       {:ok, _lv, html} = live(conn, ~p"/users/register")
 
-      assert html =~ "Register"
-      assert html =~ "Log in"
+      assert html =~ gettext("register_for_an_account")
+      assert html =~ gettext("log_in")
     end
 
     test "redirects if already logged in", %{conn: conn} do
@@ -30,7 +31,7 @@ defmodule PodcodarWeb.UserLive.RegistrationTest do
         |> element("#registration_form")
         |> render_change(user: %{"email" => "with spaces"})
 
-      assert result =~ "Register"
+      assert result =~ gettext("register_for_an_account")
       assert result =~ "must have the @ sign and no spaces"
     end
   end
@@ -46,8 +47,7 @@ defmodule PodcodarWeb.UserLive.RegistrationTest do
         render_submit(form)
         |> follow_redirect(conn, ~p"/users/log-in")
 
-      assert html =~
-               ~r/An email was sent to .*, please access it to confirm your account/
+      assert html =~ gettext("email_sent_confirmation", email: email)
     end
 
     test "renders errors for duplicated email", %{conn: conn} do
@@ -72,11 +72,11 @@ defmodule PodcodarWeb.UserLive.RegistrationTest do
 
       {:ok, _login_live, login_html} =
         lv
-        |> element("main a", "Log in")
+        |> element("main a[href='/users/log-in']")
         |> render_click()
         |> follow_redirect(conn, ~p"/users/log-in")
 
-      assert login_html =~ "Log in"
+      assert login_html =~ gettext("log_in")
     end
   end
 end

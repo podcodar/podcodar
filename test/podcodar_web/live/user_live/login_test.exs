@@ -3,14 +3,15 @@ defmodule PodcodarWeb.UserLive.LoginTest do
 
   import Phoenix.LiveViewTest
   import Podcodar.AccountsFixtures
+  use Gettext, backend: PodcodarWeb.Gettext
 
   describe "login page" do
     test "renders login page", %{conn: conn} do
       {:ok, _lv, html} = live(conn, ~p"/users/log-in")
 
-      assert html =~ "Log in"
-      assert html =~ "Register"
-      assert html =~ "Log in with email"
+      assert html =~ gettext("log_in")
+      assert html =~ gettext("sign_up")
+      assert html =~ gettext("log_in_with_email")
     end
   end
 
@@ -25,7 +26,7 @@ defmodule PodcodarWeb.UserLive.LoginTest do
         |> render_submit()
         |> follow_redirect(conn, ~p"/users/log-in")
 
-      assert html =~ "If your email is in our system"
+      assert html =~ gettext("login_instructions_sent")
 
       assert Podcodar.Repo.get_by!(Podcodar.Accounts.UserToken, user_id: user.id).context ==
                "login"
@@ -39,7 +40,7 @@ defmodule PodcodarWeb.UserLive.LoginTest do
         |> render_submit()
         |> follow_redirect(conn, ~p"/users/log-in")
 
-      assert html =~ "If your email is in our system"
+      assert html =~ gettext("login_instructions_sent")
     end
   end
 
@@ -81,11 +82,11 @@ defmodule PodcodarWeb.UserLive.LoginTest do
 
       {:ok, _login_live, login_html} =
         lv
-        |> element("main a", "Sign up")
+        |> element("main a[href='/users/register']")
         |> render_click()
         |> follow_redirect(conn, ~p"/users/register")
 
-      assert login_html =~ "Register"
+      assert login_html =~ gettext("register_for_an_account")
     end
   end
 
@@ -98,9 +99,9 @@ defmodule PodcodarWeb.UserLive.LoginTest do
     test "shows login page with email filled in", %{conn: conn, user: user} do
       {:ok, _lv, html} = live(conn, ~p"/users/log-in")
 
-      assert html =~ "You need to reauthenticate"
-      refute html =~ "Register"
-      assert html =~ "Log in with email"
+      assert html =~ gettext("reauthenticate_message")
+      refute html =~ gettext("sign_up")
+      assert html =~ gettext("log_in_with_email")
 
       assert html =~
                ~s(<input type="email" name="user[email]" id="login_form_magic_email" value="#{user.email}")

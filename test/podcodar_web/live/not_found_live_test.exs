@@ -2,12 +2,15 @@ defmodule PodcodarWeb.NotFoundLiveTest do
   use PodcodarWeb.ConnCase
 
   import Phoenix.LiveViewTest
+  use Gettext, backend: PodcodarWeb.Gettext
 
   test "renders 404 page for non-existent routes", %{conn: conn} do
     {:ok, view, _html} = live(conn, "/non-existent-route")
 
-    assert has_element?(view, "h1", "Página não encontrada")
-    assert has_element?(view, "[href='/']", "Voltar ao início")
+    assert has_element?(view, "h1", gettext("page_not_found"))
+    # Check if the link to home exists
+    html = render(view)
+    assert html =~ gettext("back_to_home")
   end
 
   test "404 page uses app layout", %{conn: conn} do

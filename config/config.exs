@@ -87,7 +87,9 @@ config :logger, :default_formatter,
   metadata: [:request_id]
 
 # Configure gettext locales
-config :podcodar, PodcodarWeb.Gettext, locales: [:en, :pt], default_locale: :pt
+config :podcodar, PodcodarWeb.Gettext,
+  locales: [:en, :pt_BR],
+  default_locale: :pt_BR
 
 # App Data
 config :podcodar, courses_file_path: Path.expand("../priv/repo/data/courses.json", __DIR__)

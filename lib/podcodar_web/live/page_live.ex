@@ -10,10 +10,10 @@ defmodule PodcodarWeb.PageLive do
       <section class="text-center min-h-svh flex flex-col justify-center items-center gap-12 mt-[-6rem] bg-pattern p-6">
         <div class="gap-4 mt-24">
           <h1 class="text-3xl sm:text-4xl md:text-5xl font-bold">
-            {gettext("Educação em tecnologia acessível para todos!")}
+            {gettext("accessible_tech_education")}
           </h1>
           <h2 class="text-lg sm:text-xl md:text-2xl">
-            {gettext("Do zero ao seu primeiro emprego sem pagar nada")}
+            {gettext("from_zero_to_first_job_free")}
           </h2>
         </div>
 
@@ -22,13 +22,13 @@ defmodule PodcodarWeb.PageLive do
             <.input
               field={@form[:query]}
               type="search"
-              placeholder={gettext("Pesquise cursos, tópicos...")}
+              placeholder={gettext("search_courses_topics")}
               autocomplete="off"
               autofocus
             />
 
-            <.link navigate={~p"/courses"} class="btn btn-ghost">{gettext("Estou com sorte")}</.link>
-            <.button type="submit">{gettext("Pesquisar")}</.button>
+            <.link navigate={~p"/courses"} class="btn btn-ghost">{gettext("im_feeling_lucky")}</.link>
+            <.button type="submit">{gettext("search")}</.button>
           </.form>
         </div>
 
@@ -47,22 +47,22 @@ defmodule PodcodarWeb.PageLive do
       </section>
 
       <section class="my-20 px-6 py-12 max-w-full md:max-w-4xl mx-auto gap-12 flex flex-col ">
-        <h2 class="text-center text-2xl font-semibold mb-6">{gettext("Links")}</h2>
+        <h2 class="text-center text-2xl font-semibold mb-6">{gettext("links")}</h2>
 
         <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 max-w-full sm:max-w-xl md:max-w-2xl mx-auto">
           <.link navigate={~p"/discord"} target="_blank" rel="noopener" class="btn btn-outline">
             <.icon name="hero-chat-bubble-left-right" class="w-5 h-5" />
-            <span class="ml-2">{gettext("Discord")}</span>
+            <span class="ml-2">{gettext("discord")}</span>
           </.link>
 
           <.link navigate={~p"/github"} target="_blank" rel="noopener" class="btn btn-outline">
             <.icon name="hero-heart" class="w-5 h-5" />
-            <span class="ml-2">{gettext("GitHub")}</span>
+            <span class="ml-2">{gettext("github")}</span>
           </.link>
 
           <.link navigate={~p"/sponsor"} target="_blank" rel="noopener" class="btn btn-outline">
             <.icon name="hero-currency-dollar" class="w-5 h-5" />
-            <span class="ml-2">{gettext("Patrocinar")}</span>
+            <span class="ml-2">{gettext("sponsor")}</span>
           </.link>
 
           <.link
@@ -72,58 +72,58 @@ defmodule PodcodarWeb.PageLive do
             class="btn btn-outline"
           >
             <.icon name="hero-document-text" class="w-5 h-5" />
-            <span class="ml-2">{gettext("Transparência")}</span>
+            <span class="ml-2">{gettext("transparency")}</span>
           </.link>
         </div>
       </section>
 
       <section class="my-20 px-6 py-12 max-w-full md:max-w-4xl mx-auto flex flex-col gap-12">
-        <h2 class="text-center text-3xl font-bold">{gettext("Nossa missão")}</h2>
+        <h2 class="text-center text-3xl font-bold">{gettext("our_mission")}</h2>
 
         <div>
           <p class="mt-4">
-            {gettext("Criamos a PodCodar por acreditarmos que a educação em tecnologia é cada vez mais necessária, e por isso deve ser acessível a todos.")}
+            {gettext("mission_paragraph_1")}
           </p>
           <p class="mt-4">
-            {gettext("Nossa comunidade busca acelerar sua formação da área de tecnologia, oferecendo recursos gratuitos e suporte para que você possa alcançar seu primeiro emprego na área.")}
+            {gettext("mission_paragraph_2")}
           </p>
 
           <ol class="list-decimal list-inside ml-2 mt-4 space-y-2">
-            <li>{gettext("Selecionamos, avaliamos e organizamos conteúdos de alta qualidade e gratuito")}</li>
-            <li>{gettext("Conectamos pessoas da área, buscando criar oportunidades de aprendizado")}</li>
-            <li>{gettext("Atividades exclusivas para membros:")}</li>
+            <li>{gettext("mission_point_1")}</li>
+            <li>{gettext("mission_point_2")}</li>
+            <li>{gettext("mission_point_3")}</li>
             <ul class="list-disc list-inside ml-4 mt-4 space-y-2">
-              <li>{gettext("Grupos de estudos")}</li>
-              <li>{gettext("Entrevistas simuladas")}</li>
-              <li>{gettext("Bolsa de estudos")}</li>
-              <li>{gettext("E muito mais!")}</li>
+              <li>{gettext("study_groups")}</li>
+              <li>{gettext("mock_interviews")}</li>
+              <li>{gettext("scholarships")}</li>
+              <li>{gettext("and_much_more")}</li>
             </ul>
           </ol>
 
           <p class="mt-4">
-            {gettext("Junte-se a nós na missão de transformar a educação em tecnologia no Brasil, tornando-a mais inclusiva e acessível!")}
+            {gettext("mission_call_to_action")}
           </p>
         </div>
       </section>
 
       <section class="my-20 px-6 py-12 max-w-full md:max-w-4xl mx-auto flex flex-col gap-12">
-        <h2 class="text-center text-3xl font-bold">{gettext("Estatísticas da plataforma")}</h2>
+        <h2 class="text-center text-3xl font-bold">{gettext("platform_statistics")}</h2>
         <div>
           <div class="stats stats-horizontal shadow mt-4 w-full">
             <div class="stat">
-              <div class="stat-title">{gettext("💬 Membros ativos")}</div>
+              <div class="stat-title">{gettext("active_members")}</div>
               <div class="stat-value">256</div>
             </div>
             <div class="stat">
-              <div class="stat-title">{gettext("👩🏾‍💻 Empregos Conquistados")}</div>
+              <div class="stat-title">{gettext("jobs_secured")}</div>
               <div class="stat-value">32</div>
             </div>
             <div class="stat">
-              <div class="stat-title">{gettext("🌐 Horas de cursos")}</div>
+              <div class="stat-title">{gettext("course_hours")}</div>
               <div class="stat-value">1421</div>
             </div>
           </div>
-          <p class="text-sm text-secondary text-center mt-2">{gettext("Última atualização: há 3 horas")}</p>
+          <p class="text-sm text-secondary text-center mt-2">{gettext("last_updated_3_hours_ago")}</p>
         </div>
 
         <div class="mt-4 flex justify-center">
@@ -133,14 +133,14 @@ defmodule PodcodarWeb.PageLive do
             target="_blank"
             rel="noopener"
           >
-            {gettext("Adicionar um curso")}
+            {gettext("add_a_course")}
           </a>
         </div>
       </section>
 
       <section class="my-20 max-w-full md:max-w-4xl mx-auto flex flex-col gap-12 px-8">
         <h2 class="text-center text-2xl font-semibold">
-          {gettext("Agradecimentos especiais aos nossos colaboradores 🚀")}
+          {gettext("special_thanks_to_contributors")}
         </h2>
 
         <div class="flex flex-wrap justify-center gap-4">

@@ -11,290 +11,350 @@ msgstr ""
 "Language: en\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: lib/podcodar_web/live/courses_live.ex:114
-#, elixir-autogen, elixir-format
-msgid "Acessar Curso"
-msgstr ""
-
 #: lib/podcodar_web/components/core_components.ex:347
 #, elixir-autogen, elixir-format
 msgid "Actions"
-msgstr ""
+msgstr "Actions"
 
-#: lib/podcodar_web/live/page_live.ex:148
-#, elixir-autogen, elixir-format
-msgid "Adicionar um curso"
-msgstr ""
-
-#: lib/podcodar_web/live/page_live.ex:155
-#, elixir-autogen, elixir-format
-msgid "Agradecimentos especiais aos nossos colaboradores 🚀"
-msgstr ""
-
-#: lib/podcodar_web/live/page_live.ex:102
-#, elixir-autogen, elixir-format
-msgid "Atividades exclusivas para membros:"
-msgstr ""
-
-#: lib/podcodar_web/components/layouts.ex:207
-#: lib/podcodar_web/components/layouts.ex:219
+#: lib/podcodar_web/components/layouts.ex:256
+#: lib/podcodar_web/components/layouts.ex:268
 #, elixir-autogen, elixir-format
 msgid "Attempting to reconnect"
-msgstr ""
+msgstr "Attempting to reconnect"
 
-#: lib/podcodar_web/live/page_live.ex:106
+#: lib/podcodar_web/components/layouts.ex:263
 #, elixir-autogen, elixir-format
-msgid "Bolsa de estudos"
-msgstr ""
+msgid "Something went wrong!"
+msgstr "Something went wrong!"
 
-#: lib/podcodar_web/live/courses_live.ex:68
+#: lib/podcodar_web/components/layouts.ex:251
 #, elixir-autogen, elixir-format
-msgid "Clique para assistir"
-msgstr ""
+msgid "We can't find the internet"
+msgstr "We can't find the internet"
 
-#: lib/podcodar_web/live/page_live.ex:100
+#: lib/podcodar_web/components/core_components.ex:74
+#: lib/podcodar_web/components/layouts.ex:44
 #, elixir-autogen, elixir-format
-msgid "Conectamos pessoas da área, buscando criar oportunidades de aprendizado"
-msgstr ""
+msgid "close"
+msgstr "Close"
 
-#: lib/podcodar_web/live/page_live.ex:85
+#: lib/podcodar_web/live/courses_live.ex:114
 #, elixir-autogen, elixir-format
-msgid "Criamos a PodCodar por acreditarmos que a educação em tecnologia é cada vez mais necessária, e por isso deve ser acessível a todos."
-msgstr ""
-
-#: lib/podcodar_web/live/courses_live.ex:46
-#, elixir-autogen, elixir-format
-msgid "Curso não encontrado 😭"
-msgstr ""
-
-#: lib/podcodar_web/live/courses_live.ex:16
-#, elixir-autogen, elixir-format
-msgid "Cursos"
-msgstr ""
-
-#: lib/podcodar_web/live/courses_live.ex:31
-#, elixir-autogen, elixir-format
-msgid "Cursos Disponíveis"
-msgstr ""
-
-#: lib/podcodar_web/live/page_live.ex:55
-#, elixir-autogen, elixir-format
-msgid "Discord"
-msgstr ""
-
-#: lib/podcodar_web/live/page_live.ex:16
-#, elixir-autogen, elixir-format
-msgid "Do zero ao seu primeiro emprego sem pagar nada"
-msgstr ""
-
-#: lib/podcodar_web/live/user_live/login.ex:18
-#, elixir-autogen, elixir-format
-msgid "Don't have an account?"
-msgstr ""
-
-#: lib/podcodar_web/live/page_live.ex:107
-#, elixir-autogen, elixir-format
-msgid "E muito mais!"
-msgstr ""
+msgid "access_course"
+msgstr "Access Course"
 
 #: lib/podcodar_web/live/page_live.ex:13
 #, elixir-autogen, elixir-format
-msgid "Educação em tecnologia acessível para todos!"
-msgstr ""
+msgid "accessible_tech_education"
+msgstr "Tech Education for everyone!"
 
-#: lib/podcodar_web/live/user_live/login.ex:49
-#: lib/podcodar_web/live/user_live/login.ex:73
+#: lib/podcodar_web/live/courses_live.ex:31
 #, elixir-autogen, elixir-format
-msgid "Email"
-msgstr ""
+msgid "available_courses"
+msgstr "Available Courses"
 
-#: lib/podcodar_web/live/page_live.ex:105
+#: lib/podcodar_web/live/not_found_live.ex:23
 #, elixir-autogen, elixir-format
-msgid "Entrevistas simuladas"
-msgstr ""
+msgid "back_to_home"
+msgstr "Back to home"
 
-#: lib/podcodar_web/live/page_live.ex:120
+#: lib/podcodar_web/live/courses_live.ex:68
 #, elixir-autogen, elixir-format
-msgid "Estatísticas da plataforma"
-msgstr ""
+msgid "click_to_watch"
+msgstr "Click to watch"
+
+#: lib/podcodar_web/live/courses_live.ex:46
+#, elixir-autogen, elixir-format
+msgid "course_not_found"
+msgstr "Course not found 😭"
+
+#: lib/podcodar_web/live/courses_live.ex:16
+#, elixir-autogen, elixir-format
+msgid "courses"
+msgstr "Courses"
+
+#: lib/podcodar_web/live/page_live.ex:16
+#, elixir-autogen, elixir-format
+msgid "from_zero_to_first_job_free"
+msgstr "From zero to your first job without paying anything"
 
 #: lib/podcodar_web/live/page_live.ex:30
 #, elixir-autogen, elixir-format
-msgid "Estou com sorte"
-msgstr ""
-
-#: lib/podcodar_web/live/page_live.ex:60
-#, elixir-autogen, elixir-format
-msgid "GitHub"
-msgstr ""
-
-#: lib/podcodar_web/live/page_live.ex:104
-#, elixir-autogen, elixir-format
-msgid "Grupos de estudos"
-msgstr ""
-
-#: lib/podcodar_web/live/user_live/login.ex:120
-#, elixir-autogen, elixir-format
-msgid "If your email is in our system, you will receive instructions for logging in shortly."
-msgstr ""
-
-#: lib/podcodar_web/live/page_live.ex:112
-#, elixir-autogen, elixir-format
-msgid "Junte-se a nós na missão de transformar a educação em tecnologia no Brasil, tornando-a mais inclusiva e acessível!"
-msgstr ""
-
-#: lib/podcodar_web/live/page_live.ex:50
-#, elixir-autogen, elixir-format
-msgid "Links"
-msgstr ""
-
-#: lib/podcodar_web/live/user_live/login.ex:13
-#, elixir-autogen, elixir-format
-msgid "Log in"
-msgstr ""
-
-#: lib/podcodar_web/live/user_live/login.ex:84
-#, elixir-autogen, elixir-format
-msgid "Log in and stay logged in"
-msgstr ""
-
-#: lib/podcodar_web/live/user_live/login.ex:87
-#, elixir-autogen, elixir-format
-msgid "Log in only this time"
-msgstr ""
-
-#: lib/podcodar_web/live/user_live/login.ex:55
-#, elixir-autogen, elixir-format
-msgid "Log in with email"
-msgstr ""
-
-#: lib/podcodar_web/live/page_live.ex:90
-#, elixir-autogen, elixir-format
-msgid "Nossa comunidade busca acelerar sua formação da área de tecnologia, oferecendo recursos gratuitos e suporte para que você possa alcançar seu primeiro emprego na área."
-msgstr ""
-
-#: lib/podcodar_web/live/page_live.ex:81
-#, elixir-autogen, elixir-format
-msgid "Nossa missão"
-msgstr ""
-
-#: lib/podcodar_web/live/not_found_live.ex:20
-#, elixir-autogen, elixir-format
-msgid "Ops! A página que você está procurando não existe ou foi movida."
-msgstr ""
-
-#: lib/podcodar_web/live/user_live/login.ex:80
-#, elixir-autogen, elixir-format
-msgid "Password"
-msgstr ""
-
-#: lib/podcodar_web/live/page_live.ex:65
-#, elixir-autogen, elixir-format
-msgid "Patrocinar"
-msgstr ""
-
-#: lib/podcodar_web/live/page_live.ex:31
-#, elixir-autogen, elixir-format
-msgid "Pesquisar"
-msgstr ""
-
-#: lib/podcodar_web/live/page_live.ex:25
-#, elixir-autogen, elixir-format
-msgid "Pesquise cursos, tópicos..."
-msgstr ""
-
-#: lib/podcodar_web/live/courses_live.ex:38
-#, elixir-autogen, elixir-format
-msgid "Pesquise cursos..."
-msgstr ""
+msgid "im_feeling_lucky"
+msgstr "I'm feeling lucky"
 
 #: lib/podcodar_web/live/not_found_live.ex:7
 #: lib/podcodar_web/live/not_found_live.ex:18
 #, elixir-autogen, elixir-format
-msgid "Página não encontrada"
-msgstr ""
+msgid "page_not_found"
+msgstr "Page not found"
+
+#: lib/podcodar_web/live/not_found_live.ex:20
+#, elixir-autogen, elixir-format
+msgid "page_not_found_description"
+msgstr "Oops! The page you're looking for doesn't exist or has been moved."
+
+#: lib/podcodar_web/live/page_live.ex:31
+#, elixir-autogen, elixir-format
+msgid "search"
+msgstr "Search"
+
+#: lib/podcodar_web/live/courses_live.ex:38
+#, elixir-autogen, elixir-format
+msgid "search_courses"
+msgstr "Search courses..."
+
+#: lib/podcodar_web/live/page_live.ex:25
+#, elixir-autogen, elixir-format
+msgid "search_courses_topics"
+msgstr "Search courses, topics..."
+
+#: lib/podcodar_web/live/page_live.ex:81
+#, elixir-autogen, elixir-format
+msgid "our_mission"
+msgstr "Our Mission"
+
+#: lib/podcodar_web/live/page_live.ex:110
+#, elixir-autogen, elixir-format
+msgid "platform_statistics"
+msgstr "Platform Statistics"
+
+#: lib/podcodar_web/live/page_live.ex:114
+#, elixir-autogen, elixir-format
+msgid "active_members"
+msgstr "💬 Active Members"
+
+#: lib/podcodar_web/live/page_live.ex:136
+#, elixir-autogen, elixir-format
+msgid "add_a_course"
+msgstr "Add a course"
+
+#: lib/podcodar_web/live/page_live.ex:99
+#, elixir-autogen, elixir-format
+msgid "and_much_more"
+msgstr "And much more!"
+
+#: lib/podcodar_web/live/page_live.ex:122
+#, elixir-autogen, elixir-format, fuzzy
+msgid "course_hours"
+msgstr "🌐 Course Hours"
+
+#: lib/podcodar_web/live/page_live.ex:55
+#, elixir-autogen, elixir-format, fuzzy
+msgid "discord"
+msgstr "Discord"
+
+#: lib/podcodar_web/live/user_live/login.ex:49
+#: lib/podcodar_web/live/user_live/login.ex:73
+#: lib/podcodar_web/live/user_live/registration.ex:29
+#, elixir-autogen, elixir-format, fuzzy
+msgid "email"
+msgstr "Email"
+
+#: lib/podcodar_web/live/user_live/login.ex:22
+#, elixir-autogen, elixir-format, fuzzy
+msgid "for_an_account_now"
+msgstr "now."
+
+#: lib/podcodar_web/live/page_live.ex:60
+#, elixir-autogen, elixir-format
+msgid "github"
+msgstr "GitHub"
+
+#: lib/podcodar_web/live/page_live.ex:118
+#, elixir-autogen, elixir-format
+msgid "jobs_secured"
+msgstr "👩🏾‍💻 Jobs Secured"
+
+#: lib/podcodar_web/live/page_live.ex:126
+#, elixir-autogen, elixir-format
+msgid "last_updated_3_hours_ago"
+msgstr "Last updated: 3 hours ago"
+
+#: lib/podcodar_web/live/page_live.ex:50
+#, elixir-autogen, elixir-format, fuzzy
+msgid "links"
+msgstr "Links"
+
+#: lib/podcodar_web/components/layouts.ex:202
+#: lib/podcodar_web/live/user_live/login.ex:13
+#: lib/podcodar_web/live/user_live/registration.ex:18
+#, elixir-autogen, elixir-format
+msgid "log_in"
+msgstr "Log in"
+
+#: lib/podcodar_web/live/user_live/login.ex:84
+#, elixir-autogen, elixir-format, fuzzy
+msgid "log_in_and_stay_logged_in"
+msgstr "Log in and stay logged in"
+
+#: lib/podcodar_web/live/user_live/login.ex:87
+#, elixir-autogen, elixir-format
+msgid "log_in_only_this_time"
+msgstr "Log in only this time"
+
+#: lib/podcodar_web/live/user_live/login.ex:55
+#, elixir-autogen, elixir-format, fuzzy
+msgid "log_in_with_email"
+msgstr "Log in with email"
+
+#: lib/podcodar_web/live/user_live/login.ex:120
+#, elixir-autogen, elixir-format
+msgid "login_instructions_sent"
+msgstr "If your email is in our system, you will receive login instructions shortly."
+
+#: lib/podcodar_web/live/user_live/login.ex:33
+#, elixir-autogen, elixir-format, fuzzy
+msgid "mailbox_page"
+msgstr "the mailbox page"
+
+#: lib/podcodar_web/live/page_live.ex:104
+#, elixir-autogen, elixir-format
+msgid "mission_call_to_action"
+msgstr "Join us in the mission to transform technology education in Brazil, making it more inclusive and accessible!"
+
+#: lib/podcodar_web/live/page_live.ex:85
+#, elixir-autogen, elixir-format
+msgid "mission_paragraph_1"
+msgstr "We created PodCodar because we believe that technology education is increasingly necessary, and therefore should be accessible to everyone."
+
+#: lib/podcodar_web/live/page_live.ex:88
+#, elixir-autogen, elixir-format
+msgid "mission_paragraph_2"
+msgstr "Our community seeks to accelerate your technology training, offering free resources and support so you can land your first job in the field."
+
+#: lib/podcodar_web/live/page_live.ex:92
+#, elixir-autogen, elixir-format
+msgid "mission_point_1"
+msgstr "We select, evaluate and organize high-quality free content"
+
+#: lib/podcodar_web/live/page_live.ex:93
+#, elixir-autogen, elixir-format
+msgid "mission_point_2"
+msgstr "We connect people in the field, seeking to create learning opportunities"
+
+#: lib/podcodar_web/live/page_live.ex:94
+#, elixir-autogen, elixir-format
+msgid "mission_point_3"
+msgstr "Exclusive activities for members:"
 
 #: lib/podcodar_web/live/page_live.ex:97
 #, elixir-autogen, elixir-format
-msgid "Selecionamos, avaliamos e organizamos conteúdos de alta qualidade e gratuito"
-msgstr ""
+msgid "mock_interviews"
+msgstr "Mock interviews"
 
-#: lib/podcodar_web/live/user_live/login.ex:22
+#: lib/podcodar_web/live/user_live/login.ex:18
 #, elixir-autogen, elixir-format
-msgid "Sign up"
-msgstr ""
-
-#: lib/podcodar_web/components/layouts.ex:214
-#, elixir-autogen, elixir-format
-msgid "Something went wrong!"
-msgstr ""
-
-#: lib/podcodar_web/live/user_live/login.ex:33
-#, elixir-autogen, elixir-format
-msgid "To see sent emails, visit"
-msgstr ""
-
-#: lib/podcodar_web/live/page_live.ex:75
-#, elixir-autogen, elixir-format
-msgid "Transparência"
-msgstr ""
-
-#: lib/podcodar_web/live/not_found_live.ex:23
-#, elixir-autogen, elixir-format
-msgid "Voltar ao início"
-msgstr ""
-
-#: lib/podcodar_web/components/layouts.ex:202
-#, elixir-autogen, elixir-format
-msgid "We can't find the internet"
-msgstr ""
-
-#: lib/podcodar_web/live/user_live/login.ex:31
-#, elixir-autogen, elixir-format
-msgid "You are running the local mail adapter."
-msgstr ""
-
-#: lib/podcodar_web/live/user_live/login.ex:16
-#, elixir-autogen, elixir-format
-msgid "You need to reauthenticate to perform sensitive actions on your account."
-msgstr ""
-
-#: lib/podcodar_web/components/core_components.ex:74
-#, elixir-autogen, elixir-format
-msgid "close"
-msgstr ""
-
-#: lib/podcodar_web/live/user_live/login.ex:22
-#, elixir-autogen, elixir-format
-msgid "for an account now."
-msgstr ""
+msgid "no_account_question"
+msgstr "Don't have an account?"
 
 #: lib/podcodar_web/live/user_live/login.ex:59
 #, elixir-autogen, elixir-format
-msgid "or"
-msgstr ""
+msgid "or_divider"
+msgstr "or"
+
+#: lib/podcodar_web/live/user_live/login.ex:80
+#, elixir-autogen, elixir-format, fuzzy
+msgid "password"
+msgstr "Password"
+
+#: lib/podcodar_web/live/user_live/login.ex:16
+#, elixir-autogen, elixir-format
+msgid "reauthenticate_message"
+msgstr "You need to re-authenticate to perform sensitive actions on your account."
+
+#: lib/podcodar_web/live/user_live/login.ex:31
+#, elixir-autogen, elixir-format
+msgid "running_local_mail_adapter"
+msgstr "You are running the local mail adapter."
+
+#: lib/podcodar_web/live/page_live.ex:98
+#, elixir-autogen, elixir-format
+msgid "scholarships"
+msgstr "Scholarships"
+
+#: lib/podcodar_web/components/layouts.ex:197
+#: lib/podcodar_web/live/user_live/login.ex:22
+#, elixir-autogen, elixir-format, fuzzy
+msgid "sign_up"
+msgstr "Sign up"
+
+#: lib/podcodar_web/live/page_live.ex:143
+#, elixir-autogen, elixir-format
+msgid "special_thanks_to_contributors"
+msgstr "Special thanks to our contributors 🚀"
+
+#: lib/podcodar_web/live/page_live.ex:65
+#, elixir-autogen, elixir-format
+msgid "sponsor"
+msgstr "Sponsor"
+
+#: lib/podcodar_web/live/page_live.ex:96
+#, elixir-autogen, elixir-format
+msgid "study_groups"
+msgstr "Study Groups"
+
+#: lib/podcodar_web/live/page_live.ex:75
+#, elixir-autogen, elixir-format, fuzzy
+msgid "transparency"
+msgstr "Transparency"
 
 #: lib/podcodar_web/live/user_live/login.ex:33
 #, elixir-autogen, elixir-format
-msgid "the mailbox page"
-msgstr ""
+msgid "visit_mailbox_page"
+msgstr "To view sent emails, visit"
 
-#: lib/podcodar_web/live/page_live.ex:137
+#: lib/podcodar_web/components/layouts.ex:36
 #, elixir-autogen, elixir-format
-msgid "Última atualização: há 3 horas"
-msgstr ""
+msgid "choose_preferred_language"
+msgstr "Choose your preferred language:"
 
-#: lib/podcodar_web/live/page_live.ex:132
+#: lib/podcodar_web/components/layouts.ex:27
 #, elixir-autogen, elixir-format
-msgid "🌐 Horas de cursos"
-msgstr ""
+msgid "choose_preferred_theme"
+msgstr "Choose your preferred theme:"
 
-#: lib/podcodar_web/live/page_live.ex:128
+#: lib/podcodar_web/components/layouts.ex:23
 #, elixir-autogen, elixir-format
-msgid "👩🏾‍💻 Empregos Conquistados"
-msgstr ""
+msgid "settings"
+msgstr "Settings"
 
-#: lib/podcodar_web/live/page_live.ex:124
+#: lib/podcodar_web/live/user_live/registration.ex:16
 #, elixir-autogen, elixir-format
-msgid "💬 Membros ativos"
-msgstr ""
+msgid "already_registered"
+msgstr "Already registered?"
+
+#: lib/podcodar_web/live/user_live/registration.ex:36
+#, elixir-autogen, elixir-format
+msgid "create_an_account"
+msgstr "Create an account"
+
+#: lib/podcodar_web/live/user_live/registration.ex:35
+#, elixir-autogen, elixir-format
+msgid "creating_account"
+msgstr "Creating account..."
+
+#: lib/podcodar_web/live/user_live/registration.ex:70
+#, elixir-autogen, elixir-format
+msgid "email_sent_confirmation"
+msgstr "An email was sent to %{email}, please access it to confirm your account."
+
+#: lib/podcodar_web/live/user_live/registration.ex:14
+#, elixir-autogen, elixir-format
+msgid "register_for_an_account"
+msgstr "Register for an account"
+
+#: lib/podcodar_web/live/user_live/registration.ex:20
+#, elixir-autogen, elixir-format
+msgid "to_your_account_now"
+msgstr " to your account now."
+
+#: lib/podcodar_web/components/layouts.ex:189
+#, elixir-autogen, elixir-format
+msgid "are_you_sure_log_out"
+msgstr "Are you sure you want to log out?"
+
+#: lib/podcodar_web/components/layouts.ex:191
+#, elixir-autogen, elixir-format
+msgid "log_out"
+msgstr "Log out"

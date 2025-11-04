@@ -10,6 +10,7 @@ defmodule PodcodarWeb.Router do
     plug :protect_from_forgery
     plug :put_secure_browser_headers
     plug :fetch_current_scope_for_user
+    plug :put_locale_in_assigns
     plug :put_root_layout, html: {PodcodarWeb.Layouts, :root}
   end
 
@@ -72,11 +73,19 @@ defmodule PodcodarWeb.Router do
       live "/users/log-in", UserLive.Login, :new
       live "/users/log-in/:token", UserLive.Confirmation, :new
 
-      # 404 - Not Found 
+      # 404 - Not Found
       live "/*path", NotFoundLive, :index
     end
 
     post "/users/log-in", UserSessionController, :create
     delete "/users/log-out", UserSessionController, :delete
+    put "/locale", LocaleController, :update
+  end
+
+  defp put_locale_in_assigns(conn, _opts) do
+    locale = get_session(conn, :locale) || "pt_BR"
+    # Convert to HTML lang format (pt_BR -> pt-br)
+    html_lang = locale |> String.downcase() |> String.replace("_", "-")
+    assign(conn, :locale, html_lang)
   end
 end

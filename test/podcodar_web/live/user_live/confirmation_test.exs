@@ -3,6 +3,7 @@ defmodule PodcodarWeb.UserLive.ConfirmationTest do
 
   import Phoenix.LiveViewTest
   import Podcodar.AccountsFixtures
+  use Gettext, backend: PodcodarWeb.Gettext
 
   alias Podcodar.Accounts
 
@@ -29,7 +30,7 @@ defmodule PodcodarWeb.UserLive.ConfirmationTest do
 
       {:ok, _lv, html} = live(conn, ~p"/users/log-in/#{token}")
       refute html =~ "Confirm my account"
-      assert html =~ "Log in"
+      assert html =~ gettext("log_in")
     end
 
     test "confirms the given token once", %{conn: conn, unconfirmed_user: user} do

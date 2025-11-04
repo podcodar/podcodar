@@ -137,20 +137,20 @@ defmodule PodcodarWeb.Layouts do
         <.link
           href={~p"/users/log-out"}
           method="delete"
-          data-confirm="Are you sure you want to log out?"
+          data-confirm={gettext("are_you_sure_log_out")}
         >
-          <.icon name="hero-arrow-left-on-rectangle" class="w-4 h-4" /> Log out
+          <.icon name="hero-arrow-left-on-rectangle" class="w-4 h-4" /> {gettext("log_out")}
         </.link>
       </li>
     <% else %>
       <li>
         <.link navigate={~p"/users/register"}>
-          <.icon name="hero-user-plus" class="w-4 h-4" /> Register
+          <.icon name="hero-user-plus" class="w-4 h-4" /> {gettext("sign_up")}
         </.link>
       </li>
       <li>
         <.link navigate={~p"/users/log-in"} class="btn btn-primary">
-          <.icon name="hero-arrow-right-on-rectangle" class="w-4 h-4" /> Log in
+          <.icon name="hero-arrow-right-on-rectangle" class="w-4 h-4" /> {gettext("log_in")}
         </.link>
       </li>
     <% end %>

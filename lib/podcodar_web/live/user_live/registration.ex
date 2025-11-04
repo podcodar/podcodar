@@ -11,13 +11,13 @@ defmodule PodcodarWeb.UserLive.Registration do
       <div class="mx-auto max-w-sm">
         <div class="text-center">
           <.header>
-            Register for an account
+            {gettext("register_for_an_account")}
             <:subtitle>
-              Already registered?
+              {gettext("already_registered")}
               <.link navigate={~p"/users/log-in"} class="font-semibold text-brand hover:underline">
-                Log in
+                {gettext("log_in")}
               </.link>
-              to your account now.
+              {gettext("to_your_account_now")}
             </:subtitle>
           </.header>
         </div>
@@ -26,14 +26,14 @@ defmodule PodcodarWeb.UserLive.Registration do
           <.input
             field={@form[:email]}
             type="email"
-            label="Email"
+            label={gettext("email")}
             autocomplete="username"
             required
             phx-mounted={JS.focus()}
           />
 
-          <.button phx-disable-with="Creating account..." class="btn btn-primary w-full">
-            Create an account
+          <.button phx-disable-with={gettext("creating_account")} class="btn btn-primary w-full">
+            {gettext("create_an_account")}
           </.button>
         </.form>
       </div>
@@ -67,7 +67,7 @@ defmodule PodcodarWeb.UserLive.Registration do
          socket
          |> put_flash(
            :info,
-           "An email was sent to #{user.email}, please access it to confirm your account."
+           gettext("email_sent_confirmation", email: user.email)
          )
          |> push_navigate(to: ~p"/users/log-in")}
 
