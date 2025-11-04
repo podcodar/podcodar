@@ -19,8 +19,7 @@ defmodule PodcodarWeb.CoursesLive do
          to_form(%{
            "query" => query
          }),
-       filters: %{},
-       playing_videos: %{}
+       filters: %{}
      )}
   end
 
@@ -49,27 +48,8 @@ defmodule PodcodarWeb.CoursesLive do
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           <div :for={course <- @courses} class="card">
             <div class="card bg-base-100 w-full h-full shadow-sm">
-              <figure
-                class="relative cursor-pointer"
-                phx-click="play_video"
-                phx-value-course-title={course.title}
-              >
-                <div
-                  :if={!Map.get(@playing_videos, course.title, false)}
-                  class="relative bg-gray-200 flex items-center justify-center"
-                  style="height: 180px;"
-                >
-                  <div class="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 hover:bg-opacity-30 transition-all duration-200 rounded-t-lg">
-                    <div class="bg-white bg-opacity-90 rounded-full p-4 shadow-lg hover:scale-110 transition-transform duration-200">
-                      <.icon name="hero-play" class="w-8 h-8 text-gray-800 ml-1" />
-                    </div>
-                  </div>
-                  <div class="text-center text-gray-600 text-sm font-medium px-4 z-10 relative">
-                    {gettext("click_to_watch")}
-                  </div>
-                </div>
+              <figure>
                 <iframe
-                  :if={Map.get(@playing_videos, course.title, false)}
                   width="100%"
                   height="180"
                   src={course.link}
@@ -77,7 +57,6 @@ defmodule PodcodarWeb.CoursesLive do
                   frameborder="0"
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                   allowfullscreen
-                  loading="lazy"
                 >
                 </iframe>
               </figure>
@@ -109,7 +88,7 @@ defmodule PodcodarWeb.CoursesLive do
                     href={course.link}
                     class="btn btn-primary btn-outline"
                     target="_blank"
-                    rel="noopener"
+                    rel="noopener noreferrer"
                   >
                     {gettext("access_course")}
                   </a>
@@ -132,16 +111,10 @@ defmodule PodcodarWeb.CoursesLive do
       socket
       |> assign(
         courses: courses,
-        search_form: to_form(%{"query" => query}),
-        playing_videos: %{}
+        search_form: to_form(%{"query" => query})
       )
       |> push_navigate(to: ~p"/courses?query=#{query}")
 
     {:noreply, socket}
-  end
-
-  def handle_event("play_video", %{"course-title" => course_title}, socket) do
-    playing_videos = Map.put(socket.assigns.playing_videos, course_title, true)
-    {:noreply, assign(socket, playing_videos: playing_videos)}
   end
 end
