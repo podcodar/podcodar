@@ -8,7 +8,7 @@ defmodule PodcodarWeb.UserLive.Registration do
   def render(assigns) do
     ~H"""
     <Layouts.app flash={@flash} current_scope={@current_scope} locale={@locale}>
-      <div class="mx-auto max-w-sm">
+      <div class="mx-auto max-w-sm px-8">
         <div class="text-center">
           <.header>
             {gettext("register_for_an_account")}

@@ -9,7 +9,7 @@ defmodule PodcodarWeb.UserLive.Settings do
   def render(assigns) do
     ~H"""
     <Layouts.app flash={@flash} current_scope={@current_scope} locale={@locale}>
-      <div class="mx-auto max-w-2xl p-8">
+      <div class="mx-auto max-w-2xl p-8 px-8">
         <div class="text-center">
           <.header>
             {gettext("account_settings")}
