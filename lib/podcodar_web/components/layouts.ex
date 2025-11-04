@@ -164,13 +164,13 @@ defmodule PodcodarWeb.Layouts do
   def social_links(assigns) do
     ~H"""
     <li>
-      <.link navigate={~p"/discord"} target="_blank">
+      <.link navigate={~p"/discord"} target="_blank" rel="noopener">
         <.icon name="hero-chat-bubble-left-right" class="w-4 h-4" /> Discord
       </.link>
     </li>
 
     <li>
-      <.link navigate={~p"/github"} target="_blank">
+      <.link navigate={~p"/github"} target="_blank" rel="noopener">
         <.icon name="hero-code-bracket" class="w-4 h-4" /> GitHub
       </.link>
     </li>
