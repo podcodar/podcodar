@@ -77,14 +77,14 @@ defmodule PodcodarWeb.PageLive do
 
         <div>
           <p class="mt-4">
-            Criamos a PodCodar por acreditarmos que a educação em tecnologia é cada vez mais necessária, e por isso deve ser acessível há todos.
+            Criamos a PodCodar por acreditarmos que a educação em tecnologia é cada vez mais necessária, e por isso deve ser acessível a todos.
           </p>
           <p class="mt-4">
             Nossa comunidade busca acelerar sua formação da área de tecnologia, oferecendo recursos gratuitos e suporte para que você possa alcançar seu primeiro emprego na área.
           </p>
 
           <ol class="list-decimal list-inside ml-2 mt-4 space-y-2">
-            <li>Selecionamos, avaliamos e organizamos conteúdos de alta qualidade e gratúito</li>
+            <li>Selecionamos, avaliamos e organizamos conteúdos de alta qualidade e gratuito</li>
             <li>Conectamos pessoas da área, buscando criar oportunidades de aprendizado</li>
             <li>Atividades exclusivas para membros:</li>
             <ul class="list-disc list-inside ml-4 mt-4 space-y-2">
