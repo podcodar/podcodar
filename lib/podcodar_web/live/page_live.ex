@@ -19,27 +19,25 @@ defmodule PodcodarWeb.PageLive do
     ~H"""
     <Layouts.app flash={@flash} current_scope={@current_scope} locale={@locale}>
       <section class="text-center min-h-svh flex flex-col justify-center items-center gap-12 mt-[-4rem] bg-pattern p-8 md:p-16">
-        <div class="gap-4 mt-24">
+        <div class="gap-6 flex flex-col">
           <h1 class="text-3xl sm:text-4xl md:text-5xl font-bold">
             {gettext("accessible_tech_education")}
           </h1>
-          <h2 class="text-lg sm:text-xl md:text-2xl">
-            {gettext("from_zero_to_first_job_free")}
-          </h2>
         </div>
 
-        <div class="w-full md:min-w-3xl">
+        <div class="w-full md:w-2xl">
           <.form for={@form} id="home-search-form" phx-change="validate" phx-submit="search">
             <.input
               field={@form[:query]}
               type="search"
               placeholder={gettext("search_courses_topics")}
               autocomplete="off"
+              class="rounded-full px-8 py-6 rounded-full input input-bordered input-lg w-full"
               autofocus
             />
 
-            <.link navigate={~p"/courses"} class="btn btn-ghost">{gettext("im_feeling_lucky")}</.link>
             <.button type="submit">{gettext("search")}</.button>
+            <.link navigate={~p"/courses"} class="btn btn-ghost">{gettext("im_feeling_lucky")}</.link>
           </.form>
         </div>
 
@@ -47,7 +45,7 @@ defmodule PodcodarWeb.PageLive do
           <.link
             :for={term <- @suggested_searches}
             navigate={~p"/courses?query=#{term}"}
-            class="btn btn-sm btn-dash btn-secondary"
+            class="btn btn-sm btn-dash btn-neutral opacity-70"
           >
             {term}
           </.link>
@@ -55,10 +53,10 @@ defmodule PodcodarWeb.PageLive do
         </div>
       </section>
 
-      <section class="max-w-full md:max-w-4xl mx-auto gap-12 flex flex-col p-16">
+      <section class="max-w-full md:max-w-4xl mx-auto gap-12 flex flex-col p-8 md:p-16">
         <h2 class="text-center text-2xl font-semibold mb-6">{gettext("links")}</h2>
 
-        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 max-w-full sm:max-w-xl md:max-w-2xl mx-auto">
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-full sm:max-w-xl md:max-w-2xl mx-auto">
           <.link navigate={~p"/discord"} target="_blank" rel="noopener" class="btn btn-outline">
             <.icon name="hero-chat-bubble-left-right" class="w-5 h-5" />
             <span class="ml-2">{gettext("discord")}</span>
@@ -86,7 +84,7 @@ defmodule PodcodarWeb.PageLive do
         </div>
       </section>
 
-      <section class="max-w-full md:max-w-4xl mx-auto flex flex-col gap-12 p-16">
+      <section class="max-w-full md:max-w-4xl mx-auto flex flex-col gap-12 p-8 md:p-16">
         <h2 class="text-center text-3xl font-bold">{gettext("our_mission")}</h2>
 
         <div>
@@ -115,10 +113,10 @@ defmodule PodcodarWeb.PageLive do
         </div>
       </section>
 
-      <section class="max-w-full md:max-w-4xl mx-auto flex flex-col gap-12 p-16">
+      <section class="max-w-full md:max-w-4xl mx-auto flex flex-col gap-12 p-8 md:p-16">
         <h2 class="text-center text-3xl font-bold">{gettext("platform_statistics")}</h2>
         <div>
-          <div class="stats stats-horizontal shadow mt-4 w-full">
+          <div class="stats stats-vertical md:stats-horizontal shadow mt-4 w-full text-center">
             <div class="stat">
               <div class="stat-title">{gettext("active_members")}</div>
               <div class="stat-value">256</div>
@@ -147,7 +145,7 @@ defmodule PodcodarWeb.PageLive do
         </div>
       </section>
 
-      <section class="max-w-full md:max-w-4xl mx-auto flex flex-col gap-12 p-16">
+      <section class="max-w-full md:max-w-4xl mx-auto flex flex-col gap-12 p-8 md:p-16">
         <h2 class="text-center text-2xl font-semibold">
           {gettext("special_thanks_to_contributors")}
         </h2>

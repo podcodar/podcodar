@@ -68,12 +68,7 @@ msgstr "Curso não encontrado 😭"
 msgid "courses"
 msgstr "Cursos"
 
-#: lib/podcodar_web/live/page_live.ex:27
-#, elixir-autogen, elixir-format
-msgid "from_zero_to_first_job_free"
-msgstr "Do zero ao seu primeiro emprego sem pagar nada"
-
-#: lib/podcodar_web/live/page_live.ex:41
+#: lib/podcodar_web/live/page_live.ex:40
 #, elixir-autogen, elixir-format
 msgid "im_feeling_lucky"
 msgstr "Estou com sorte"
@@ -89,7 +84,7 @@ msgstr "Página não encontrada"
 msgid "page_not_found_description"
 msgstr "Ops! A página que você está procurando não existe ou foi movida."
 
-#: lib/podcodar_web/live/page_live.ex:42
+#: lib/podcodar_web/live/page_live.ex:39
 #, elixir-autogen, elixir-format
 msgid "search"
 msgstr "Pesquisar"
@@ -99,42 +94,42 @@ msgstr "Pesquisar"
 msgid "search_courses"
 msgstr "Pesquise cursos..."
 
-#: lib/podcodar_web/live/page_live.ex:36
+#: lib/podcodar_web/live/page_live.ex:33
 #, elixir-autogen, elixir-format
 msgid "search_courses_topics"
 msgstr "Pesquise cursos, tópicos..."
 
-#: lib/podcodar_web/live/page_live.ex:90
+#: lib/podcodar_web/live/page_live.ex:88
 #, elixir-autogen, elixir-format
 msgid "our_mission"
 msgstr "Nossa missão"
 
-#: lib/podcodar_web/live/page_live.ex:119
+#: lib/podcodar_web/live/page_live.ex:117
 #, elixir-autogen, elixir-format
 msgid "platform_statistics"
 msgstr "Estatísticas da plataforma"
 
-#: lib/podcodar_web/live/page_live.ex:123
+#: lib/podcodar_web/live/page_live.ex:121
 #, elixir-autogen, elixir-format
 msgid "active_members"
 msgstr "💬 Membros ativos"
 
-#: lib/podcodar_web/live/page_live.ex:145
+#: lib/podcodar_web/live/page_live.ex:143
 #, elixir-autogen, elixir-format
 msgid "add_a_course"
 msgstr "Adicionar um curso"
 
-#: lib/podcodar_web/live/page_live.ex:108
+#: lib/podcodar_web/live/page_live.ex:106
 #, elixir-autogen, elixir-format
 msgid "and_much_more"
 msgstr "E muito mais!"
 
-#: lib/podcodar_web/live/page_live.ex:131
+#: lib/podcodar_web/live/page_live.ex:129
 #, elixir-autogen, elixir-format
 msgid "course_hours"
 msgstr "🌐 Horas de cursos"
 
-#: lib/podcodar_web/live/page_live.ex:64
+#: lib/podcodar_web/live/page_live.ex:62
 #, elixir-autogen, elixir-format
 msgid "discord"
 msgstr "Discord"
@@ -152,22 +147,22 @@ msgstr "Email"
 msgid "for_an_account_now"
 msgstr "agora."
 
-#: lib/podcodar_web/live/page_live.ex:69
+#: lib/podcodar_web/live/page_live.ex:67
 #, elixir-autogen, elixir-format
 msgid "github"
 msgstr "GitHub"
 
-#: lib/podcodar_web/live/page_live.ex:127
+#: lib/podcodar_web/live/page_live.ex:125
 #, elixir-autogen, elixir-format
 msgid "jobs_secured"
 msgstr "👩🏾‍💻 Empregos Conquistados"
 
-#: lib/podcodar_web/live/page_live.ex:135
+#: lib/podcodar_web/live/page_live.ex:133
 #, elixir-autogen, elixir-format
 msgid "last_updated_3_hours_ago"
 msgstr "Última atualização: há 3 horas"
 
-#: lib/podcodar_web/live/page_live.ex:59
+#: lib/podcodar_web/live/page_live.ex:57
 #, elixir-autogen, elixir-format
 msgid "links"
 msgstr "Links"
@@ -205,37 +200,37 @@ msgstr "Se seu email estiver em nosso sistema, você receberá instruções para
 msgid "mailbox_page"
 msgstr "a página da caixa de correio"
 
-#: lib/podcodar_web/live/page_live.ex:113
+#: lib/podcodar_web/live/page_live.ex:111
 #, elixir-autogen, elixir-format
 msgid "mission_call_to_action"
 msgstr "Junte-se a nós na missão de transformar a educação em tecnologia no Brasil, tornando-a mais inclusiva e acessível!"
 
-#: lib/podcodar_web/live/page_live.ex:94
+#: lib/podcodar_web/live/page_live.ex:92
 #, elixir-autogen, elixir-format
 msgid "mission_paragraph_1"
 msgstr "Criamos a PodCodar por acreditarmos que a educação em tecnologia é cada vez mais necessária, e por isso deve set acessível a todos."
 
-#: lib/podcodar_web/live/page_live.ex:97
+#: lib/podcodar_web/live/page_live.ex:95
 #, elixir-autogen, elixir-format
 msgid "mission_paragraph_2"
 msgstr "Nossa comunidade busca acelerar sua formação da área de tecnologia, oferecendo recursos gratuitos e suporte para que você possa alcançar seu primeiro emprego na área."
 
-#: lib/podcodar_web/live/page_live.ex:101
+#: lib/podcodar_web/live/page_live.ex:99
 #, elixir-autogen, elixir-format
 msgid "mission_point_1"
 msgstr "Selecionamos, avaliamos e organizamos conteúdos de alta qualidade e gratuito"
 
-#: lib/podcodar_web/live/page_live.ex:102
+#: lib/podcodar_web/live/page_live.ex:100
 #, elixir-autogen, elixir-format
 msgid "mission_point_2"
 msgstr "Conectamos pessoas da área, buscando criar oportunidades de aprendizado"
 
-#: lib/podcodar_web/live/page_live.ex:103
+#: lib/podcodar_web/live/page_live.ex:101
 #, elixir-autogen, elixir-format
 msgid "mission_point_3"
 msgstr "Atividades exclusivas para membros:"
 
-#: lib/podcodar_web/live/page_live.ex:106
+#: lib/podcodar_web/live/page_live.ex:104
 #, elixir-autogen, elixir-format
 msgid "mock_interviews"
 msgstr "Entrevistas simuladas"
@@ -265,7 +260,7 @@ msgstr "Você precisa se reautenticar para executar ações sensíveis em sua co
 msgid "running_local_mail_adapter"
 msgstr "Você está executando o adaptador de email local."
 
-#: lib/podcodar_web/live/page_live.ex:107
+#: lib/podcodar_web/live/page_live.ex:105
 #, elixir-autogen, elixir-format
 msgid "scholarships"
 msgstr "Bolsa de estudos"
@@ -276,22 +271,22 @@ msgstr "Bolsa de estudos"
 msgid "sign_up"
 msgstr "Cadastrar-se"
 
-#: lib/podcodar_web/live/page_live.ex:152
+#: lib/podcodar_web/live/page_live.ex:150
 #, elixir-autogen, elixir-format
 msgid "special_thanks_to_contributors"
 msgstr "Agradecimentos especiais aos nossos colaboradores 🚀"
 
-#: lib/podcodar_web/live/page_live.ex:74
+#: lib/podcodar_web/live/page_live.ex:72
 #, elixir-autogen, elixir-format
 msgid "sponsor"
 msgstr "Patrocinar"
 
-#: lib/podcodar_web/live/page_live.ex:105
+#: lib/podcodar_web/live/page_live.ex:103
 #, elixir-autogen, elixir-format
 msgid "study_groups"
 msgstr "Grupos de estudos"
 
-#: lib/podcodar_web/live/page_live.ex:84
+#: lib/podcodar_web/live/page_live.ex:82
 #, elixir-autogen, elixir-format
 msgid "transparency"
 msgstr "Transparência"
@@ -435,7 +430,7 @@ msgstr "O link mágico é inválido ou expirou."
 msgid "manage_account_email_password_settings"
 msgstr "Gerencie as configurações de email e senha da sua conta"
 
-#: lib/podcodar_web/live/page_live.ex:54
+#: lib/podcodar_web/live/page_live.ex:52
 #, elixir-autogen, elixir-format
 msgid "much_more"
 msgstr "Muito mais"
