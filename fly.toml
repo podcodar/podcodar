@@ -12,10 +12,15 @@ primary_region = 'gru'
   force_https = true
   auto_stop_machines = true
   auto_start_machines = true
+  max_machines_running = 1
   min_machines_running = 1
   processes = ['app']
 
-[[vm]]
+[vm]
   memory = '512mb'
   cpu_kind = 'shared'
   cpus = 1
+
+[mounts]
+  source = "podcodar_data"
+  destination = "/data"
