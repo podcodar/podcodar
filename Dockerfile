@@ -24,11 +24,11 @@ WORKDIR /app
 RUN mix local.hex --force && \
     mix local.rebar --force
 
-# Cache deps
 COPY mix.exs mix.lock ./
 COPY config ./config
 
 RUN mix deps.get --only prod && \
+    mix tailwind.install && \
     mix deps.compile
 
 # Copy application source
