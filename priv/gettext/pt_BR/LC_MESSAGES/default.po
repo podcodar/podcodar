@@ -46,7 +46,7 @@ msgstr "Acessar Curso"
 #: lib/podcodar_web/live/page_live.ex:24
 #, elixir-autogen, elixir-format
 msgid "accessible_tech_education"
-msgstr "Educação em tecnologia para todos!"
+msgstr "Educação tecnológica acessível para todos!"
 
 #: lib/podcodar_web/live/courses_live.ex:30
 #, elixir-autogen, elixir-format

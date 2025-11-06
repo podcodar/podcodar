@@ -28,13 +28,13 @@ defmodule PodcodarWeb.PageLive do
             />
 
             <.button type="submit">{gettext("search")}</.button>
-            <.link href="/random" class="btn btn-ghost">{gettext("im_feeling_lucky")}</.link>
+            <.link navigate={~p"/random"} class="btn btn-ghost">{gettext("im_feeling_lucky")}</.link>
           </.form>
         </div>
 
         <div class="flex flex-wrap justify-center gap-4 max-w-full md:max-w-2xl px-8">
           <.link
-            :for={term <- Courses.suggested_searches()}
+            :for={term <- @suggested_searches}
             navigate={~p"/courses?query=#{term}"}
             class="btn btn-sm btn-dash opacity-70"
           >
