@@ -1,4 +1,4 @@
-import { z } from "zod";
+import { z } from "@zod/zod";
 
 const locale = ["en", "br"];
 const technologies = [
