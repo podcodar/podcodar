@@ -1,10 +1,28 @@
 defmodule Podcodar.Courses do
   require Logger
 
+  @topics [
+    "golang",
+    "elixir",
+    "python",
+    "phoenix",
+    "docker",
+    "ash",
+    "sql"
+  ]
+
   # define a course structure
   defmodule Course do
     @derive Jason.Encoder
     defstruct [:title, :description, :link, :locale, :technologies]
+  end
+
+  def suggested_searches do
+    @topics
+  end
+
+  def get_random do
+    Enum.random(@topics)
   end
 
   def list_courses do

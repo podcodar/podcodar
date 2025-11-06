@@ -64,6 +64,7 @@ defmodule PodcodarWeb.Router do
     get "/github", RedirectController, :github
     get "/sponsor", RedirectController, :sponsor
     get "/discord", RedirectController, :discord
+    get "/random", RedirectController, :random
 
     live_session :current_user,
       on_mount: [
