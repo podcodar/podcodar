@@ -1,20 +1,11 @@
 defmodule PodcodarWeb.PageLive do
   use PodcodarWeb, :live_view
   alias Podcodar.SearchQuery
+  alias Podcodar.Courses
   alias Podcodar.Cache
   require Logger
 
   # list of suggested searches
-  @suggested_searches [
-    "golang",
-    "elixir",
-    "python",
-    "phoenix",
-    "docker",
-    "ash",
-    "sql"
-  ]
-
   def render(assigns) do
     ~H"""
     <Layouts.app flash={@flash} current_scope={@current_scope} locale={@locale}>
@@ -37,13 +28,13 @@ defmodule PodcodarWeb.PageLive do
             />
 
             <.button type="submit">{gettext("search")}</.button>
-            <.link navigate={~p"/courses"} class="btn btn-ghost">{gettext("im_feeling_lucky")}</.link>
+            <.link href="/random" class="btn btn-ghost">{gettext("im_feeling_lucky")}</.link>
           </.form>
         </div>
 
         <div class="flex flex-wrap justify-center gap-4 max-w-full md:max-w-2xl px-8">
           <.link
-            :for={term <- @suggested_searches}
+            :for={term <- Courses.suggested_searches()}
             navigate={~p"/courses?query=#{term}"}
             class="btn btn-sm btn-dash opacity-70"
           >
@@ -183,7 +174,7 @@ defmodule PodcodarWeb.PageLive do
      socket
      |> assign(:form, to_form(changeset))
      |> assign(:contributors, [])
-     |> assign(suggested_searches: @suggested_searches)
+     |> assign(suggested_searches: Courses.suggested_searches())
      |> then(fn socket ->
        if connected?(socket), do: send(self(), :load_contributors)
        socket

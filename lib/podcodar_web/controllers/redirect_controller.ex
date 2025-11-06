@@ -20,4 +20,9 @@ defmodule PodcodarWeb.RedirectController do
     Logger.info("sponsor_url: #{sponsor_url}")
     redirect(conn, external: sponsor_url)
   end
+
+  def random(conn, _params) do
+    topic = Podcodar.Courses.get_random()
+    redirect(conn, to: "/courses?query=#{URI.encode_www_form(topic)}")
+  end
 end

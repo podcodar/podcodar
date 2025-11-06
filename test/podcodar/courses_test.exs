@@ -31,4 +31,23 @@ defmodule Podcodar.CoursesTest do
       assert :ok = File.write(filepath, Jason.encode!(courses))
     end
   end
+
+  describe "suggested_searches/0" do
+    test "returns the list of topics" do
+      topics = Courses.suggested_searches()
+
+      assert "sql" in topics
+      assert "ash" in topics
+      assert "elixir" in topics
+      assert "phoenix" in topics
+    end
+  end
+
+  describe "get_random/0" do
+    test "returns one of the topics" do
+      topics = Courses.suggested_searches()
+      random_topic = Courses.get_random()
+      assert random_topic in topics
+    end
+  end
 end
