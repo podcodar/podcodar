@@ -28,7 +28,6 @@ COPY mix.exs mix.lock ./
 COPY config ./config
 
 RUN mix deps.get --only prod && \
-    mix tailwind.install && \
     mix deps.compile
 
 # Copy application source
