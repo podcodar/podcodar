@@ -45,7 +45,7 @@ defmodule PodcodarWeb.PageLive do
           <.link
             :for={term <- @suggested_searches}
             navigate={~p"/courses?query=#{term}"}
-            class="btn btn-sm btn-dash btn-neutral opacity-70"
+            class="btn btn-sm btn-dash opacity-70"
           >
             {term}
           </.link>
