@@ -23,6 +23,6 @@ defmodule PodcodarWeb.RedirectController do
 
   def random(conn, _params) do
     topic = Podcodar.Courses.get_random()
-    redirect(conn, to: "/courses?query=#{URI.encode_www_form(topic)}")
+    redirect(conn, to: ~p"/courses?query=#{URI.encode_www_form(topic)}")
   end
 end
