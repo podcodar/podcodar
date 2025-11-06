@@ -72,7 +72,7 @@ config :esbuild,
 
 # Configure tailwind (the version is required)
 config :tailwind,
-  version: "4.1.16",
+  version: "4.1.17",
   podcodar: [
     args: ~w(
       --input=assets/css/app.css
