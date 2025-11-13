@@ -89,10 +89,26 @@
 
   {
     "title": "O essencial do Spring",
-    "link": "https://www.youtube.com/embed/videoseries?si=cTNetTtAaOlnVUoY&amp;list=PL62G310vn6nF3gssjqfCKLpTK2sZJ_a_1",
+    "link": "https://www.youtube.com/playlist?list=https://www.youtube.com/embed/videoseries?si=cTNetTtAaOlnVUoY&amp;list=PLHz_AreHm4dlsK3Nr9GVvXCbpQyHQl1o1",
     "description": "Curso introdutório e gratuito de Spring Framework em português!",
     "locale": "br",
     "technologies": ["java", "spring", "backend", "api"]
+  },
+
+  {
+    "title": "Curso Grátis de JavaScript e ECMAScript para Iniciantes",
+    "link": "https://www.youtube.com/embed/videoseries?si=CNHXv1YbyT0jI4ox&amp;list=PLHz_AreHm4dlsK3Nr9GVvXCbpQyHQl1o1",
+    "description": "Curso de linguagem JavaScript, voltado para iniciantes e para quem quiser aprender mais sobre ECMAScript, a versão padronizada do JS.",
+    "locale": "br",
+    "technologies": ["javascript", "web", "fullstack"]
+  },
+
+  {
+    "title": "Curso completo e atual de HTML5 e CSS3",
+    "link": "https://www.youtube.com/embed/videoseries?si=MVniIwBiTrUEAc9h&amp;list=PLHz_AreHm4dkZ9-atkcmcBaMZdmLHft8n",
+    "description": "Faça agora mesmo o Curso de HTML5 e CSS3 do Professor Gustavo Guanabara, com aulas atualizadas e com material de apoio em PDF.",
+    "locale": "br",
+    "technologies": ["web", "frontend"]
   }
 ]
 
