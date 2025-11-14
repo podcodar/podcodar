@@ -1,5 +1,6 @@
 defmodule PodcodarWeb.UserAuthTest do
   use PodcodarWeb.ConnCase
+  use Gettext, backend: PodcodarWeb.Gettext
 
   alias Phoenix.LiveView
   alias Podcodar.Accounts
@@ -326,7 +327,7 @@ defmodule PodcodarWeb.UserAuthTest do
       assert redirected_to(conn) == ~p"/users/log-in"
 
       assert Phoenix.Flash.get(conn.assigns.flash, :error) ==
-               "You must log in to access this page."
+               gettext("you_must_log_in_to_access_this_page")
     end
 
     test "stores the path to redirect to on GET", %{conn: conn} do
@@ -398,7 +399,7 @@ defmodule PodcodarWeb.UserAuthTest do
       assert conn.halted
       assert redirected_to(conn) == ~p"/"
       assert Phoenix.Flash.get(conn.assigns.flash, :error) =~
-               "You do not have permission to access this page"
+               gettext("you_do_not_have_permission_to_access_this_page")
     end
 
     test "continues if user has required role", %{conn: conn, user: user} do

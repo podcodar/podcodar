@@ -1,5 +1,6 @@
 defmodule PodcodarWeb.UserAuth do
   use PodcodarWeb, :verified_routes
+  use Gettext, backend: PodcodarWeb.Gettext
 
   import Plug.Conn
   import Phoenix.Controller
@@ -223,7 +224,7 @@ defmodule PodcodarWeb.UserAuth do
     else
       socket =
         socket
-        |> Phoenix.LiveView.put_flash(:error, "You must log in to access this page.")
+        |> Phoenix.LiveView.put_flash(:error, gettext("you_must_log_in_to_access_this_page"))
         |> Phoenix.LiveView.redirect(to: ~p"/users/log-in")
 
       {:halt, socket}
@@ -238,7 +239,7 @@ defmodule PodcodarWeb.UserAuth do
     else
       socket =
         socket
-        |> Phoenix.LiveView.put_flash(:error, "You must re-authenticate to access this page.")
+        |> Phoenix.LiveView.put_flash(:error, gettext("you_must_reauthenticate_to_access_this_page"))
         |> Phoenix.LiveView.redirect(to: ~p"/users/log-in")
 
       {:halt, socket}
@@ -272,7 +273,7 @@ defmodule PodcodarWeb.UserAuth do
       conn
     else
       conn
-      |> put_flash(:error, "You must log in to access this page.")
+      |> put_flash(:error, gettext("you_must_log_in_to_access_this_page"))
       |> maybe_store_return_to()
       |> redirect(to: ~p"/users/log-in")
       |> halt()
@@ -293,7 +294,7 @@ defmodule PodcodarWeb.UserAuth do
       conn
     else
       conn
-      |> put_flash(:error, "You do not have permission to access this page.")
+      |> put_flash(:error, gettext("you_do_not_have_permission_to_access_this_page"))
       |> redirect(to: ~p"/")
       |> halt()
     end
@@ -308,7 +309,7 @@ defmodule PodcodarWeb.UserAuth do
       conn
     else
       conn
-      |> put_flash(:error, "You do not have permission to access this page.")
+      |> put_flash(:error, gettext("you_do_not_have_permission_to_access_this_page"))
       |> redirect(to: ~p"/")
       |> halt()
     end
@@ -339,7 +340,7 @@ defmodule PodcodarWeb.UserAuth do
     else
       socket =
         socket
-        |> Phoenix.LiveView.put_flash(:error, "You do not have permission to access this page.")
+        |> Phoenix.LiveView.put_flash(:error, gettext("you_do_not_have_permission_to_access_this_page"))
         |> Phoenix.LiveView.redirect(to: ~p"/")
 
       {:halt, socket}
@@ -355,7 +356,7 @@ defmodule PodcodarWeb.UserAuth do
     else
       socket =
         socket
-        |> Phoenix.LiveView.put_flash(:error, "You do not have permission to access this page.")
+        |> Phoenix.LiveView.put_flash(:error, gettext("you_do_not_have_permission_to_access_this_page"))
         |> Phoenix.LiveView.redirect(to: ~p"/")
 
       {:halt, socket}

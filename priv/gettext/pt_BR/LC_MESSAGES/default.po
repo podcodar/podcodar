@@ -494,3 +494,22 @@ msgstr "não corresponde à senha"
 #, elixir-autogen, elixir-format
 msgid "must have the @ sign and no spaces"
 msgstr "deve conter o símbolo @ e não ter espaços"
+
+#: lib/podcodar_web/user_auth.ex:227
+#: lib/podcodar_web/user_auth.ex:276
+#, elixir-autogen, elixir-format
+msgid "you_must_log_in_to_access_this_page"
+msgstr "Você deve fazer login para acessar esta página."
+
+#: lib/podcodar_web/user_auth.ex:242
+#, elixir-autogen, elixir-format
+msgid "you_must_reauthenticate_to_access_this_page"
+msgstr "Você deve autenticar novamente para acessar esta página."
+
+#: lib/podcodar_web/user_auth.ex:297
+#: lib/podcodar_web/user_auth.ex:312
+#: lib/podcodar_web/user_auth.ex:343
+#: lib/podcodar_web/user_auth.ex:359
+#, elixir-autogen, elixir-format
+msgid "you_do_not_have_permission_to_access_this_page"
+msgstr "Você não tem permissão para acessar esta página."
