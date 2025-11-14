@@ -60,6 +60,39 @@ defmodule Podcodar.Accounts do
   """
   def get_user!(id), do: Repo.get!(User, id)
 
+  ## Role management
+
+  @doc """
+  Updates a user's role.
+
+  ## Examples
+
+      iex> update_user_role(user, "admin")
+      {:ok, %User{}}
+
+      iex> update_user_role(user, "invalid_role")
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def update_user_role(user, role) do
+    user
+    |> User.role_changeset(%{role: role})
+    |> Repo.update()
+  end
+
+  @doc """
+  Returns an `%Ecto.Changeset{}` for changing the user role.
+
+  ## Examples
+
+      iex> change_user_role(user)
+      %Ecto.Changeset{data: %User{}}
+
+  """
+  def change_user_role(user, attrs \\ %{}) do
+    User.role_changeset(user, attrs)
+  end
+
   ## User registration
 
   @doc """

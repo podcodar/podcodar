@@ -30,4 +30,34 @@ defmodule Podcodar.Accounts.Scope do
   end
 
   def for_user(nil), do: nil
+
+  @doc """
+  Returns true if the scope has the given role.
+  """
+  def has_role?(%__MODULE__{user: %User{} = user}, role) do
+    User.has_role?(user, role)
+  end
+
+  def has_role?(_, _), do: false
+
+  @doc """
+  Returns true if the scope is an admin.
+  """
+  def admin?(%__MODULE__{user: %User{} = user}), do: User.admin?(user)
+  def admin?(_), do: false
+
+  @doc """
+  Returns true if the scope is an interviewer or admin.
+  """
+  def interviewer?(%__MODULE__{user: %User{} = user}), do: User.interviewer?(user)
+  def interviewer?(_), do: false
+
+  @doc """
+  Returns true if the scope has at least one of the given roles.
+  """
+  def has_any_role?(%__MODULE__{user: %User{} = user}, roles) do
+    User.has_any_role?(user, roles)
+  end
+
+  def has_any_role?(_, _), do: false
 end

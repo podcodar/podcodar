@@ -387,4 +387,124 @@ defmodule PodcodarWeb.UserAuthTest do
       }
     end
   end
+
+  describe "require_role/2" do
+    test "redirects if user does not have required role", %{conn: conn, user: user} do
+      conn =
+        conn
+        |> assign(:current_scope, Scope.for_user(user))
+        |> UserAuth.require_role("admin")
+
+      assert conn.halted
+      assert redirected_to(conn) == ~p"/"
+      assert Phoenix.Flash.get(conn.assigns.flash, :error) =~
+               "You do not have permission to access this page"
+    end
+
+    test "continues if user has required role", %{conn: conn, user: user} do
+      {:ok, admin_user} = Accounts.update_user_role(user, "admin")
+
+      conn =
+        conn
+        |> assign(:current_scope, Scope.for_user(admin_user))
+        |> UserAuth.require_role("admin")
+
+      refute conn.halted
+      refute conn.status
+    end
+
+    test "redirects if no user is logged in", %{conn: conn} do
+      conn =
+        conn
+        |> assign(:current_scope, nil)
+        |> UserAuth.require_role("admin")
+
+      assert conn.halted
+      assert redirected_to(conn) == ~p"/"
+    end
+  end
+
+  describe "require_any_role/2" do
+    test "redirects if user does not have any required role", %{conn: conn, user: user} do
+      conn =
+        conn
+        |> assign(:current_scope, Scope.for_user(user))
+        |> UserAuth.require_any_role(["admin", "interviewer"])
+
+      assert conn.halted
+      assert redirected_to(conn) == ~p"/"
+    end
+
+    test "continues if user has one of the required roles", %{conn: conn, user: user} do
+      {:ok, interviewer_user} = Accounts.update_user_role(user, "interviewer")
+
+      conn =
+        conn
+        |> assign(:current_scope, Scope.for_user(interviewer_user))
+        |> UserAuth.require_any_role(["admin", "interviewer"])
+
+      refute conn.halted
+      refute conn.status
+    end
+  end
+
+  describe "require_admin/2" do
+    test "redirects if user is not admin", %{conn: conn, user: user} do
+      conn =
+        conn
+        |> assign(:current_scope, Scope.for_user(user))
+        |> UserAuth.require_admin([])
+
+      assert conn.halted
+      assert redirected_to(conn) == ~p"/"
+    end
+
+    test "continues if user is admin", %{conn: conn, user: user} do
+      {:ok, admin_user} = Accounts.update_user_role(user, "admin")
+
+      conn =
+        conn
+        |> assign(:current_scope, Scope.for_user(admin_user))
+        |> UserAuth.require_admin([])
+
+      refute conn.halted
+      refute conn.status
+    end
+  end
+
+  describe "require_interviewer/2" do
+    test "redirects if user is not interviewer or admin", %{conn: conn, user: user} do
+      conn =
+        conn
+        |> assign(:current_scope, Scope.for_user(user))
+        |> UserAuth.require_interviewer([])
+
+      assert conn.halted
+      assert redirected_to(conn) == ~p"/"
+    end
+
+    test "continues if user is interviewer", %{conn: conn, user: user} do
+      {:ok, interviewer_user} = Accounts.update_user_role(user, "interviewer")
+
+      conn =
+        conn
+        |> assign(:current_scope, Scope.for_user(interviewer_user))
+        |> UserAuth.require_interviewer([])
+
+      refute conn.halted
+      refute conn.status
+    end
+
+    test "continues if user is admin", %{conn: conn, user: user} do
+      {:ok, admin_user} = Accounts.update_user_role(user, "admin")
+
+      conn =
+        conn
+        |> assign(:current_scope, Scope.for_user(admin_user))
+        |> UserAuth.require_interviewer([])
+
+      refute conn.halted
+      refute conn.status
+    end
+  end
 end

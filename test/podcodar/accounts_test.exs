@@ -394,4 +394,97 @@ defmodule Podcodar.AccountsTest do
       refute inspect(%User{password: "123456"}) =~ "password: \"123456\""
     end
   end
+
+  describe "update_user_role/2" do
+    test "updates the user role with valid role" do
+      user = user_fixture()
+      assert user.role == "member"
+
+      assert {:ok, updated_user} = Accounts.update_user_role(user, "admin")
+      assert updated_user.role == "admin"
+    end
+
+    test "returns error with invalid role" do
+      user = user_fixture()
+      assert {:error, changeset} = Accounts.update_user_role(user, "invalid_role")
+      assert "is invalid" in errors_on(changeset).role
+    end
+
+    test "updates to interviewer role" do
+      user = user_fixture()
+      assert {:ok, updated_user} = Accounts.update_user_role(user, "interviewer")
+      assert updated_user.role == "interviewer"
+    end
+  end
+
+  describe "change_user_role/2" do
+    test "returns a changeset" do
+      user = user_fixture()
+      assert %Ecto.Changeset{} = Accounts.change_user_role(user)
+    end
+  end
+
+  describe "User.has_role?/2" do
+    test "returns true when user has the specified role" do
+      user = user_fixture()
+      assert User.has_role?(user, "member")
+      refute User.has_role?(user, "admin")
+    end
+
+    test "returns false for nil user" do
+      refute User.has_role?(nil, "admin")
+    end
+  end
+
+  describe "User.admin?/1" do
+    test "returns true for admin users" do
+      user = user_fixture()
+      {:ok, admin_user} = Accounts.update_user_role(user, "admin")
+      assert User.admin?(admin_user)
+    end
+
+    test "returns false for non-admin users" do
+      user = user_fixture()
+      refute User.admin?(user)
+    end
+
+    test "returns false for nil" do
+      refute User.admin?(nil)
+    end
+  end
+
+  describe "User.interviewer?/1" do
+    test "returns true for interviewer users" do
+      user = user_fixture()
+      {:ok, interviewer_user} = Accounts.update_user_role(user, "interviewer")
+      assert User.interviewer?(interviewer_user)
+    end
+
+    test "returns true for admin users" do
+      user = user_fixture()
+      {:ok, admin_user} = Accounts.update_user_role(user, "admin")
+      assert User.interviewer?(admin_user)
+    end
+
+    test "returns false for member users" do
+      user = user_fixture()
+      refute User.interviewer?(user)
+    end
+
+    test "returns false for nil" do
+      refute User.interviewer?(nil)
+    end
+  end
+
+  describe "User.has_any_role?/2" do
+    test "returns true when user has one of the specified roles" do
+      user = user_fixture()
+      assert User.has_any_role?(user, ["member", "admin"])
+      refute User.has_any_role?(user, ["admin", "interviewer"])
+    end
+
+    test "returns false for nil user" do
+      refute User.has_any_role?(nil, ["admin"])
+    end
+  end
 end

@@ -284,4 +284,81 @@ defmodule PodcodarWeb.UserAuth do
   end
 
   defp maybe_store_return_to(conn), do: conn
+
+  @doc """
+  Plug for routes that require a specific role.
+  """
+  def require_role(conn, role) when is_binary(role) do
+    if conn.assigns.current_scope && Accounts.Scope.has_role?(conn.assigns.current_scope, role) do
+      conn
+    else
+      conn
+      |> put_flash(:error, "You do not have permission to access this page.")
+      |> redirect(to: ~p"/")
+      |> halt()
+    end
+  end
+
+  @doc """
+  Plug for routes that require one of several roles.
+  """
+  def require_any_role(conn, roles) when is_list(roles) do
+    if conn.assigns.current_scope &&
+         Accounts.Scope.has_any_role?(conn.assigns.current_scope, roles) do
+      conn
+    else
+      conn
+      |> put_flash(:error, "You do not have permission to access this page.")
+      |> redirect(to: ~p"/")
+      |> halt()
+    end
+  end
+
+  @doc """
+  Plug for routes that require admin role.
+  """
+  def require_admin(conn, _opts) do
+    require_role(conn, "admin")
+  end
+
+  @doc """
+  Plug for routes that require interviewer or admin role.
+  """
+  def require_interviewer(conn, _opts) do
+    require_any_role(conn, ["interviewer", "admin"])
+  end
+
+  @doc """
+  LiveView on_mount callback that requires a specific role.
+  """
+  def on_mount(:require_admin, _params, session, socket) do
+    socket = mount_current_scope(socket, session)
+
+    if socket.assigns.current_scope && Accounts.Scope.admin?(socket.assigns.current_scope) do
+      {:cont, socket}
+    else
+      socket =
+        socket
+        |> Phoenix.LiveView.put_flash(:error, "You do not have permission to access this page.")
+        |> Phoenix.LiveView.redirect(to: ~p"/")
+
+      {:halt, socket}
+    end
+  end
+
+  def on_mount(:require_interviewer, _params, session, socket) do
+    socket = mount_current_scope(socket, session)
+
+    if socket.assigns.current_scope &&
+         Accounts.Scope.interviewer?(socket.assigns.current_scope) do
+      {:cont, socket}
+    else
+      socket =
+        socket
+        |> Phoenix.LiveView.put_flash(:error, "You do not have permission to access this page.")
+        |> Phoenix.LiveView.redirect(to: ~p"/")
+
+      {:halt, socket}
+    end
+  end
 end

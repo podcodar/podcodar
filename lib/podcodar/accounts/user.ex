@@ -11,9 +11,12 @@ defmodule Podcodar.Accounts.User do
     field :hashed_password, :string, redact: true
     field :confirmed_at, :utc_datetime
     field :authenticated_at, :utc_datetime, virtual: true
+    field :role, :string, default: "member"
 
     timestamps(type: :utc_datetime)
   end
+
+  @valid_roles ~w(member interviewer admin)
 
   @doc """
   A user changeset for registering or changing the email.
@@ -118,6 +121,18 @@ defmodule Podcodar.Accounts.User do
   end
 
   @doc """
+  A user changeset for changing the role.
+
+  Only allows valid roles: member, interviewer, admin.
+  """
+  def role_changeset(user, attrs) do
+    user
+    |> cast(attrs, [:role])
+    |> validate_required([:role])
+    |> validate_inclusion(:role, @valid_roles)
+  end
+
+  @doc """
   Verifies the password.
 
   If there is no user or the user doesn't have a password, we call
@@ -132,4 +147,34 @@ defmodule Podcodar.Accounts.User do
     Bcrypt.no_user_verify()
     false
   end
+
+  @doc """
+  Returns true if the user has the given role.
+  """
+  def has_role?(%__MODULE__{role: role}, required_role) when is_binary(required_role) do
+    role == required_role
+  end
+
+  def has_role?(_, _), do: false
+
+  @doc """
+  Returns true if the user is an admin.
+  """
+  def admin?(%__MODULE__{role: "admin"}), do: true
+  def admin?(_), do: false
+
+  @doc """
+  Returns true if the user is an interviewer or admin.
+  """
+  def interviewer?(%__MODULE__{role: role}) when role in ["interviewer", "admin"], do: true
+  def interviewer?(_), do: false
+
+  @doc """
+  Returns true if the user has at least one of the given roles.
+  """
+  def has_any_role?(%__MODULE__{} = user, roles) when is_list(roles) do
+    Enum.any?(roles, &has_role?(user, &1))
+  end
+
+  def has_any_role?(_, _), do: false
 end
