@@ -160,7 +160,7 @@ defmodule PodcodarWeb.Layouts do
 
     <%= if @current_scope do %>
       <li>
-        <.link navigate={~p"/users/settings"}>
+        <.link navigate={~p"/@#{@current_scope.user.username}"}>
           <.icon name="hero-user" class="w-4 h-4" /> @{@current_scope.user.username}
         </.link>
       </li>

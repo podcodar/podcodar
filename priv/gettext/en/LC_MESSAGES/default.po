@@ -321,6 +321,36 @@ msgstr "Choose your preferred theme:"
 msgid "settings"
 msgstr "Settings"
 
+#: lib/podcodar_web/live/user_live/profile.ex:32
+#, elixir-autogen, elixir-format
+msgid "profile_info"
+msgstr "Profile Information"
+
+#: lib/podcodar_web/live/user_live/profile.ex:51
+#, elixir-autogen, elixir-format
+msgid "member_since"
+msgstr "Member since"
+
+#: lib/podcodar_web/live/user_live/profile.ex:59
+#, elixir-autogen, elixir-format
+msgid "edit_profile"
+msgstr "Edit Profile"
+
+#: lib/podcodar_web/live/user_live/profile.ex:68
+#, elixir-autogen, elixir-format
+msgid "user_not_found"
+msgstr "User Not Found"
+
+#: lib/podcodar_web/live/user_live/profile.ex:69
+#, elixir-autogen, elixir-format
+msgid "user_not_found_message"
+msgstr "The user you're looking for doesn't exist."
+
+#: lib/podcodar_web/live/user_live/profile.ex:71
+#, elixir-autogen, elixir-format
+msgid "go_home"
+msgstr "Go Home"
+
 #: lib/podcodar_web/live/user_live/registration.ex:16
 #, elixir-autogen, elixir-format
 msgid "already_registered"
