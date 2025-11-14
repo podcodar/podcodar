@@ -32,17 +32,7 @@ defmodule Podcodar.Courses do
     case Jason.decode(content) do
       {:ok, courses} ->
         Logger.info("Successfully loaded courses from #{path}: #{inspect(courses)}")
-
-        {:ok,
-         Enum.map(courses, fn course_map ->
-           %Course{
-             title: Map.get(course_map, "title", ""),
-             description: Map.get(course_map, "description", ""),
-             link: Map.get(course_map, "link", ""),
-             locale: Map.get(course_map, "locale", ""),
-             technologies: Map.get(course_map, "technologies", [])
-           }
-         end)}
+        {:ok, Enum.map(courses, &map_to_course/1)}
 
       {:error, reason} ->
         Logger.error("Failed to decode courses JSON: #{inspect(reason)}")
@@ -69,6 +59,16 @@ defmodule Podcodar.Courses do
       end)
 
     {:ok, courses}
+  end
+
+  defp map_to_course(course_map) do
+    %Course{
+      title: Map.get(course_map, "title", ""),
+      description: Map.get(course_map, "description", ""),
+      link: Map.get(course_map, "link", ""),
+      locale: Map.get(course_map, "locale", ""),
+      technologies: Map.get(course_map, "technologies", [])
+    }
   end
 
   defp resolve_courses_file_path do

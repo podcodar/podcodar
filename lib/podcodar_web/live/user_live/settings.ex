@@ -104,10 +104,11 @@ defmodule PodcodarWeb.UserLive.Settings do
     %{"user" => user_params} = params
 
     email_form =
-      socket.assigns.current_scope.user
-      |> Accounts.change_user_email(user_params, validate_unique: false)
-      |> Map.put(:action, :validate)
-      |> to_form()
+      validate_user_form(
+        socket.assigns.current_scope.user,
+        user_params,
+        &Accounts.change_user_email(&1, &2, validate_unique: false)
+      )
 
     {:noreply, assign(socket, email_form: email_form)}
   end
@@ -137,10 +138,11 @@ defmodule PodcodarWeb.UserLive.Settings do
     %{"user" => user_params} = params
 
     password_form =
-      socket.assigns.current_scope.user
-      |> Accounts.change_user_password(user_params, hash_password: false)
-      |> Map.put(:action, :validate)
-      |> to_form()
+      validate_user_form(
+        socket.assigns.current_scope.user,
+        user_params,
+        &Accounts.change_user_password(&1, &2, hash_password: false)
+      )
 
     {:noreply, assign(socket, password_form: password_form)}
   end
@@ -157,5 +159,12 @@ defmodule PodcodarWeb.UserLive.Settings do
       changeset ->
         {:noreply, assign(socket, password_form: to_form(changeset, action: :insert))}
     end
+  end
+
+  defp validate_user_form(user, user_params, change_function) do
+    user
+    |> change_function.(user_params)
+    |> Map.put(:action, :validate)
+    |> to_form()
   end
 end
