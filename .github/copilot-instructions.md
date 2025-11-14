@@ -147,7 +147,7 @@ Controllers automatically have the `current_scope` available if they use the `:b
 - **Always** preload Ecto associations in queries when they'll be accessed in templates
 - Remember `import Ecto.Query` and other supporting modules when you write `seeds.exs`
 - `Ecto.Schema` fields always use the `:string` type, even for `:text` columns
-- `Ecto.Changeset.validate_number/2` **DOES NOT SUPPORT the `:allow_nil` option**
+- `Ecto.Changeset.validate_number/3` supports the `:allow_nil` option (added in Ecto 3.11). However, by default, Ecto validations only run if a change for the given field exists and the change value is not nil, so this option is rarely needed
 - You **must** use `Ecto.Changeset.get_field(changeset, :field)` to access changeset fields
 - Fields which are set programmatically, such as `user_id`, must not be listed in `cast` calls or similar for security purposes. Instead they must be explicitly set when creating the struct
 
