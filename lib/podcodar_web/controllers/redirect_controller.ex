@@ -4,25 +4,25 @@ defmodule PodcodarWeb.RedirectController do
   require Logger
 
   def discord(conn, _params) do
-    discord_url = Application.get_env(:podcodar, :discord_invite_url)
-    Logger.info("discord_url: #{discord_url}")
-    redirect(conn, external: discord_url)
+    redirect_to_external(conn, :discord_invite_url, "discord")
   end
 
   def github(conn, _params) do
-    github_url = Application.get_env(:podcodar, :github_org_url)
-    Logger.info("github_url: #{github_url}")
-    redirect(conn, external: github_url)
+    redirect_to_external(conn, :github_org_url, "github")
   end
 
   def sponsor(conn, _params) do
-    sponsor_url = Application.get_env(:podcodar, :sponsor_url)
-    Logger.info("sponsor_url: #{sponsor_url}")
-    redirect(conn, external: sponsor_url)
+    redirect_to_external(conn, :sponsor_url, "sponsor")
   end
 
   def random(conn, _params) do
     topic = Podcodar.Courses.get_random()
     redirect(conn, to: ~p"/courses?query=#{URI.encode_www_form(topic)}")
+  end
+
+  defp redirect_to_external(conn, config_key, service_name) do
+    url = Application.get_env(:podcodar, config_key)
+    Logger.info("#{service_name}_url: #{url}")
+    redirect(conn, external: url)
   end
 end
