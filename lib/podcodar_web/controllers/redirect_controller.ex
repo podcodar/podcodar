@@ -22,7 +22,14 @@ defmodule PodcodarWeb.RedirectController do
 
   defp redirect_to_external(conn, config_key) do
     url = Application.get_env(:podcodar, config_key)
-    service_name = config_key |> Atom.to_string() |> String.replace("_invite_url", "") |> String.replace("_org_url", "") |> String.replace("_url", "")
+
+    service_name =
+      config_key
+      |> Atom.to_string()
+      |> String.replace("_invite_url", "")
+      |> String.replace("_org_url", "")
+      |> String.replace("_url", "")
+
     Logger.info("#{service_name}_url: #{url}")
     redirect(conn, external: url)
   end
