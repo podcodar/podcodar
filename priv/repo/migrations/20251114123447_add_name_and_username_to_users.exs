@@ -4,7 +4,7 @@ defmodule Podcodar.Repo.Migrations.AddNameAndUsernameToUsers do
   def change do
     alter table(:users) do
       add :name, :string
-      add :username, :string, null: false
+      add :username, :string
     end
 
     create unique_index(:users, [:username])
