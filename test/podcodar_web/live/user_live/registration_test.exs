@@ -33,7 +33,7 @@ defmodule PodcodarWeb.UserLive.RegistrationTest do
       result =
         lv
         |> element("#registration_form")
-        |> render_change(user: %{"email" => "with spaces"})
+        |> render_change(user: %{"email" => "with spaces", "username" => "ab"})
 
       assert result =~ gettext("register_for_an_account")
       assert result =~ gettext("must have the @ sign and no spaces")
@@ -62,11 +62,59 @@ defmodule PodcodarWeb.UserLive.RegistrationTest do
       result =
         lv
         |> form("#registration_form",
-          user: %{"email" => user.email}
+          user: %{"email" => user.email, "username" => "newuser"}
         )
         |> render_submit()
 
       assert result =~ gettext("has already been taken")
+    end
+
+    test "renders errors for duplicated username", %{conn: conn} do
+      {:ok, lv, _html} = live(conn, ~p"/users/register")
+
+      user = user_fixture(%{username: "testuser"})
+
+      result =
+        lv
+        |> form("#registration_form",
+          user: %{"email" => "new@email.com", "username" => user.username}
+        )
+        |> render_submit()
+
+      assert result =~ gettext("has already been taken")
+    end
+
+    test "renders errors for username too short", %{conn: conn} do
+      {:ok, lv, _html} = live(conn, ~p"/users/register")
+
+      result =
+        lv
+        |> element("#registration_form")
+        |> render_change(user: %{"username" => "ab"})
+
+      assert result =~ gettext("should be at least %{count} character(s)", count: 3)
+    end
+
+    test "renders errors for username too long", %{conn: conn} do
+      {:ok, lv, _html} = live(conn, ~p"/users/register")
+
+      result =
+        lv
+        |> element("#registration_form")
+        |> render_change(user: %{"username" => String.duplicate("a", 21)})
+
+      assert result =~ gettext("should be at most %{count} character(s)", count: 20)
+    end
+
+    test "renders errors for username with invalid characters", %{conn: conn} do
+      {:ok, lv, _html} = live(conn, ~p"/users/register")
+
+      result =
+        lv
+        |> element("#registration_form")
+        |> render_change(user: %{"username" => "user@name"})
+
+      assert result =~ gettext("can only contain letters, numbers, and underscores")
     end
   end
 

@@ -6,6 +6,8 @@ defmodule Podcodar.Accounts.User do
   @primary_key {:id, :binary_id, autogenerate: true}
   @foreign_key_type :binary_id
   schema "users" do
+    field :name, :string
+    field :username, :string
     field :email, :string
     field :password, :string, virtual: true, redact: true
     field :hashed_password, :string, redact: true
@@ -54,6 +56,44 @@ defmodule Podcodar.Accounts.User do
   defp validate_email_changed(changeset) do
     if get_field(changeset, :email) && get_change(changeset, :email) == nil do
       add_error(changeset, :email, "did not change")
+    else
+      changeset
+    end
+  end
+
+  @doc """
+  A user changeset for registration.
+
+  It is important to validate the uniqueness of the username and email
+  to avoid duplicates in the database.
+
+  ## Options
+
+    * `:validate_unique` - Set to false if you don't want to validate the
+      uniqueness of the email and username, useful when displaying live validations.
+      Defaults to `true`.
+  """
+  def registration_changeset(user, attrs, opts \\ []) do
+    user
+    |> cast(attrs, [:name, :username, :email])
+    |> validate_required([:username, :email])
+    |> validate_username(opts)
+    |> validate_email(opts)
+  end
+
+  defp validate_username(changeset, opts) do
+    changeset =
+      changeset
+      |> validate_required([:username])
+      |> validate_length(:username, min: 3, max: 20)
+      |> validate_format(:username, ~r/^[a-zA-Z0-9_]+$/,
+        message: gettext("can only contain letters, numbers, and underscores")
+      )
+
+    if Keyword.get(opts, :validate_unique, true) do
+      changeset
+      |> unsafe_validate_unique(:username, Podcodar.Repo)
+      |> unique_constraint(:username)
     else
       changeset
     end

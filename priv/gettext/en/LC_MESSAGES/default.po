@@ -142,6 +142,16 @@ msgstr "Discord"
 msgid "email"
 msgstr "Email"
 
+#: lib/podcodar_web/live/user_live/registration.ex:27
+#, elixir-autogen, elixir-format, fuzzy
+msgid "name"
+msgstr "Name"
+
+#: lib/podcodar_web/live/user_live/registration.ex:33
+#, elixir-autogen, elixir-format, fuzzy
+msgid "username"
+msgstr "Username"
+
 #: lib/podcodar_web/live/user_live/login.ex:22
 #, elixir-autogen, elixir-format, fuzzy
 msgid "for_an_account_now"

@@ -10,10 +10,13 @@ defmodule Podcodar.AccountsFixtures do
   alias Podcodar.Accounts.Scope
 
   def unique_user_email, do: "user#{System.unique_integer()}@example.com"
+  def unique_username, do: "user#{System.unique_integer()}"
   def valid_user_password, do: "hello world!"
 
   def valid_user_attributes(attrs \\ %{}) do
     Enum.into(attrs, %{
+      name: "Test User",
+      username: unique_username(),
       email: unique_user_email()
     })
   end
