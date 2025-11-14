@@ -32,8 +32,7 @@ defmodule PodcodarWeb.UserLive.Profile do
                   <h2 class="text-xl font-semibold mb-2">{gettext("profile_info")}</h2>
                   <div class="space-y-2">
                     <p>
-                      <span class="font-semibold">{gettext("username")}:</span>
-                      @{@user.username}
+                      <span class="font-semibold">{gettext("username")}:</span> @{@user.username}
                     </p>
                     <%= if @user.name do %>
                       <p>

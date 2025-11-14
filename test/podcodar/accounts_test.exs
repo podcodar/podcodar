@@ -90,7 +90,9 @@ defmodule Podcodar.AccountsTest do
       assert "has already been taken" in errors_on(changeset).email
 
       # Now try with the upper cased email too, to check that email case is ignored.
-      {:error, changeset} = Accounts.register_user(%{email: String.upcase(email), username: "newuser2"})
+      {:error, changeset} =
+        Accounts.register_user(%{email: String.upcase(email), username: "newuser2"})
+
       assert "has already been taken" in errors_on(changeset).email
     end
 
@@ -100,24 +102,35 @@ defmodule Podcodar.AccountsTest do
       assert "should be at least 3 character(s)" in errors_on(changeset).username
 
       # Too long
-      {:error, changeset} = Accounts.register_user(%{email: unique_user_email(), username: String.duplicate("a", 21)})
+      {:error, changeset} =
+        Accounts.register_user(%{email: unique_user_email(), username: String.duplicate("a", 21)})
+
       assert "should be at most 20 character(s)" in errors_on(changeset).username
     end
 
     test "validates username format" do
-      {:error, changeset} = Accounts.register_user(%{email: unique_user_email(), username: "user@name"})
+      {:error, changeset} =
+        Accounts.register_user(%{email: unique_user_email(), username: "user@name"})
+
       assert "can only contain letters, numbers, and underscores" in errors_on(changeset).username
 
-      {:error, changeset} = Accounts.register_user(%{email: unique_user_email(), username: "user-name"})
+      {:error, changeset} =
+        Accounts.register_user(%{email: unique_user_email(), username: "user-name"})
+
       assert "can only contain letters, numbers, and underscores" in errors_on(changeset).username
 
-      {:error, changeset} = Accounts.register_user(%{email: unique_user_email(), username: "user name"})
+      {:error, changeset} =
+        Accounts.register_user(%{email: unique_user_email(), username: "user name"})
+
       assert "can only contain letters, numbers, and underscores" in errors_on(changeset).username
     end
 
     test "validates username uniqueness" do
       %{username: username} = user_fixture(%{username: "johndoe"})
-      {:error, changeset} = Accounts.register_user(%{email: unique_user_email(), username: username})
+
+      {:error, changeset} =
+        Accounts.register_user(%{email: unique_user_email(), username: username})
+
       assert "has already been taken" in errors_on(changeset).username
     end
 
