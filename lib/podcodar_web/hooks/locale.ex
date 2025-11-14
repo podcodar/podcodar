@@ -16,12 +16,15 @@ defmodule PodcodarWeb.Hooks.Locale do
 
   # catch-all case
   def on_mount(:set_locale, _params, _session, socket) do
-    default_locale =
-      Application.fetch_env!(:podcodar, PodcodarWeb.Gettext)[:default_locale]
-      |> to_string()
+    default_locale = get_default_locale()
 
     Gettext.put_locale(PodcodarWeb.Gettext, default_locale)
 
     {:cont, assign(socket, :locale, default_locale)}
+  end
+
+  defp get_default_locale do
+    Application.fetch_env!(:podcodar, PodcodarWeb.Gettext)[:default_locale]
+    |> to_string()
   end
 end
