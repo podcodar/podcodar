@@ -504,3 +504,8 @@ msgstr ""
 #, elixir-autogen, elixir-format
 msgid "must have the @ sign and no spaces"
 msgstr ""
+
+#: lib/podcodar/accounts/user.ex:90
+#, elixir-autogen, elixir-format
+msgid "can only contain letters, numbers, and underscores"
+msgstr "can only contain letters, numbers, and underscores"

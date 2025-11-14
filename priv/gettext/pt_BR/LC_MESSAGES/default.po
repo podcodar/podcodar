@@ -504,3 +504,8 @@ msgstr "não corresponde à senha"
 #, elixir-autogen, elixir-format
 msgid "must have the @ sign and no spaces"
 msgstr "deve conter o símbolo @ e não ter espaços"
+
+#: lib/podcodar/accounts/user.ex:90
+#, elixir-autogen, elixir-format
+msgid "can only contain letters, numbers, and underscores"
+msgstr "pode conter apenas letras, números e sublinhados"
