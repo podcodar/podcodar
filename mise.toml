@@ -1,11 +1,10 @@
 [tasks]
-hello = "echo 'Hello, World!'"
-precommit = "mix precommit"
 fmt = "deno run -A npm:prettier --write **/*.md"
+dotenv = "op item get $(op item list | grep .podcodar.env | awk '{ print $1 }') --fields 'notesPlain' --reveal | sed 's/\"//g' > .env"
+precommit = "mix precommit"
 
 [env]
 _.file = '.env'
-_.path = "./node_modules/.bin"
 ENV = "production"
 
 [tools]
