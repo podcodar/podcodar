@@ -97,6 +97,75 @@ defmodule Podcodar.Accounts do
   def sudo_mode?(_user, _minutes), do: false
 
   @doc """
+  Returns an `%Ecto.Changeset{}` for updating the user profile (name and username).
+
+  See `Podcodar.Accounts.User.profile_changeset/3` for a list of supported options.
+
+  ## Examples
+
+      iex> change_user_profile(user)
+      %Ecto.Changeset{data: %User{}}
+
+  """
+  def change_user_profile(user, attrs \\ %{}, opts \\ []) do
+    User.profile_changeset(user, attrs, opts)
+  end
+
+  @doc """
+  Updates the user profile (name and username).
+
+  ## Examples
+
+      iex> update_user_profile(user, %{name: "John Doe", username: "johndoe"})
+      {:ok, %User{}}
+
+      iex> update_user_profile(user, %{name: ""})
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def update_user_profile(user, attrs) do
+    user
+    |> User.profile_changeset(attrs)
+    |> Repo.update()
+  end
+
+  @doc """
+  Returns an `%Ecto.Changeset{}` for updating the user profile and email (name, username, and email).
+
+  See `Podcodar.Accounts.User.profile_and_email_changeset/3` for a list of supported options.
+
+  ## Examples
+
+      iex> change_user_profile_and_email(user)
+      %Ecto.Changeset{data: %User{}}
+
+  """
+  def change_user_profile_and_email(user, attrs \\ %{}, opts \\ []) do
+    User.profile_and_email_changeset(user, attrs, opts)
+  end
+
+  @doc """
+  Updates the user profile and email (name, username, and email).
+
+  Note: Email updates require confirmation via a link sent to the new email address.
+  Only the profile fields (name and username) are immediately persisted.
+
+  ## Examples
+
+      iex> update_user_profile_and_email(user, %{name: "John Doe", username: "johndoe", email: "new@example.com"})
+      {:ok, %User{}}
+
+      iex> update_user_profile_and_email(user, %{name: ""})
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def update_user_profile_and_email(user, attrs) do
+    user
+    |> User.profile_and_email_changeset(attrs)
+    |> Repo.update()
+  end
+
+  @doc """
   Returns an `%Ecto.Changeset{}` for changing the user email.
 
   See `Podcodar.Accounts.User.email_changeset/3` for a list of supported options.

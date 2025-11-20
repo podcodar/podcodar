@@ -7,7 +7,7 @@
 ### Use "mix gettext.extract --merge" or "mix gettext.merge"
 ### to merge POT files into PO files.
 msgid ""
-msgstr ""
+msgstr "Save Profile"
 "Language: en\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
@@ -125,25 +125,25 @@ msgid "and_much_more"
 msgstr "And much more!"
 
 #: lib/podcodar_web/live/page_live.ex:120
-#, elixir-autogen, elixir-format, fuzzy
+#, elixir-autogen, elixir-format
 msgid "course_hours"
 msgstr "🌐 Course Hours"
 
 #: lib/podcodar_web/live/page_live.ex:53
-#, elixir-autogen, elixir-format, fuzzy
+#, elixir-autogen, elixir-format
 msgid "discord"
 msgstr "Discord"
 
 #: lib/podcodar_web/live/user_live/login.ex:49
 #: lib/podcodar_web/live/user_live/login.ex:73
 #: lib/podcodar_web/live/user_live/registration.ex:46
-#: lib/podcodar_web/live/user_live/settings.ex:24
-#, elixir-autogen, elixir-format, fuzzy
+#: lib/podcodar_web/live/user_live/settings.ex:38
+#, elixir-autogen, elixir-format
 msgid "email"
 msgstr "Email"
 
 #: lib/podcodar_web/live/user_live/login.ex:22
-#, elixir-autogen, elixir-format, fuzzy
+#, elixir-autogen, elixir-format
 msgid "for_an_account_now"
 msgstr "now."
 
@@ -163,7 +163,7 @@ msgid "last_updated_3_hours_ago"
 msgstr "Last updated: 3 hours ago"
 
 #: lib/podcodar_web/live/page_live.ex:48
-#, elixir-autogen, elixir-format, fuzzy
+#, elixir-autogen, elixir-format
 msgid "links"
 msgstr "Links"
 
@@ -176,7 +176,7 @@ msgid "log_in"
 msgstr "Log in"
 
 #: lib/podcodar_web/live/user_live/login.ex:84
-#, elixir-autogen, elixir-format, fuzzy
+#, elixir-autogen, elixir-format
 msgid "log_in_and_stay_logged_in"
 msgstr "Log in and stay logged in"
 
@@ -186,7 +186,7 @@ msgid "log_in_only_this_time"
 msgstr "Log in only this time"
 
 #: lib/podcodar_web/live/user_live/login.ex:55
-#, elixir-autogen, elixir-format, fuzzy
+#, elixir-autogen, elixir-format
 msgid "log_in_with_email"
 msgstr "Log in with email"
 
@@ -196,7 +196,7 @@ msgid "login_instructions_sent"
 msgstr "If your email is in our system, you will receive login instructions shortly."
 
 #: lib/podcodar_web/live/user_live/login.ex:33
-#, elixir-autogen, elixir-format, fuzzy
+#, elixir-autogen, elixir-format
 msgid "mailbox_page"
 msgstr "the mailbox page"
 
@@ -246,7 +246,7 @@ msgid "or_divider"
 msgstr "or"
 
 #: lib/podcodar_web/live/user_live/login.ex:80
-#, elixir-autogen, elixir-format, fuzzy
+#, elixir-autogen, elixir-format
 msgid "password"
 msgstr "Password"
 
@@ -267,7 +267,7 @@ msgstr "Scholarships"
 
 #: lib/podcodar_web/components/layouts.ex:179
 #: lib/podcodar_web/live/user_live/login.ex:22
-#, elixir-autogen, elixir-format, fuzzy
+#, elixir-autogen, elixir-format
 msgid "sign_up"
 msgstr "Sign up"
 
@@ -287,7 +287,7 @@ msgid "study_groups"
 msgstr "Study Groups"
 
 #: lib/podcodar_web/live/page_live.ex:73
-#, elixir-autogen, elixir-format, fuzzy
+#, elixir-autogen, elixir-format
 msgid "transparency"
 msgstr "Transparency"
 
@@ -356,16 +356,6 @@ msgstr "Log out"
 msgid "account_settings"
 msgstr "Account Settings"
 
-#: lib/podcodar_web/live/user_live/settings.ex:29
-#, elixir-autogen, elixir-format
-msgid "change_email"
-msgstr "Change Email"
-
-#: lib/podcodar_web/live/user_live/settings.ex:28
-#, elixir-autogen, elixir-format
-msgid "changing"
-msgstr "Changing..."
-
 #: lib/podcodar_web/live/user_live/confirmation.ex:37
 #, elixir-autogen, elixir-format
 msgid "confirm_and_log_in_only_this_time"
@@ -376,7 +366,7 @@ msgstr "Confirm and log in only this time"
 msgid "confirm_and_stay_logged_in"
 msgstr "Confirm and stay logged in"
 
-#: lib/podcodar_web/live/user_live/settings.ex:61
+#: lib/podcodar_web/live/user_live/settings.ex:75
 #, elixir-autogen, elixir-format
 msgid "confirm_new_password"
 msgstr "Confirm new password"
@@ -387,17 +377,12 @@ msgstr "Confirm new password"
 msgid "confirming"
 msgstr "Confirming..."
 
-#: lib/podcodar_web/live/user_live/settings.ex:129
-#, elixir-autogen, elixir-format
-msgid "email_change_confirmation_link_sent"
-msgstr "A link to confirm your email change has been sent to the new address."
-
-#: lib/podcodar_web/live/user_live/settings.ex:81
+#: lib/podcodar_web/live/user_live/settings.ex:95
 #, elixir-autogen, elixir-format
 msgid "email_change_link_invalid_or_expired"
 msgstr "Email change link is invalid or it has expired."
 
-#: lib/podcodar_web/live/user_live/settings.ex:78
+#: lib/podcodar_web/live/user_live/settings.ex:92
 #, elixir-autogen, elixir-format
 msgid "email_changed_successfully"
 msgstr "Email changed successfully."
@@ -435,17 +420,18 @@ msgstr "Manage your account email address and password settings"
 msgid "much_more"
 msgstr "Much more"
 
-#: lib/podcodar_web/live/user_live/settings.ex:54
+#: lib/podcodar_web/live/user_live/settings.ex:68
 #, elixir-autogen, elixir-format
 msgid "new_password"
 msgstr "New password"
 
-#: lib/podcodar_web/live/user_live/settings.ex:65
+#: lib/podcodar_web/live/user_live/settings.ex:79
 #, elixir-autogen, elixir-format
 msgid "save_password"
 msgstr "Save Password"
 
-#: lib/podcodar_web/live/user_live/settings.ex:64
+#: lib/podcodar_web/live/user_live/settings.ex:42
+#: lib/podcodar_web/live/user_live/settings.ex:78
 #, elixir-autogen, elixir-format
 msgid "saving"
 msgstr "Saving..."
@@ -473,7 +459,7 @@ msgstr "Logged out successfully."
 #: lib/podcodar_web/controllers/user_session_controller.ex:59
 #, elixir-autogen, elixir-format
 msgid "password_updated_successfully"
-msgstr "Password updated successfully."
+msgstr "Profile updated successfully."
 
 #: lib/podcodar_web/controllers/user_session_controller.ex:8
 #, elixir-autogen, elixir-format
@@ -485,27 +471,44 @@ msgstr "User confirmed successfully."
 msgid "welcome_back"
 msgstr "Welcome back."
 
-#: lib/podcodar/accounts/user.ex:127
+#: lib/podcodar/accounts/user.ex:162
 #, elixir-autogen, elixir-format
 msgid "does not match password"
 msgstr "does not match password"
 
-#: lib/podcodar/accounts/user.ex:65
+#: lib/podcodar/accounts/user.ex:100
 #, elixir-autogen, elixir-format
 msgid "must have the @ sign and no spaces"
 msgstr "must have the @ sign and no spaces"
 
 #: lib/podcodar_web/live/user_live/registration.ex:29
+#: lib/podcodar_web/live/user_live/settings.ex:24
 #, elixir-autogen, elixir-format
 msgid "full_name"
 msgstr "Full Name"
 
-#: lib/podcodar/accounts/user.ex:97
+#: lib/podcodar/accounts/user.ex:132
 #, elixir-autogen, elixir-format
 msgid "must contain only lowercase letters, numbers, underscores and hyphens"
 msgstr "must contain only lowercase letters, numbers, underscores and hyphens"
 
 #: lib/podcodar_web/live/user_live/registration.ex:38
+#: lib/podcodar_web/live/user_live/settings.ex:31
 #, elixir-autogen, elixir-format
 msgid "username"
 msgstr "Username"
+
+#: lib/podcodar_web/live/user_live/settings.ex:156
+#, elixir-autogen, elixir-format
+msgid "profile_updated_successfully"
+msgstr "Profile updated successfully."
+
+#: lib/podcodar_web/live/user_live/settings.ex:43
+#, elixir-autogen, elixir-format
+msgid "save_profile"
+msgstr "Save Profile"
+
+#: lib/podcodar_web/live/user_live/settings.ex:152
+#, elixir-autogen, elixir-format
+msgid "profile_and_email_change_confirmation_link_sent"
+msgstr "Profile updated and a confirmation link for the email change has been sent to the new address."

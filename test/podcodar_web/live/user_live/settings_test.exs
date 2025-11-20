@@ -13,7 +13,7 @@ defmodule PodcodarWeb.UserLive.SettingsTest do
         |> log_in_user(user_fixture())
         |> live(~p"/users/settings")
 
-      assert html =~ gettext("change_email")
+      assert html =~ gettext("save_profile")
       assert html =~ gettext("save_password")
     end
 
@@ -38,55 +38,148 @@ defmodule PodcodarWeb.UserLive.SettingsTest do
     end
   end
 
-  describe "update email form" do
+  describe "update profile form" do
     setup %{conn: conn} do
       user = user_fixture()
       %{conn: log_in_user(conn, user), user: user}
     end
 
-    test "updates the user email", %{conn: conn, user: user} do
+    test "updates the user profile", %{conn: conn, user: user} do
+      new_name = "Jane Doe"
+      new_username = "janedoe"
+
+      {:ok, lv, _html} = live(conn, ~p"/users/settings")
+
+      result =
+        lv
+        |> form("#profile_form", %{
+          "user" => %{"name" => new_name, "username" => new_username, "email" => user.email}
+        })
+        |> render_submit()
+
+      assert result =~ gettext("profile_updated_successfully")
+      assert result =~ new_name
+      updated_user = Accounts.get_user!(user.id)
+      assert updated_user.name == new_name
+      assert updated_user.username == new_username
+    end
+
+    test "renders errors with invalid data (phx-change)", %{conn: conn} do
+      conn = Phoenix.ConnTest.init_test_session(conn, %{"locale" => "en"})
+      {:ok, lv, _html} = live(conn, ~p"/users/settings")
+
+      result =
+        lv
+        |> element("#profile_form")
+        |> render_change(%{
+          "user" => %{"name" => "A", "username" => "123@invalid"}
+        })
+
+      assert result =~ gettext("save_profile")
+      assert result =~ "should be at least 2 character(s)"
+      assert result =~ "must contain only lowercase letters, numbers, underscores and hyphens"
+    end
+
+    test "renders errors with invalid data (phx-submit)", %{conn: conn} do
+      conn = Phoenix.ConnTest.init_test_session(conn, %{"locale" => "en"})
+      {:ok, lv, _html} = live(conn, ~p"/users/settings")
+
+      result =
+        lv
+        |> form("#profile_form", %{
+          "user" => %{"name" => "B", "username" => "abc@"}
+        })
+        |> render_submit()
+
+      assert result =~ gettext("save_profile")
+      assert result =~ "should be at least 2 character(s)"
+      assert result =~ "must contain only lowercase letters, numbers, underscores and hyphens"
+    end
+
+    test "renders duplicate username error", %{conn: conn} do
+      conn = Phoenix.ConnTest.init_test_session(conn, %{"locale" => "en"})
+      existing_user = user_fixture(%{username: "existinguser"})
+
+      {:ok, lv, _html} = live(conn, ~p"/users/settings")
+
+      result =
+        lv
+        |> form("#profile_form", %{
+          "user" => %{"name" => "Jane Doe", "username" => existing_user.username}
+        })
+        |> render_submit()
+
+      assert result =~ gettext("save_profile")
+      assert result =~ "has already been taken"
+    end
+  end
+
+  describe "update profile form with email" do
+    setup %{conn: conn} do
+      user = user_fixture()
+      %{conn: log_in_user(conn, user), user: user}
+    end
+
+    test "updates the user email with confirmation", %{conn: conn, user: user} do
       new_email = unique_user_email()
 
       {:ok, lv, _html} = live(conn, ~p"/users/settings")
 
       result =
         lv
-        |> form("#email_form", %{
-          "user" => %{"email" => new_email}
+        |> form("#profile_form", %{
+          "user" => %{"name" => user.name, "username" => user.username, "email" => new_email}
         })
         |> render_submit()
 
-      assert result =~ gettext("email_change_confirmation_link_sent")
+      assert result =~ "link para confirmar a alteração do seu email"
       assert Accounts.get_user_by_email(user.email)
     end
 
-    test "renders errors with invalid data (phx-change)", %{conn: conn} do
+    test "updates profile without changing email", %{conn: conn, user: user} do
+      new_name = "Updated Name"
+
       {:ok, lv, _html} = live(conn, ~p"/users/settings")
 
       result =
         lv
-        |> element("#email_form")
-        |> render_change(%{
-          "action" => "update_email",
-          "user" => %{"email" => "with spaces"}
-        })
-
-      assert result =~ gettext("change_email")
-      assert result =~ gettext("must have the @ sign and no spaces")
-    end
-
-    test "renders errors with invalid data (phx-submit)", %{conn: conn, user: user} do
-      {:ok, lv, _html} = live(conn, ~p"/users/settings")
-
-      result =
-        lv
-        |> form("#email_form", %{
-          "user" => %{"email" => user.email}
+        |> form("#profile_form", %{
+          "user" => %{"name" => new_name, "username" => user.username, "email" => user.email}
         })
         |> render_submit()
 
-      assert result =~ gettext("change_email")
-      assert result =~ gettext("did not change")
+      assert result =~ gettext("profile_updated_successfully")
+      updated_user = Accounts.get_user!(user.id)
+      assert updated_user.name == new_name
+      assert updated_user.email == user.email
+    end
+
+    test "renders errors with invalid email (phx-change)", %{conn: conn} do
+      conn = Phoenix.ConnTest.init_test_session(conn, %{"locale" => "en"})
+      {:ok, lv, _html} = live(conn, ~p"/users/settings")
+
+      result =
+        lv
+        |> element("#profile_form")
+        |> render_change(%{
+          "user" => %{"name" => "John Doe", "username" => "johndoe", "email" => "with spaces"}
+        })
+
+      assert result =~ gettext("save_profile")
+      assert result =~ "must have the @ sign and no spaces"
+    end
+
+    test "renders errors with unchanged email", %{conn: conn, user: user} do
+      {:ok, lv, _html} = live(conn, ~p"/users/settings")
+
+      result =
+        lv
+        |> form("#profile_form", %{
+          "user" => %{"name" => user.name, "username" => user.username, "email" => user.email}
+        })
+        |> render_submit()
+
+      assert result =~ gettext("profile_updated_successfully")
     end
   end
 

@@ -41,6 +41,41 @@ defmodule Podcodar.Accounts.User do
   end
 
   @doc """
+  A user changeset for updating profile information (name and username).
+
+  ## Options
+
+    * `:validate_unique` - Set to false if you don't want to validate the
+      uniqueness of username, useful when displaying live validations.
+      Defaults to `true`.
+  """
+  def profile_changeset(user, attrs, opts \\ []) do
+    user
+    |> cast(attrs, [:name, :username])
+    |> validate_required([:name, :username])
+    |> validate_name()
+    |> validate_username(opts)
+  end
+
+  @doc """
+  A user changeset for updating profile information and email (name, username, and email).
+
+  ## Options
+
+    * `:validate_unique` - Set to false if you don't want to validate the
+      uniqueness of username and email, useful when displaying live validations.
+      Defaults to `true`.
+  """
+  def profile_and_email_changeset(user, attrs, opts \\ []) do
+    user
+    |> cast(attrs, [:name, :username, :email])
+    |> validate_required([:name, :username, :email])
+    |> validate_name()
+    |> validate_username(opts)
+    |> validate_email(opts)
+  end
+
+  @doc """
   A user changeset for registering or changing the email.
 
   It requires the email to change otherwise an error is added.

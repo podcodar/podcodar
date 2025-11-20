@@ -17,16 +17,30 @@ defmodule PodcodarWeb.UserLive.Settings do
           </.header>
         </div>
 
-        <.form for={@email_form} id="email_form" phx-submit="update_email" phx-change="validate_email">
+        <.form for={@profile_form} id="profile_form" phx-submit="update_profile" phx-change="validate_profile">
           <.input
-            field={@email_form[:email]}
+            field={@profile_form[:name]}
+            type="text"
+            label={gettext("full_name")}
+            autocomplete="name"
+            required
+          />
+          <.input
+            field={@profile_form[:username]}
+            type="text"
+            label={gettext("username")}
+            autocomplete="username"
+            required
+          />
+          <.input
+            field={@profile_form[:email]}
             type="email"
             label={gettext("email")}
             autocomplete="username"
             required
           />
-          <.button variant="primary" phx-disable-with={gettext("changing")}>
-            {gettext("change_email")}
+          <.button variant="primary" phx-disable-with={gettext("saving")}>
+            {gettext("save_profile")}
           </.button>
         </.form>
 
@@ -86,13 +100,13 @@ defmodule PodcodarWeb.UserLive.Settings do
 
   def mount(_params, _session, socket) do
     user = socket.assigns.current_scope.user
-    email_changeset = Accounts.change_user_email(user, %{}, validate_unique: false)
+    profile_changeset = Accounts.change_user_profile_and_email(user, %{}, validate_unique: false)
     password_changeset = Accounts.change_user_password(user, %{}, hash_password: false)
 
     socket =
       socket
       |> assign(:current_email, user.email)
-      |> assign(:email_form, to_form(email_changeset))
+      |> assign(:profile_form, to_form(profile_changeset))
       |> assign(:password_form, to_form(password_changeset))
       |> assign(:trigger_submit, false)
 
@@ -100,37 +114,61 @@ defmodule PodcodarWeb.UserLive.Settings do
   end
 
   @impl true
-  def handle_event("validate_email", params, socket) do
+  def handle_event("validate_profile", params, socket) do
     %{"user" => user_params} = params
 
-    email_form =
+    profile_form =
       validate_user_form(
         socket.assigns.current_scope.user,
         user_params,
-        &Accounts.change_user_email(&1, &2, validate_unique: false)
+        &Accounts.change_user_profile_and_email(&1, &2, validate_unique: false)
       )
 
-    {:noreply, assign(socket, email_form: email_form)}
+    {:noreply, assign(socket, profile_form: profile_form)}
   end
 
-  def handle_event("update_email", params, socket) do
+  def handle_event("update_profile", params, socket) do
     %{"user" => user_params} = params
     user = socket.assigns.current_scope.user
     true = Accounts.sudo_mode?(user)
 
-    case Accounts.change_user_email(user, user_params) do
-      %{valid?: true} = changeset ->
-        Accounts.deliver_user_update_email_instructions(
-          Ecto.Changeset.apply_action!(changeset, :insert),
-          user.email,
-          &url(~p"/users/settings/confirm-email/#{&1}")
-        )
+    new_email = Map.get(user_params, "email")
+    email_changed = new_email && new_email != user.email
 
-        info = gettext("email_change_confirmation_link_sent")
-        {:noreply, socket |> put_flash(:info, info)}
+    # First, update only the profile fields (name and username)
+    profile_only_params = Map.take(user_params, ["name", "username"])
 
-      changeset ->
-        {:noreply, assign(socket, :email_form, to_form(changeset, action: :insert))}
+    case Accounts.update_user_profile(user, profile_only_params) do
+      {:ok, updated_user} ->
+        socket = assign(socket, :current_scope, %{socket.assigns.current_scope | user: updated_user})
+
+        if email_changed do
+          # Validate and send email confirmation
+          case Accounts.change_user_email(updated_user, %{"email" => new_email}) do
+            %{valid?: true} = changeset ->
+              Accounts.deliver_user_update_email_instructions(
+                Ecto.Changeset.apply_action!(changeset, :insert),
+                user.email,
+                &url(~p"/users/settings/confirm-email/#{&1}")
+              )
+
+              {:noreply,
+               socket
+               |> put_flash(:info, gettext("profile_and_email_change_confirmation_link_sent"))}
+
+            changeset ->
+              {:noreply,
+               socket
+               |> assign(:profile_form, to_form(changeset, action: :insert))}
+          end
+        else
+          {:noreply,
+           socket
+           |> put_flash(:info, gettext("profile_updated_successfully"))}
+        end
+
+      {:error, changeset} ->
+        {:noreply, assign(socket, profile_form: to_form(changeset, action: :insert))}
     end
   end
 
