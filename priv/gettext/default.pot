@@ -54,6 +54,7 @@ msgid "available_courses"
 msgstr ""
 
 #: lib/podcodar_web/live/not_found_live.ex:23
+#: lib/podcodar_web/live/user_profile_live.ex:45
 #, elixir-autogen, elixir-format
 msgid "back_to_home"
 msgstr ""
@@ -138,6 +139,7 @@ msgstr ""
 #: lib/podcodar_web/live/user_live/login.ex:73
 #: lib/podcodar_web/live/user_live/registration.ex:46
 #: lib/podcodar_web/live/user_live/settings.ex:38
+#: lib/podcodar_web/live/user_profile_live.ex:30
 #, elixir-autogen, elixir-format
 msgid "email"
 msgstr ""
@@ -494,11 +496,12 @@ msgstr ""
 
 #: lib/podcodar_web/live/user_live/registration.ex:38
 #: lib/podcodar_web/live/user_live/settings.ex:31
+#: lib/podcodar_web/live/user_profile_live.ex:34
 #, elixir-autogen, elixir-format
 msgid "username"
 msgstr ""
 
-#: lib/podcodar_web/live/user_live/settings.ex:156
+#: lib/podcodar_web/live/user_live/settings.ex:167
 #, elixir-autogen, elixir-format
 msgid "profile_updated_successfully"
 msgstr ""
@@ -508,7 +511,12 @@ msgstr ""
 msgid "save_profile"
 msgstr ""
 
-#: lib/podcodar_web/live/user_live/settings.ex:152
+#: lib/podcodar_web/live/user_live/settings.ex:157
 #, elixir-autogen, elixir-format
 msgid "profile_and_email_change_confirmation_link_sent"
+msgstr ""
+
+#: lib/podcodar_web/live/user_profile_live.ex:43
+#, elixir-autogen, elixir-format
+msgid "user_not_found"
 msgstr ""

@@ -75,6 +75,9 @@ defmodule PodcodarWeb.Router do
       live "/", PageLive, :home
       live "/courses", CoursesLive, :home
 
+      # User Profile
+      live "/@:username", UserProfileLive, :show
+
       # App Pages
       live "/users/register", UserLive.Registration, :new
       live "/users/log-in", UserLive.Login, :new
