@@ -17,7 +17,12 @@ defmodule PodcodarWeb.UserLive.Settings do
           </.header>
         </div>
 
-        <.form for={@profile_form} id="profile_form" phx-submit="update_profile" phx-change="validate_profile">
+        <.form
+          for={@profile_form}
+          id="profile_form"
+          phx-submit="update_profile"
+          phx-change="validate_profile"
+        >
           <.input
             field={@profile_form[:name]}
             type="text"
@@ -140,7 +145,8 @@ defmodule PodcodarWeb.UserLive.Settings do
 
     case Accounts.update_user_profile(user, profile_only_params) do
       {:ok, updated_user} ->
-        socket = assign(socket, :current_scope, %{socket.assigns.current_scope | user: updated_user})
+        socket =
+          assign(socket, :current_scope, %{socket.assigns.current_scope | user: updated_user})
 
         if email_changed do
           # Validate and send email confirmation
