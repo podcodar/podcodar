@@ -35,10 +35,15 @@ Pronto! Agora você pode acessar a plataforma em [`localhost:4000`](http://local
 #### Contas de Usuário
 
 A plataforma suporta autenticação baseada em email. Usuários podem:
-- Registrar uma nova conta com email
+- Registrar uma nova conta com email, nome completo e username único
 - Receber um link mágico para login sem senha
 - Ou definir uma senha para login tradicional
 - Gerenciar configurações da conta (email, senha)
+
+**Requisitos de Registro:**
+- **Email:** Válido e único no sistema
+- **Nome completo:** 2-160 caracteres
+- **Username:** 3-30 caracteres, apenas letras minúsculas, números, underscores e hífens (ex: `john_doe-123`)
 
 ### Usando Docker
 

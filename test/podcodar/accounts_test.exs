@@ -85,6 +85,97 @@ defmodule Podcodar.AccountsTest do
       assert is_nil(user.confirmed_at)
       assert is_nil(user.password)
     end
+
+    test "requires name to be set" do
+      {:error, changeset} =
+        Accounts.register_user(%{email: "test@example.com", username: "testuser"})
+
+      assert %{name: ["can't be blank"]} = errors_on(changeset)
+    end
+
+    test "requires username to be set" do
+      {:error, changeset} =
+        Accounts.register_user(%{email: "test@example.com", name: "Test User"})
+
+      assert %{username: ["can't be blank"]} = errors_on(changeset)
+    end
+
+    test "validates name minimum length" do
+      {:error, changeset} = Accounts.register_user(valid_user_attributes(name: "A"))
+
+      assert "should be at least 2 character(s)" in errors_on(changeset).name
+    end
+
+    test "validates name maximum length" do
+      too_long = String.duplicate("a", 161)
+      {:error, changeset} = Accounts.register_user(valid_user_attributes(name: too_long))
+
+      assert "should be at most 160 character(s)" in errors_on(changeset).name
+    end
+
+    test "validates username minimum length" do
+      {:error, changeset} = Accounts.register_user(valid_user_attributes(username: "ab"))
+
+      assert "should be at least 3 character(s)" in errors_on(changeset).username
+    end
+
+    test "validates username maximum length" do
+      too_long = String.duplicate("a", 31)
+      {:error, changeset} = Accounts.register_user(valid_user_attributes(username: too_long))
+
+      assert "should be at most 30 character(s)" in errors_on(changeset).username
+    end
+
+    test "validates username format allows lowercase, numbers, underscores and hyphens" do
+      # Valid usernames should work
+      {:ok, user1} = Accounts.register_user(valid_user_attributes(username: "valid-user"))
+      assert user1.username == "valid-user"
+
+      {:ok, user2} = Accounts.register_user(valid_user_attributes(username: "valid_user123"))
+      assert user2.username == "valid_user123"
+    end
+
+    test "validates username format rejects uppercase letters" do
+      {:error, changeset} = Accounts.register_user(valid_user_attributes(username: "Invalid"))
+
+      assert "must contain only lowercase letters, numbers, underscores and hyphens" in errors_on(
+               changeset
+             ).username
+    end
+
+    test "validates username format rejects special characters" do
+      {:error, changeset} = Accounts.register_user(valid_user_attributes(username: "user@name"))
+
+      assert "must contain only lowercase letters, numbers, underscores and hyphens" in errors_on(
+               changeset
+             ).username
+    end
+
+    test "validates username uniqueness" do
+      username = "uniqueuser123"
+      user_fixture(username: username)
+
+      {:error, changeset} = Accounts.register_user(valid_user_attributes(username: username))
+
+      assert "has already been taken" in errors_on(changeset).username
+    end
+
+    test "registers user with all fields correctly" do
+      attrs =
+        valid_user_attributes(
+          email: "complete@example.com",
+          name: "Complete User",
+          username: "completeuser"
+        )
+
+      {:ok, user} = Accounts.register_user(attrs)
+
+      assert user.email == "complete@example.com"
+      assert user.name == "Complete User"
+      assert user.username == "completeuser"
+      assert is_nil(user.hashed_password)
+      assert is_nil(user.confirmed_at)
+    end
   end
 
   describe "sudo_mode?/2" do

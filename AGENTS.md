@@ -4,6 +4,16 @@ This is a web application written using the Phoenix web framework.
 
 ## Project guidelines
 
+- **Before committing:** Always review and update both `README.md` and `AGENTS.md` if your changes affect:
+  - User-facing features (update README.md)
+  - Development practices, patterns, or guidelines (update AGENTS.md)
+  - Schema changes or validation rules (update AGENTS.md with constraints/requirements)
+  - This ensures documentation stays in sync with code changes
+- **Internationalization (i18n):** Always use `gettext()` for user-facing strings
+  - Run `mix gettext.extract --merge` after adding/modifying gettext strings
+  - This extracts msgid entries and merges them into `.po` files
+  - Then manually add translations for `pt_BR` locale to `priv/gettext/pt_BR/LC_MESSAGES/default.po`
+  - See the [Gettext documentation](https://hexdocs.pm/gettext/) for detailed information
 - Use `mix precommit` alias when you are done with all changes and fix any pending issues
 - Use the already included and available `:req` (`Req`) library for HTTP requests, **avoid** `:httpoison`, `:tesla`, and `:httpc`. Req is included by default and is the preferred HTTP client for Phoenix apps
 - We use [mise](https://mise.jdx.dev/) for tools and system dependencies management (see `mise.toml`)
@@ -117,6 +127,16 @@ LiveViews that can work with or without authentication, **always use the __exist
     end
 
 Controllers automatically have the `current_scope` available if they use the `:browser` pipeline.
+
+### User Registration Fields
+
+When registering users, always ensure:
+- **Email:** Valid email format and unique in the database
+- **Name:** 2-160 characters (user's full name)
+- **Username:** 3-30 characters, lowercase letters/numbers/underscores/hyphens only, unique in the database
+  - Use `User.registration_changeset/3` for registration (validates all three fields)
+  - Use `validate_unique: false` in LiveView for real-time validation without DB hits
+  - Use `validate_unique: true` on form submit to ensure uniqueness
 
 <!-- phoenix-gen-auth-end -->
 

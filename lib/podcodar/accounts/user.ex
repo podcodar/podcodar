@@ -7,12 +7,37 @@ defmodule Podcodar.Accounts.User do
   @foreign_key_type :binary_id
   schema "users" do
     field :email, :string
+    field :name, :string
+    field :username, :string
     field :password, :string, virtual: true, redact: true
     field :hashed_password, :string, redact: true
     field :confirmed_at, :utc_datetime
     field :authenticated_at, :utc_datetime, virtual: true
 
     timestamps(type: :utc_datetime)
+  end
+
+  @doc """
+  A user changeset for registration.
+
+  It validates email, name, and username. This changeset ensures:
+  - Email is valid and unique
+  - Name is 2-160 characters
+  - Username is 3-30 characters and only contains lowercase letters, numbers, underscores, and hyphens
+
+  ## Options
+
+    * `:validate_unique` - Set to false if you don't want to validate the
+      uniqueness of email and username, useful for live validation.
+      Defaults to `true`.
+  """
+  def registration_changeset(user, attrs, opts \\ []) do
+    user
+    |> cast(attrs, [:email, :name, :username])
+    |> validate_required([:email, :name, :username])
+    |> validate_email(opts)
+    |> validate_name()
+    |> validate_username(opts)
   end
 
   @doc """
@@ -54,6 +79,28 @@ defmodule Podcodar.Accounts.User do
   defp validate_email_changed(changeset) do
     if get_field(changeset, :email) && get_change(changeset, :email) == nil do
       add_error(changeset, :email, "did not change")
+    else
+      changeset
+    end
+  end
+
+  defp validate_name(changeset) do
+    changeset
+    |> validate_length(:name, min: 2, max: 160)
+  end
+
+  defp validate_username(changeset, opts) do
+    changeset =
+      changeset
+      |> validate_length(:username, min: 3, max: 30)
+      |> validate_format(:username, ~r/^[a-z0-9_-]+$/,
+        message: gettext("must contain only lowercase letters, numbers, underscores and hyphens")
+      )
+
+    if Keyword.get(opts, :validate_unique, true) do
+      changeset
+      |> unsafe_validate_unique(:username, Podcodar.Repo)
+      |> unique_constraint(:username)
     else
       changeset
     end

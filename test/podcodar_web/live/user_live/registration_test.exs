@@ -68,6 +68,116 @@ defmodule PodcodarWeb.UserLive.RegistrationTest do
 
       assert result =~ gettext("has already been taken")
     end
+
+    test "renders errors for duplicated username", %{conn: conn} do
+      {:ok, lv, _html} = live(conn, ~p"/users/register")
+
+      user = user_fixture(%{username: "testuser"})
+
+      result =
+        lv
+        |> form("#registration_form",
+          user: valid_user_attributes(username: user.username)
+        )
+        |> render_submit()
+
+      assert result =~ gettext("has already been taken")
+    end
+
+    test "renders errors for invalid username format", %{conn: conn} do
+      {:ok, lv, _html} = live(conn, ~p"/users/register")
+
+      result =
+        lv
+        |> form("#registration_form",
+          user: valid_user_attributes(username: "Invalid_User")
+        )
+        |> render_submit()
+
+      assert result =~
+               gettext("must contain only lowercase letters, numbers, underscores and hyphens")
+    end
+
+    test "renders errors for username too short", %{conn: conn} do
+      {:ok, lv, _html} = live(conn, ~p"/users/register")
+
+      result =
+        lv
+        |> form("#registration_form",
+          user: valid_user_attributes(username: "ab")
+        )
+        |> render_submit()
+
+      assert result =~ "should be at least 3 character(s)"
+    end
+
+    test "renders errors for username too long", %{conn: conn} do
+      {:ok, lv, _html} = live(conn, ~p"/users/register")
+
+      long_username = String.duplicate("a", 31)
+
+      result =
+        lv
+        |> form("#registration_form",
+          user: valid_user_attributes(username: long_username)
+        )
+        |> render_submit()
+
+      assert result =~ "should be at most 30 character(s)"
+    end
+
+    test "renders errors for name too short", %{conn: conn} do
+      {:ok, lv, _html} = live(conn, ~p"/users/register")
+
+      result =
+        lv
+        |> form("#registration_form",
+          user: valid_user_attributes(name: "A")
+        )
+        |> render_submit()
+
+      assert result =~ "should be at least 2 character(s)"
+    end
+
+    test "renders errors for name too long", %{conn: conn} do
+      {:ok, lv, _html} = live(conn, ~p"/users/register")
+
+      long_name = String.duplicate("a", 161)
+
+      result =
+        lv
+        |> form("#registration_form",
+          user: valid_user_attributes(name: long_name)
+        )
+        |> render_submit()
+
+      assert result =~ "should be at most 160 character(s)"
+    end
+
+    test "registers user with name, username, and email", %{conn: conn} do
+      {:ok, lv, _html} = live(conn, ~p"/users/register")
+
+      attrs =
+        valid_user_attributes(
+          email: "newuser@example.com",
+          name: "John Doe",
+          username: "johndoe123"
+        )
+
+      form = form(lv, "#registration_form", user: attrs)
+
+      {:ok, _lv, html} =
+        render_submit(form)
+        |> follow_redirect(conn, ~p"/users/log-in")
+
+      assert html =~ gettext("email_sent_confirmation", email: "newuser@example.com")
+
+      # Verify user was created with all fields
+      user = Podcodar.Accounts.get_user_by_email("newuser@example.com")
+      assert user.name == "John Doe"
+      assert user.username == "johndoe123"
+      assert user.email == "newuser@example.com"
+    end
   end
 
   describe "registration navigation" do
