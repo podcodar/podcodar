@@ -7,6 +7,9 @@ defmodule Podcodar.Repo.Migrations.AddNameAndUsernameToUsers do
       add :username, :string, null: false, default: ""
     end
 
+    # Update usernames to use email where username is empty
+    execute("UPDATE users SET username = email WHERE username = ''", "")
+
     create unique_index(:users, [:username])
   end
 end
