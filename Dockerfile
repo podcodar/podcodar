@@ -65,12 +65,15 @@ RUN mkdir -p /data && chown -R app:app /data
 # Copy release from build stage
 COPY --from=build /app/_build/prod/rel/podcodar ./
 
+# Copy entrypoint script
+COPY --chown=app:app scripts/docker_entrypoint.sh ./bin/docker_entrypoint.sh
+RUN chmod +x ./bin/docker_entrypoint.sh
+
 USER app
 
 ENV DATABASE_PATH=${DATABASE_PATH:-/data/podcodar.db}
 
-ENTRYPOINT ["/app/bin/podcodar"]
+ENTRYPOINT ["/app/bin/docker_entrypoint.sh"]
 
 CMD ["start"]
-
 
